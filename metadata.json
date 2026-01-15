@@ -1,0 +1,8 @@
+
+{
+  "name": "Nibuy - E-commerce Shopee Style",
+  "description": "Uma plataforma de e-commerce inspirada no layout da Shopee, focada em promoções, ofertas relâmpago e navegação intuitiva por categorias.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
