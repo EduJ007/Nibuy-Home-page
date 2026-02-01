@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Search, Bell, HelpCircle, Instagram, Facebook, CassetteTape as Pinterest, Music2, User, Camera, LogOut } from 'lucide-react';
+import { Search, Bell, HelpCircle, Instagram, Facebook, Pin as Pinterest, User, Camera, LogOut, Pin } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -61,6 +61,10 @@ const Header: React.FC = () => {
     }
   };
 
+const handleSearch = () => {
+  window.location.href = 'https://nibuy-produtos.vercel.app/';
+};
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#ff5722] shadow-md text-white">
       {/* Input de arquivo escondido (ajuda a abrir o explorador de arquivos) */}
@@ -75,16 +79,34 @@ const Header: React.FC = () => {
       {/* Top Bar */}
       <div className="hidden md:flex max-w-[1200px] mx-auto py-1.5 justify-between items-center text-xs">
         <div className="flex gap-4 items-center">
-          <a href="#" className="hover:text-gray-200 transition-colors">Entrar em Contato</a>
+          <a href="https://nibuy-contact.vercel.app/" className="hover:text-gray-200 transition-colors">Entrar em Contato</a>
           <span className="opacity-30">|</span>
-          <a href="#" className="hover:text-gray-200 transition-colors">Sobre nós</a>
+          <a href="https://sobre-nibuy.vercel.app/" className="hover:text-gray-200 transition-colors">Sobre nós</a>
           <span className="opacity-30">|</span>
           <div className="flex items-center gap-2">
             <span>Siga-nos no</span>
             <div className="flex items-center gap-3">
-              <Instagram size={18} className="cursor-pointer hover:text-gray-300" />
-              <Facebook size={18} className="cursor-pointer hover:text-gray-300" />
-              <Music2 size={16} className="cursor-pointer hover:text-gray-300 transition-colors" /> {/* TikTok */}
+              <a href="https://www.instagram.com/nibuyoficial/?next=%2Faccounts%2Fonetap%2F"
+              target="_blank" 
+              rel="noreferrer"
+              title="Instagram"
+              className="cursor-pointer hover:text-gray-300">
+              <Instagram size={18}/>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61583962855568"
+              target="_blank" 
+              rel="noreferrer"
+              title="Facebook"
+              className="cursor-pointer hover:text-gray-300">
+              <Facebook size={18}/>
+              </a>
+              <a href=""
+              target="_blank" 
+              rel="noreferrer"
+              title="Pinterest"
+              className="cursor-pointer hover:text-gray-300 transition-colors">
+              <Pin size={18} className="cursor-pointer hover:text-gray-300 transition-colors" /> {/* TikTok */}
+              </a>
             </div>
           </div>
         </div>
@@ -118,7 +140,7 @@ const Header: React.FC = () => {
             )}
           </div>
 
-          <a href="#" className="flex items-center gap-1 hover:text-gray-300">
+          <a href="https://nibuy-central-ajuda.vercel.app/" className="flex items-center gap-1 hover:text-gray-300">
             <HelpCircle size={18} /> Ajuda
           </a>
 
@@ -134,24 +156,32 @@ const Header: React.FC = () => {
 
       {/* Main Header Area */}
       <div className="max-w-[1200px] mx-auto py-4 px-4 lg:px-0 flex items-center gap-8">
-        <div onClick={() => window.location.href = '/'} className="flex items-center gap-3 cursor-pointer shrink-0 active:opacity-70 transition-opacity">
-          <img src="/logo-nibuy.png" alt="Nibuy Logo" className="h-16 w-auto object-contain" />
+        <div onClick={() => window.location.href = 'https://nibuy-home-page.vercel.app/'} className="flex items-center gap-3 cursor-pointer shrink-0 active:opacity-70 transition-opacity">
+          <img src="/logo-nibuy.png" alt="Nibuy Logo" className="h-14 w-auto object-contain" />
           <span className="text-3xl font-black hidden md:block tracking-tighter">𝙉𝙞𝙗𝙪𝙮</span>
         </div>
 
         <div className="flex-1">
-          <div className="bg-white rounded-sm p-1 flex items-center shadow-sm">
-            <input 
-              type="text" 
-              placeholder="Buscar na Nibuy..." 
-              className="flex-1 px-4 py-2 text-gray-800 outline-none placeholder:text-gray-400"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-            <button className="bg-[#ff5722] px-6 py-2 rounded-sm hover:opacity-90 transition-opacity"><Search size={20} /></button>
-          </div>
-        </div>
-
+                  {/* Adicionei o onClick na div pai para qualquer clique aqui levar ao site */}
+                  <div 
+                    onClick={handleSearch} 
+                    class="bg-white rounded-sm p-1 flex items-center shadow-sm cursor-pointer"
+                  >
+                    <input 
+                      type="text" 
+                      placeholder="Buscar na Nibuy..." 
+                      className="flex-1 px-4 py-2 text-gray-800 outline-none placeholder:text-gray-400 cursor-pointer"
+                      readOnly // Isso impede de abrir o teclado e foca no redirecionamento
+                      value={searchValue}
+                      onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    <button 
+                      className="bg-[#ff5722] px-6 py-2 rounded-sm hover:opacity-90 transition-opacity"
+                    >
+                      <Search size={20} />
+                    </button>
+                  </div>
+                </div>
         {/* User / Account Button */}
         <div className="relative group">
           {user ? (

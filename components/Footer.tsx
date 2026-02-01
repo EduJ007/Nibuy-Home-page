@@ -1,108 +1,60 @@
 import React from 'react';
-// IMPORTAÇÕES NECESSÁRIAS PARA OS ÍCONES FUNCIONAREM
-import { Facebook, Instagram, Music2, Truck, ShieldCheck, HelpCircle } from 'lucide-react';
+// IMPORTAÇÕES DOS ÍCONES QUE VOCÊ USA NO MODELO ESCURO
+import { Instagram, Facebook, Music2 } from 'lucide-react';
+
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          
-          {/* Coluna 1: Atendimento */}
-          <div>
-            <h4 className="font-bold text-gray-800 mb-5 uppercase text-xs tracking-wider">Atendimento</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="/ajuda" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors text-sm text-gray-500">
-                  <div className="w-4 flex justify-center"><HelpCircle size={14} className="text-[#ee4d2d]"/></div>
-                  <span>Central de Ajuda</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/558193611017" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors font-medium text-sm text-gray-700">
-                  <div className="w-4 flex justify-center"><Truck size={14} className="text-[#ee4d2d]"/></div>
-                  <span>Como Rastrear meu Pedido?</span>
-                </a>
-              </li>
-              <li>
-                <a href="/contato" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors text-sm text-gray-500">
-                  <div className="w-4"></div>
-                  <span>Como Comprar</span>
-                </a>
-              </li>
-              <li>
-                <a href="/contato" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors text-sm text-gray-500">
-                  <div className="w-4"></div>
-                  <span>Devolução e Reembolso</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Coluna 2: Institucional */}
-          <div>
-            <h4 className="font-bold text-gray-800 mb-5 uppercase text-xs tracking-wider">Sobre a Nibuy</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="/sobre" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors text-sm text-gray-500">
-                  <div className="w-4"></div>
-                  <span>Quem Somos</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors text-sm text-gray-500">
-                  <div className="w-4"></div>
-                  <span>Termos e Condições</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-2 hover:text-[#ee4d2d] transition-colors text-sm text-gray-500">
-                  <div className="w-4"></div>
-                  <span>Política de Privacidade</span>
-                </a>
-              </li>
-              <li className="flex items-center gap-2 text-sm">
-                <div className="w-4 flex justify-center"><ShieldCheck size={14} className="text-green-600"/></div>
-                <span className="text-gray-600 font-medium">Site 100% Seguro</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Coluna 3: Pagamento */}
-          <div>
-            <h4 className="font-bold text-gray-800 mb-5 uppercase text-xs tracking-wider">Pagamento Em</h4>
-            <div className="flex flex-wrap gap-2 pr-4">
-              <div className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm text-[10px] font-bold text-gray-600">PIX</div>
-              <div className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm text-[10px] font-bold text-gray-600">BOLETO</div>
-              <div className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm text-[10px] font-bold text-gray-600">VISA</div>
-              <div className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm text-[10px] font-bold text-gray-600">MASTER</div>
-            </div>
-            <p className="mt-4 text-[11px] leading-tight italic text-gray-400">Parcele suas compras em até 12x no cartão via parceiros.</p>
-          </div>
-
-          {/* Coluna 4: Redes Sociais */}
-          <div>
-            <h4 className="font-bold text-gray-800 mb-5 uppercase text-xs tracking-wider">Siga a Nibuy</h4>
-            <div className="flex gap-4 mb-6">
-              <a href="#" className="p-2 bg-gray-50 rounded-full hover:text-[#ee4d2d] transition-colors text-gray-400"><Instagram size={18} /></a>
-              <a href="#" className="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-100 transition-all border border-gray-100">
-                  <Music2 size={18} />
-                </a>
-              <a href="#" className="p-2 bg-gray-50 rounded-full hover:text-[#ee4d2d] transition-colors text-gray-400"><Facebook size={18} /></a>
-            </div>
-            <div className="text-[11px] text-gray-400 border-t border-gray-50 pt-4">
-              <p className="font-bold uppercase mb-1">Contato Profissional</p>
-              <a href="https://mail.google.com/mail/u/0/?hl=pt-BR#inbox" className="hover:text-[#ee4d2d]">nibuyoficial@gmail.com</a>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Linha Final de Copyright */}
-        <div className="border-t border-gray-100 pt-8 text-center md:text-left">
-          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-            © 2026 NIBUY BRASIL - O SHOPPING DOS AFILIADOS
+    <footer className="bg-gray-900 text-white pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
+        
+        {/* COLUNA 1: IDENTIDADE (EXATAMENTE IGUAL) */}
+        <div className="col-span-1 md:col-span-2">
+          <span className="text-3xl font-black text-[#ff5722]">
+            𝙉𝙞𝙗𝙪𝙮
+          </span>
+          <p className="mt-4 text-gray-400 max-w-sm text-sm leading-relaxed">
+            Sua vitrine inteligente de ofertas. Encontramos os melhores preços e você finaliza a compra com total segurança nas maiores lojas do Brasil.
           </p>
+          
+          {/* REDES SOCIAIS EM CÍRCULOS (EXATAMENTE IGUAL) */}
+          <div className="flex gap-4 mt-6">
+            <a href="https://instagram.com/nibuyoficial" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#ff5722] transition-all duration-300 border border-white/10">
+              <Instagram size={20} />
+            </a>
+            <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-[#4267B2] transition-all duration-300 border border-white/10">
+              <Facebook size={20} />
+            </a>
+            <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-black transition-all duration-300 border border-white/10">
+              <Music2 size={20} />
+            </a>
+          </div>
         </div>
+
+        {/* COLUNA 2: NAVEGAÇÃO (EXATAMENTE IGUAL) */}
+        <div>
+          <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">Navegação</h4>
+          <ul className="space-y-4 text-gray-400 text-sm">
+            <li><a href="https://nibuy-home-page.vercel.app/" className="hover:text-white transition-colors">Início</a></li>
+            <li><a href="https://sobre-nibuy.vercel.app/" className="hover:text-white transition-colors">Sobre a Nibuy</a></li>
+            <li><a href="#" className="text-[#ff5722] font-bold">Central de Ajuda</a></li>
+          </ul>
+        </div>
+
+        {/* COLUNA 3: SUPORTE (EXATAMENTE IGUAL) */}
+        <div>
+          <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">Suporte</h4>
+          <div className="space-y-4">
+            <p className="text-sm text-gray-400">Segunda a Sexta<br/><span className="text-white">09h às 18h</span></p>
+            <a href="mailto:nibuyoficial@nibuy.com.br" className="text-sm text-[#ff5722] font-bold underline hover:text-orange-400 transition-colors">
+              nibuyoficial@nibuy.com.br
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* LINHA FINAL (EXATAMENTE IGUAL) */}
+      <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-white/10 text-center text-gray-500 text-[10px] uppercase tracking-widest font-bold">
+        <p>© 2026 NIBUY OFERTAS. TODOS OS DIREITOS RESERVADOS.</p>
       </div>
     </footer>
   );

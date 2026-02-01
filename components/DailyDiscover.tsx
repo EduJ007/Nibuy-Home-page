@@ -30,10 +30,9 @@ const DailyDiscover: React.FC = () => {
   }, []);
 
   return (
-    <section className="mt-6">
-      {/* TÍTULO AJUSTADO: REMOVI O 'sticky' E O 'top-[120px]' */}
-      <div className="bg-white border-b-4 border-[#ee4d2d] py-4 mb-4 shadow-sm">
-        <h2 className="text-center text-[#ee4d2d] uppercase font-bold text-lg tracking-widest">
+    <section className="mt-20">
+      <div className="bg-white border-b-4 border-[#ff5722] py-4 mb-4 shadow-sm">
+        <h2 className="text-center text-[#ff5722] uppercase font-bold text-lg tracking-widest">
           Descobertas do Dia
         </h2>
       </div>
@@ -46,7 +45,7 @@ const DailyDiscover: React.FC = () => {
             <div 
               key={item.id} 
               onClick={() => item.link && window.open(item.link, '_blank')}
-              className="bg-white rounded-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer group flex flex-col border border-transparent hover:border-[#ee4d2d] overflow-hidden"
+              className="bg-white rounded-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer group flex flex-col border border-transparent hover:border-[#ff5722] overflow-hidden"
             >
               <div className="relative aspect-square overflow-hidden bg-gray-50">
                 <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:opacity-90 transition-opacity" />
@@ -79,6 +78,15 @@ const DailyDiscover: React.FC = () => {
             </div>
           );
         })}
+      </div>
+
+      <div className="flex justify-center mt-12 pb-8">
+        <button 
+          onClick={() => window.open('/todas-as-ofertas', '_self')}
+          className="px-20 py-3 bg-white border border-gray-300 text-gray-600 font-medium text-sm uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm rounded-sm"
+        >
+          Veja Mais
+        </button>
       </div>
     </section>
   );
