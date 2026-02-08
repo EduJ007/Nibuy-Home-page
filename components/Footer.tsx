@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
           <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">Suporte</h4>
           <div className="space-y-4">
             <p className="text-sm text-gray-400">Segunda a Sexta<br/><span className="text-white">09h às 18h</span></p>
-            <a href="mailto:nibuyoficial@nibuy.com.br" className="text-sm text-[#ff5722] font-bold underline hover:text-orange-400 transition-colors">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nibuyoficial@gmail.com" className="text-sm text-[#ff5722] font-bold underline hover:text-orange-400 transition-colors">
               nibuyoficial@nibuy.com.br
             </a>
           </div>
