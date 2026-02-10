@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
             </a>
             
             {/* FACEBOOK */}
-            <a href="#" className="w-10 h-10 bg-white/5 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#4267B2] transition-all duration-300 group">
+            <a href="https://www.facebook.com/profile.php?id=61583962855568" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#4267B2] transition-all duration-300 group">
               <Facebook size={18} className="group-hover:scale-110 transition-transform" />
             </a>
 
