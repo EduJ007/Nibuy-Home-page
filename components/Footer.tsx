@@ -16,16 +16,22 @@ const Footer: React.FC = () => {
             Sua vitrine inteligente de ofertas. Encontramos os melhores preços e você finaliza a compra com total segurança nas maiores lojas do Brasil.
           </p>
           
-          {/* REDES SOCIAIS EM CÍRCULOS (EXATAMENTE IGUAL) */}
           <div className="flex gap-4 mt-6">
-            <a href="https://instagram.com/nibuyoficial" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-[#ff5722] transition-all duration-300 border border-white/10">
-              <Instagram size={20} />
+            {/* INSTAGRAM */}
+            <a href="https://instagram.com/nibuyoficial" target="_blank" rel="noopener noreferrer" 
+              className="w-10 h-10 bg-white/5 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#ff5722] transition-all duration-300 group">
+              <Instagram size={18} className="group-hover:scale-110 transition-transform" />
             </a>
-            <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-[#4267B2] transition-all duration-300 border border-white/10">
-              <Facebook size={20} />
+            
+            {/* FACEBOOK */}
+            <a href="#" className="w-10 h-10 bg-white/5 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#4267B2] transition-all duration-300 group">
+              <Facebook size={18} className="group-hover:scale-110 transition-transform" />
             </a>
-            <a href="#" className="p-2 bg-white/10 rounded-full hover:bg-black transition-all duration-300 border border-white/10">
-              <Music2 size={20} />
+
+            {/* PINTEREST (NO LUGAR DA MÚSICA) */}
+            <a href="https://pin.it/hFv1x89A5" target="_blank" rel="noopener noreferrer" 
+              className="w-10 h-10 bg-white/5 rounded-full border border-white/10 flex items-center justify-center hover:bg-red-600 transition-all duration-300 group">
+              <i className="fa-brands fa-pinterest text-[18px] group-hover:scale-110 transition-transform"></i>
             </a>
           </div>
         </div>
