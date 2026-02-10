@@ -41,8 +41,10 @@ const Footer: React.FC = () => {
           <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">Navegação</h4>
           <ul className="space-y-4 text-gray-400 text-sm">
             <li><a href="https://nibuy-home-page.vercel.app/" className="hover:text-white transition-colors">Início</a></li>
-            <li><a href="https://sobre-nibuy.vercel.app/" className="hover:text-white transition-colors">Sobre a Nibuy</a></li>
-            <li><a href="#" className="text-[#ff5722] font-bold">Central de Ajuda</a></li>
+            <li><a href="https://sobre-nibuy.vercel.app/" className="hover:text-white transition-colors">Sobre o Nibuy</a></li>
+            <li><a href="https://nibuy-central-ajuda.vercel.app/" className="hover:text-white transition-colors">Central de Ajuda</a></li>
+            <li><a href="https://nibuy-contact.vercel.app/" className="hover:text-white transition-colors">Contato</a></li>
+            <li><a href="https://nibuy-produtos.vercel.app/" className="text-[#ff5722] hover:text-white transition-colors">Produtos</a></li>
           </ul>
         </div>
 
@@ -51,7 +53,7 @@ const Footer: React.FC = () => {
           <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">Suporte</h4>
           <div className="space-y-4">
             <p className="text-sm text-gray-400">Segunda a Sexta<br/><span className="text-white">09h às 18h</span></p>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nibuyoficial@gmail.com" className="text-sm text-[#ff5722] font-bold underline hover:text-orange-400 transition-colors">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nibuyoficial@gmail.com" className="text-sm text-[#ff5722] font-bold underline hover:text-orange-400 transition-colors" target="_blank" rel="noopener noreferrer">
               nibuyoficial@nibuy.com.br
             </a>
           </div>
