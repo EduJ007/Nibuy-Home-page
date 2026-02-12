@@ -176,7 +176,7 @@ const Header: React.FC = () => {
         <div className="relative">
           {!user ? (
             <button onClick={() => setShowLoginModal(true)} className="flex items-center gap-2 hover:opacity-80 transition-all">
-              <User size={38} className="border-2 border-white rounded-full p-0.5" />
+              <User size={40} className="border-2 border-white rounded-full p-0.5" />
               <div className="text-left hidden lg:block leading-tight">
                 <p className="text-[10px]">Entre ou</p>
                 <p className="text-[14px] font-bold">Cadastre-se</p>
