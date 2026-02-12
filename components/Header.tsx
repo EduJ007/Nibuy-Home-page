@@ -128,10 +128,10 @@ const Header: React.FC = () => {
         </div>
 
         {/* ÁREA DE PERFIL DINÂMICA */}
-        <div className="relative">
-          {!user ? (
-            <button onClick={() => setShowLoginModal(true)} className="flex items-center gap-2 hover:opacity-80">
-              <User size={34} className="border-2 border-white rounded-full p-0.5" />
+        <div className="relative mr-4 lg:mr-8"> {/* Adicionei margem aqui */}
+            {!user ? (
+              <button onClick={() => setShowLoginModal(true)} className="flex items-center gap-2 hover:opacity-80 transition-all">
+              <User size={37} className="border-2 border-white rounded-full p-0.5" />
               <div className="text-left hidden lg:block">
                 <p className="text-[12px] leading-tight">Faça Login ou</p>
                 <p className="text-[15px] font-bold leading-tight">Crie sua conta</p>

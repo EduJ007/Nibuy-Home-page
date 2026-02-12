@@ -1,8 +1,6 @@
-import { HeartOff } from 'lucide-react';
 import React from 'react';
 
 const categories = [
-  // Mantenha sua lista de categorias igual...
   { id: 1, name: 'Eletrodomésticos', img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=200&auto=format&fit=crop' , href: 'https://nibuy-produtos.vercel.app/' },
   { id: 2, name: 'Moda', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
   { id: 3, name: 'Beleza', img: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=200&auto=format&fit=crop', href: 'https://nibuy-produtos.vercel.app/' },
@@ -24,43 +22,48 @@ const categories = [
   { id: 19, name: 'Ferramentas', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' }, 
   { id: 20, name: 'Livros', img: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
 ];
+
 const CategoryGrid: React.FC = () => {
   return (
-    <section className="bg-white mt-20 w-[98%] max-w-[1400px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
+    /* Aumentei o mt (espaço para baixo) como você pediu anteriormente */
+    <section className="bg-white mt-20 md:mt-24 w-[98%] max-w-[1400px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
       <div className="flex items-center px-6 py-4 border-b border-gray-200">
         <h2 className="text-[#ff5722] text-xl font-black uppercase italic tracking-tighter">
           Categorias
         </h2>
       </div>
 
-      <div className="grid grid-cols-5 md:grid-cols-10 border-l border-t border-gray-200">
+      {/* MOBILE: Carrossel horizontal (overflow-x-auto)
+          DESKTOP: Grid estático de 10 colunas
+      */}
+      <div className="flex overflow-x-auto md:grid md:grid-cols-10 scrollbar-hide border-l border-t border-gray-200">
         {categories.map((cat) => (
-          <div 
+          <a 
             key={cat.id} 
-            className="border-r border-b border-gray-200 p-4 flex flex-col items-center hover:bg-gray-50/50 transition-all cursor-pointer group h-30 md:h-39"
+            href={cat.href}
+            className="min-w-[110px] md:min-w-0 border-r border-b border-gray-200 p-5 flex flex-col items-center hover:bg-gray-50/50 transition-all cursor-pointer group shrink-0 md:shrink"
           >
-            <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl overflow-hidden mb-3 border border-gray-200 group-hover:scale-105 transition-transform shrink-0 shadow-sm">
-              <img src={cat.img} alt={cat.name} className="w-full h-full object-cover" />
+            {/* Imagem maior e com mais destaque */}
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-3 border-2 border-gray-100 group-hover:border-[#ff5722] transition-all shadow-sm">
+              <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
             </div>
             
-            <div className="flex items-start justify-center text-center h-auto w-full">
-              {/* Ajustado: Leading e padding para a palavra Eletrodomésticos respirar */}
-              <span className="text-[10px] md:text-[12px] text-gray-800 font-black uppercase tracking-tighter leading-tight line-clamp-2 break-words">
+            <div className="flex items-center justify-center text-center w-full">
+              {/* Texto aumentado (text-xs no mobile, text-sm no desktop) e mais escuro para ler melhor */}
+              <span className="text-[11px] md:text-[13px] text-gray-900 font-extrabold uppercase tracking-tight leading-tight line-clamp-2">
                 {cat.name}
               </span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
       <div className="flex justify-end p-4 border-t border-gray-50 bg-gray-50/10">
-      <a href="https://nibuy-produtos.vercel.app/">
-        <button 
-          className="text-blue-600 hover:text-blue-800 font-black text-[13px] uppercase tracking-widest transition-all flex items-center gap-1 group"
-        >
-          Ver Mais 
-          <span className="text-lg transition-transform group-hover:translate-x-1">›</span>
-        </button>
+        <a href="https://nibuy-produtos.vercel.app/">
+          <button className="text-[#ff5722] hover:text-[#e64a19] font-black text-[13px] uppercase tracking-widest transition-all flex items-center gap-1 group">
+            Ver Todas as Categorias 
+            <span className="text-lg transition-transform group-hover:translate-x-1">›</span>
+          </button>
         </a>
       </div>
     </section>
