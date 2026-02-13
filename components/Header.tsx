@@ -37,8 +37,6 @@ const handleSearch = () => {
   }
 };
 
-  const [showNotifications, setShowNotifications] = useState(false);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
