@@ -58,14 +58,17 @@ const CategoryGrid: React.FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-end p-4 border-t border-gray-50 bg-gray-50/10">
-        <a href="https://nibuy-produtos.vercel.app/">
-          <button className="text-[#ff5722] hover:text-[#e64a19] font-black text-[13px] uppercase tracking-widest transition-all flex items-center gap-1 group">
-            Ver Todas as Categorias 
-            <span className="text-lg transition-transform group-hover:translate-x-1">›</span>
+          <div className="flex justify-end p-4 border-t border-gray-50 bg-gray-50/10">
+        <a href="https://nibuy-produtos.vercel.app/?cat=Todos">
+          <button className="text-[#ff5722] hover:text-[#e64a19] font-black text-[13px] uppercase tracking-widest transition-all flex items-center gap-2">
+            Ver mais 
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+            </svg>
           </button>
         </a>
-      </div>
+    </div>
+</div>
     </section>
   );
 };
