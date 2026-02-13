@@ -178,18 +178,22 @@ const handleSearch = () => {
           <span className="text-3xl font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
         </div>
         
+                 <div className="flex-1 flex bg-white rounded-sm p-1 items-center shadow-sm">
                   <input 
-            type="text" 
-            placeholder="Buscar na Nibuy..." 
-            className="flex-1 px-4 py-2 text-gray-800 outline-none"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          />
-          <button onClick={handleSearch} className="bg-[#ff5722] px-6 py-2 rounded-sm">
-            <Search size={20} />
-          </button>
-
+                    type="text" 
+                    placeholder="Buscar na Nibuy..." 
+                    className="flex-1 px-4 py-2 text-gray-800 outline-none"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()} 
+                  />
+                  <button 
+                    onClick={handleSearch}
+                    className="bg-[#ff5722] px-6 py-2 rounded-sm hover:brightness-110"
+                  >
+                    <Search size={20} />
+                  </button>
+                </div>
         <div className="relative">
           {!user ? (
             <button onClick={() => setShowLoginModal(true)} className="flex items-center gap-2 hover:opacity-80 transition-all">
