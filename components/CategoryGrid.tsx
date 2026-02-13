@@ -37,12 +37,12 @@ const CategoryGrid: React.FC = () => {
           DESKTOP: Grid estático de 10 colunas
       */}
       <div className="flex overflow-x-auto md:grid md:grid-cols-10 scrollbar-hide border-l border-t border-gray-200">
-        {categories.map((cat) => (
-          <a 
-            key={cat.id} 
-            href={cat.href}
-            className="min-w-[110px] md:min-w-0 border-r border-b border-gray-200 p-5 flex flex-col items-center hover:bg-gray-50/50 transition-all cursor-pointer group shrink-0 md:shrink"
-          >
+       {categories.map((cat) => (
+              <a 
+                key={cat.id} 
+                href={`https://nibuy-produtos.vercel.app/?cat=${encodeURIComponent(cat.name)}`} 
+                className="border border-gray-200 p-5 flex flex-col items-center hover:bg-gray-50/50 transition-all cursor-pointer group shrink-0 md:shrink"
+              >
             {/* Imagem maior e com mais destaque */}
             <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-3 border-2 border-gray-100 group-hover:border-[#ff5722] transition-all shadow-sm">
               <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
