@@ -29,17 +29,16 @@ const Header: React.FC = () => {
   const [editPhoto, setEditPhoto] = useState('');
   const [updateLoading, setUpdateLoading] = useState(false);
 
-  const [searchTerm, setSearchTerm] = useState('');
+ const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = () => {
-    if (searchTerm.trim()) {
-      window.location.href = `https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`;
-    }
-  };
-  /* --- fim do script --- */
+const handleSearch = () => {
+  if (searchTerm.trim()) {
+    window.location.href = `https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`;
+  }
+};
 
   const [showNotifications, setShowNotifications] = useState(false);
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
@@ -179,10 +178,17 @@ const Header: React.FC = () => {
           <span className="text-3xl font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
         </div>
         
-        <div className="flex-1 flex bg-white rounded-sm p-1 items-center shadow-sm">
-          <input type="text" placeholder="Buscar na Nibuy..." className="flex-1 px-4 py-2 text-gray-800 outline-none" />
-          <button className="bg-[#ff5722] px-6 py-2 rounded-sm hover:brightness-110"><Search size={20} /></button>
-        </div>
+                  <input 
+            type="text" 
+            placeholder="Buscar na Nibuy..." 
+            className="flex-1 px-4 py-2 text-gray-800 outline-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          />
+          <button onClick={handleSearch} className="bg-[#ff5722] px-6 py-2 rounded-sm">
+            <Search size={20} />
+          </button>
 
         <div className="relative">
           {!user ? (
