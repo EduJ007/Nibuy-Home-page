@@ -29,6 +29,17 @@ const Header: React.FC = () => {
   const [editPhoto, setEditPhoto] = useState('');
   const [updateLoading, setUpdateLoading] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      window.location.href = `https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`;
+    }
+  };
+  /* --- fim do script --- */
+
+  const [showNotifications, setShowNotifications] = useState(false);
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
