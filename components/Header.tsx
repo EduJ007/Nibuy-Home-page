@@ -220,14 +220,41 @@ const Header: React.FC = () => {
             </div>
             <div className="p-8 space-y-5">
               <div className="flex justify-center mb-4">
-                <div className="relative">
-                  <img src={editPhoto} className="w-24 h-24 rounded-full border-4 border-orange-100 object-cover shadow-xl" />
-                  <div className="absolute bottom-0 right-0 bg-[#ff5722] p-1.5 rounded-full text-white border-2 border-white"><Camera size={16} /></div>
-                </div>
+                <img 
+                  src={editPhoto} 
+                  className="w-24 h-24 rounded-full border-4 border-orange-100 object-cover shadow-xl" 
+                  onError={(e) => {(e.target as HTMLImageElement).src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=error'}} 
+                />
               </div>
-              <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Novo nome" className="w-full border p-3 rounded-xl font-bold focus:border-[#ff5722] outline-none" />
-              <input type="text" value={editPhoto} onChange={(e) => setEditPhoto(e.target.value)} placeholder="URL da Foto" className="w-full border p-3 rounded-xl text-xs text-gray-400 focus:border-[#ff5722] outline-none" />
-              <button onClick={handleUpdateProfile} disabled={updateLoading} className="w-full bg-[#ff5722] text-white font-black py-4 rounded-xl shadow-lg flex items-center justify-center gap-2">
+
+              <div className="space-y-1">
+                <h1 className="text-sm font-black uppercase text-[#ff5722] ml-1">Nome:</h1>
+                <input 
+                  type="text" 
+                  value={editName} 
+                  onChange={(e) => setEditName(e.target.value)} 
+                  placeholder="Seu nome" 
+                  className="w-full border-2 border-gray-100 p-3 rounded-xl font-bold focus:border-[#ff5722] outline-none" 
+                />
+              </div>
+
+              <div className="space-y-1">
+                <h1 className="text-sm font-black uppercase text-[#ff5722] ml-1">Link da Imagem:</h1>
+                <input 
+                  type="text" 
+                  value={editPhoto} 
+                  onChange={(e) => setEditPhoto(e.target.value)} 
+                  onKeyDown={(e) => e.key === 'Enter' && handleUpdateProfile()} 
+                  placeholder="URL da foto" 
+                  className="w-full border-2 border-gray-100 p-3 rounded-xl text-xs text-blue-500 focus:border-[#ff5722] outline-none" 
+                />
+              </div>
+
+              <button 
+                onClick={handleUpdateProfile} 
+                disabled={updateLoading} 
+                className="w-full bg-[#ff5722] text-white font-black py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all"
+              >
                 {updateLoading ? 'Salvando...' : <><Check size={20} /> Salvar Alterações</>}
               </button>
             </div>
@@ -235,7 +262,7 @@ const Header: React.FC = () => {
         </div>
       )}
 
-      {/* MODAL DE LOGIN ORIGINAL */}
+      {/* Modal Login */}
       {showLoginModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowLoginModal(false)}></div>
@@ -248,8 +275,12 @@ const Header: React.FC = () => {
               <input type="password" placeholder="Senha" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none" />
               <button onClick={handleAuthAction} className="w-full bg-[#ff5722] text-white font-bold py-3 rounded-lg hover:brightness-110">{isLoginView ? 'Entrar' : 'Cadastrar'}</button>
             </div>
-            <button onClick={handleGoogleLogin} className="w-full mt-4 flex items-center justify-center gap-3 border p-3 rounded-lg font-bold text-sm"><img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5 h-5" /> Google</button>
-            <button onClick={() => setIsLoginView(!isLoginView)} className="w-full mt-6 text-[#ff5722] text-sm font-bold text-center">{isLoginView ? 'Criar conta' : 'Já tenho conta'}</button>
+            <button onClick={handleGoogleLogin} className="w-full mt-4 flex items-center justify-center gap-3 border p-3 rounded-lg font-bold text-sm">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5 h-5" alt="Google" /> Google
+            </button>
+            <button onClick={() => setIsLoginView(!isLoginView)} className="w-full mt-6 text-[#ff5722] text-sm font-bold text-center">
+              {isLoginView ? 'Criar conta' : 'Já tenho conta'}
+            </button>
           </div>
         </div>
       )}
