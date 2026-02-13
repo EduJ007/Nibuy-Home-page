@@ -67,7 +67,6 @@ const CategoryGrid: React.FC = () => {
             </svg>
           </button>
         </a>
-    </div>
 </div>
     </section>
   );
