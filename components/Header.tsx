@@ -216,7 +216,7 @@ const Header: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden z-10 relative text-gray-800">
             <div className="bg-[#ff5722] p-6 text-white flex justify-between items-center">
               <h3 className="font-black uppercase italic tracking-tighter text-xl">Editar Perfil</h3>
-              <button onClick={() => setShowProfileModal(false)}><X size={24} /></button>
+              <button onClick={() => setShowProfileModal(false)}><X size={30} /></button>
             </div>
             <div className="p-8 space-y-5">
               <div className="flex justify-center mb-4">
