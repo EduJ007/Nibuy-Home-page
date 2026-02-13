@@ -222,7 +222,7 @@ const Header: React.FC = () => {
               <div className="flex justify-center mb-4">
                 <img 
                   src={editPhoto} 
-                  className="w-30 h-30 rounded-full border-4 border-orange-100 object-cover shadow-xl" 
+                  className="w-25 h-25 rounded-full border-4 border-orange-100 object-cover shadow-xl" 
                   onError={(e) => {(e.target as HTMLImageElement).src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=error'}} 
                 />
               </div>
