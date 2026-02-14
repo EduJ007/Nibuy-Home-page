@@ -18,6 +18,7 @@ const Header: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [isLoginView, setIsLoginView] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [user, setUser] = useState<{ name: string; email: string; photo: string } | null>(null);
   const [nameInput, setNameInput] = useState('');
@@ -101,48 +102,33 @@ const Header: React.FC = () => {
 
   const handleAuthAction = async () => {
   try {
-    setError(''); // Limpa erro anterior
+    setError('');
+    if (!emailInput || !passwordInput) {
+      setError("Preencha todos os campos!");
+      return;
+    }
+
     if (isLoginView) {
-      // LOGIN
-      await signInWithEmailAndPassword(auth, emailInput, passwordInput);
+      // Tenta Logar
+      await signInWithEmailAndPassword(auth, emailInput.trim(), passwordInput);
     } else {
-      // CADASTRO
-      const res = await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
-      // Salva no Firestore
+      // Tenta Cadastrar
+      if (!nameInput) { setError("Digite seu nome!"); return; }
+      const res = await createUserWithEmailAndPassword(auth, emailInput.trim(), passwordInput);
+      
       await setDoc(doc(db, "users", res.user.uid), {
         name: nameInput,
-        email: emailInput,
-        photo: '',
+        email: emailInput.trim(),
         createdAt: new Date().toISOString()
       });
     }
     setShowLoginModal(false);
   } catch (err: any) {
-    console.error("Erro completo:", err.code); // Isso vai mostrar o código real no seu F12
-
-    // Tradutor de erros para o usuário:
-    switch (err.code) {
-      case 'auth/invalid-credential':
-        setError("E-mail ou senha incorretos.");
-        break;
-      case 'auth/user-not-found':
-        setError("Usuário não encontrado.");
-        break;
-      case 'auth/wrong-password':
-        setError("Senha incorreta.");
-        break;
-      case 'auth/email-already-in-use':
-        setError("Este e-mail já está em uso.");
-        break;
-      case 'auth/invalid-email':
-        setError("Formato de e-mail inválido.");
-        break;
-      case 'auth/weak-password':
-        setError("A senha deve ter pelo menos 6 caracteres.");
-        break;
-      default:
-        setError("Ocorreu um erro. Tente novamente.");
-    }
+    console.error("Erro detalhado:", err.code);
+    if (err.code === 'auth/invalid-credential') setError("E-mail ou senha incorretos.");
+    else if (err.code === 'auth/email-already-in-use') setError("E-mail já cadastrado.");
+    else if (err.code === 'auth/weak-password') setError("Senha muito curta (mín. 6 caracteres).");
+    else setError("Erro ao entrar. Tente novamente.");
   }
 };
 
