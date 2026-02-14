@@ -319,14 +319,42 @@ const Header: React.FC = () => {
             <h2 className="text-2xl font-black text-[#ff5722] mb-6 text-center uppercase italic">{isLoginView ? 'Login' : 'Cadastro'}</h2>
             {error && <div className="bg-red-50 text-red-600 p-3 rounded-md text-xs font-bold mb-4 text-center border border-red-100">{error}</div>}
             <div className="space-y-4">
+
+
               {!isLoginView && <input type="text" placeholder="Nome" value={nameInput} onChange={(e) => setNameInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none" />}
+
+
               <input type="email" placeholder="E-mail" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none" />
-              <input type="password" placeholder="Senha" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none" />
+              
+
+                <div className="relative">
+                  <input 
+                    type={showPassword ? "text" : "password"} 
+                    placeholder="Senha" 
+                    value={passwordInput} 
+                    onChange={(e) => setPasswordInput(e.target.value)} 
+                    className="w-full border p-3 rounded-lg outline-none pr-10" 
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  >
+                    {showPassword ? <X size={18} /> : <Search size={18} className="rotate-45" />}
+                  </button>
+                </div>
+
               <button onClick={handleAuthAction} className="w-full bg-[#ff5722] text-white font-bold py-3 rounded-lg hover:brightness-110">{isLoginView ? 'Entrar' : 'Cadastrar'}</button>
+
+              
             </div>
             <button onClick={handleGoogleLogin} className="w-full mt-4 flex items-center justify-center gap-3 border p-3 rounded-lg font-bold text-sm">
+
+
               <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" /> Google
             </button>
+
+
             <button onClick={() => setIsLoginView(!isLoginView)} className="w-full mt-6 text-[#ff5722] text-sm font-bold text-center">
               {isLoginView ? 'Criar conta' : 'Já tenho conta'}
             </button>
