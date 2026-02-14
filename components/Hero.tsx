@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Gamepad2, Sofa, Sparkles } from 'lucide-react';
+import { auth } from '../firebase';
 
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,6 +21,19 @@ const Hero: React.FC = () => {
       icon: <Sparkles className="mb-4 text-orange-100" size={48} />
     }
   ];
+
+  const protectedRedirect = (url: string) => {
+    if (auth.currentUser) {
+      window.location.href = url;
+    } else {
+      // Dispara o sinal para o Header abrir o modal com a mensagem laranja
+      const event = new CustomEvent('openNibuyLogin', { 
+        detail: { message: "Você precisa estar logado para acessar as ofertas." } 
+      });
+      window.dispatchEvent(event);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const nextSlide = () => setCurrentSlide((prev) => (prev === mainSlides.length - 1 ? 0 : prev + 1));
   const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? mainSlides.length - 1 : prev - 1));
@@ -55,7 +69,7 @@ const Hero: React.FC = () => {
             {mainSlides[currentSlide].sub}
           </p>
           <button 
-            onClick={() => window.location.href = mainSlides[currentSlide].link}
+           onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
             className="bg-white text-[#ff5722] font-black py-3 md:py-4 px-8 md:px-12 rounded-full hover:scale-105 transition-all uppercase text-[10px] md:text-sm tracking-widest active:scale-95 shadow-lg"
           >
             {mainSlides[currentSlide].btn}
@@ -77,7 +91,7 @@ const Hero: React.FC = () => {
             <Gamepad2 className="text-orange-500 mb-4 group-hover:scale-110 transition-transform" size={40} />
             <h3 className="text-white font-black italic text-2xl leading-tight mb-4 uppercase tracking-tight">UNIVERSO<br/>GAMER</h3>
             <button 
-                onClick={() => window.location.href = 'https://nibuy-produtos.vercel.app/'}
+               onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
                 className="text-xs bg-orange-500 text-white px-6 py-2.5 rounded-lg font-bold uppercase hover:bg-orange-600 transition-all shadow-lg"
             >
                 Ver Coleção
@@ -89,7 +103,7 @@ const Hero: React.FC = () => {
             <Sofa className="text-[#ff5722] mb-4 group-hover:scale-110 transition-transform" size={40} />
             <h3 className="text-[#ff5722] font-black italic text-2xl leading-tight mb-4 uppercase tracking-tight">CASA &<br/>DECORAÇÃO</h3>
             <button 
-                onClick={() => window.location.href = 'https://nibuy-produtos.vercel.app/'}
+                onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
                 className="text-xs border-2 border-[#ff5722] text-[#ff5722] px-6 py-2 rounded-lg font-bold uppercase hover:bg-[#ff5722] hover:text-white transition-all shadow-sm"
             >
                 Explorar

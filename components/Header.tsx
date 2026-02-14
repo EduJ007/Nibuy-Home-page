@@ -11,11 +11,12 @@ import {
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
 const Header: React.FC = () => {
+  /* --- ESTADOS DO COMPONENTE --- */
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [notifCount, setNotifCount] = useState(1);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false); // Novo
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const [isLoginView, setIsLoginView] = useState(true);
 
   const [user, setUser] = useState<{ name: string; email: string; photo: string } | null>(null);
@@ -29,33 +30,46 @@ const Header: React.FC = () => {
   const [editPhoto, setEditPhoto] = useState('');
   const [updateLoading, setUpdateLoading] = useState(false);
 
- const [searchTerm, setSearchTerm] = useState('');
+  /* --- SCRIPT DA ÁREA DE BUSCA E PROTEÇÃO --- */
+  const [searchTerm, setSearchTerm] = useState('');
 
-const handleSearch = () => {
-  if (searchTerm.trim()) {
-    window.location.href = `https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`;
-  }
-};
+  // Função que trava o acesso se não estiver logado
+  const protectedRedirect = (url: string) => {
+    if (user) {
+      window.location.href = url;
+    } else {
+      setError("Ops! Você precisa estar logado para acessar as ofertas.");
+      setIsLoginView(true);
+      setShowLoginModal(true);
+    }
+  };
 
+  // Função da lupa/enter
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      protectedRedirect(`https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
+  /* --- EFEITOS (FIREBASE) --- */
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        const userDoc = await getDoc(doc(db, "users", currentUser.uid));
-        if (userDoc.exists()) {
-          const userData = userDoc.data() as any;
-          setUser(userData);
-          setEditName(userData.name);
-          setEditPhoto(userData.photo);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const docRef = doc(db, "users", firebaseUser.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setUser({
+            name: data.name || '',
+            email: firebaseUser.email || '',
+            photo: data.photo || ''
+          });
         } else {
-          const newUser = {
-            name: currentUser.displayName || 'Usuário',
-            email: currentUser.email || '',
-            photo: currentUser.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${currentUser.uid}`
-          };
-          await setDoc(doc(db, "users", currentUser.uid), newUser);
-          setUser(newUser);
-          setEditName(newUser.name);
-          setEditPhoto(newUser.photo);
+          setUser({
+            name: firebaseUser.displayName || '',
+            email: firebaseUser.email || '',
+            photo: firebaseUser.photoURL || ''
+          });
         }
       } else {
         setUser(null);
@@ -64,61 +78,64 @@ const handleSearch = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleUpdateProfile = async () => {
-    if (!auth.currentUser || !editName) return;
-    setUpdateLoading(true);
+  /* --- FUNÇÕES DE AUTENTICAÇÃO --- */
+  const handleGoogleLogin = async () => {
     try {
-      const userRef = doc(db, "users", auth.currentUser.uid);
-      await updateDoc(userRef, { name: editName, photo: editPhoto });
-      setUser(prev => prev ? { ...prev, name: editName, photo: editPhoto } : null);
-      setShowProfileModal(false);
-      alert("Perfil atualizado com sucesso! 🎉");
-    } catch (err) {
-      setError('Erro ao atualizar perfil.');
-    } finally {
-      setUpdateLoading(false);
+      const result = await signInWithPopup(auth, googleProvider);
+      const userRef = doc(db, "users", result.user.uid);
+      const docSnap = await getDoc(userRef);
+      
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL,
+          createdAt: new Date().toISOString()
+        });
+      }
+      setShowLoginModal(false);
+    } catch (err: any) {
+      setError("Erro ao entrar com Google");
     }
   };
 
   const handleAuthAction = async () => {
-    setError('');
     try {
-      if (!isLoginView) {
-        if (!nameInput) { setError('Nome é obrigatório'); return; }
-        const res = await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
-        const newUser = { name: nameInput, email: emailInput, photo: `https://api.dicebear.com/7.x/avataaars/svg?seed=${nameInput}` };
-        await setDoc(doc(db, "users", res.user.uid), newUser);
-      } else {
+      setError('');
+      if (isLoginView) {
         await signInWithEmailAndPassword(auth, emailInput, passwordInput);
+      } else {
+        const res = await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
+        await setDoc(doc(db, "users", res.user.uid), {
+          name: nameInput,
+          email: emailInput,
+          photo: '',
+          createdAt: new Date().toISOString()
+        });
       }
       setShowLoginModal(false);
     } catch (err: any) {
-      setError('E-mail ou senha incorretos.');
+      setError("Erro na autenticação. Verifique seus dados.");
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      const res = await signInWithPopup(auth, googleProvider);
-      const userDoc = await getDoc(doc(db, "users", res.user.uid));
-      if (!userDoc.exists()) {
-        const newUser = {
-          name: res.user.displayName || 'Usuário',
-          email: res.user.email || '',
-          photo: res.user.photoURL || ''
-        };
-        await setDoc(doc(db, "users", res.user.uid), newUser);
-        setUser(newUser);
-      }
-      setShowLoginModal(false);
-    } catch (err) { setError('Erro no login com Google.'); }
+  useEffect(() => {
+  const handleOpenLogin = (e: any) => {
+    setError(e.detail?.message || "Você precisa estar logado.");
+    setIsLoginView(true);
+    setShowLoginModal(true);
   };
+
+  window.addEventListener('openNibuyLogin', handleOpenLogin);
+  return () => window.removeEventListener('openNibuyLogin', handleOpenLogin);
+}, []);
 
   const handleLogout = async () => {
     await signOut(auth);
     setShowUserMenu(false);
+    window.location.reload();
   };
-
+  
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#ff5722] shadow-md text-white">
       {/* Top Bar - Preservada 100% igual ao seu original */}
