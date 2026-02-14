@@ -6,7 +6,8 @@ import {
   signInWithEmailAndPassword, 
   signInWithPopup, 
   signOut, 
-  onAuthStateChanged 
+  onAuthStateChanged,
+  sendPasswordResetEmail
 } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -42,6 +43,19 @@ const Header: React.FC = () => {
       setError("Ops! Você precisa estar logado para acessar as ofertas.");
       setIsLoginView(true);
       setShowLoginModal(true);
+    }
+  };
+
+  const handleResetPassword = async () => {
+    if (!emailInput) {
+      setError("Digite seu e-mail para recuperar a senha.");
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, emailInput.trim());
+      setError("E-mail de recuperação enviado! Verifique sua caixa de entrada.");
+    } catch (err: any) {
+      setError("Erro ao enviar. Verifique o e-mail digitado.");
     }
   };
 
@@ -100,35 +114,42 @@ const Header: React.FC = () => {
     }
   };
 
-  const handleAuthAction = async () => {
+ const handleAuthAction = async (e?: React.MouseEvent | React.FormEvent) => {
+  if (e) e.preventDefault(); // Impede o Localhost de dar refresh e bugar o Firebase
+
   try {
     setError('');
-    if (!emailInput || !passwordInput) {
+    const email = emailInput.trim(); 
+    const password = passwordInput;
+
+    if (!email || !password) {
       setError("Preencha todos os campos!");
       return;
     }
 
+    console.log("Tentando autenticar:", email); // Para você ver no F12 se o e-mail está certo
+
     if (isLoginView) {
-      // Tenta Logar
-      await signInWithEmailAndPassword(auth, emailInput.trim(), passwordInput);
+      await signInWithEmailAndPassword(auth, email, password);
     } else {
-      // Tenta Cadastrar
       if (!nameInput) { setError("Digite seu nome!"); return; }
-      const res = await createUserWithEmailAndPassword(auth, emailInput.trim(), passwordInput);
-      
+      const res = await createUserWithEmailAndPassword(auth, email, password);
       await setDoc(doc(db, "users", res.user.uid), {
         name: nameInput,
-        email: emailInput.trim(),
+        email: email,
+        photo: '',
         createdAt: new Date().toISOString()
       });
     }
+    
     setShowLoginModal(false);
   } catch (err: any) {
-    console.error("Erro detalhado:", err.code);
+    console.error("ERRO COMPLETO:", err.code, err.message);
+    
     if (err.code === 'auth/invalid-credential') setError("E-mail ou senha incorretos.");
-    else if (err.code === 'auth/email-already-in-use') setError("E-mail já cadastrado.");
-    else if (err.code === 'auth/weak-password') setError("Senha muito curta (mín. 6 caracteres).");
-    else setError("Erro ao entrar. Tente novamente.");
+    else if (err.code === 'auth/too-many-requests') setError("Muitas tentativas. Aguarde um pouco.");
+    else if (err.code === 'auth/internal-error') setError("Erro interno. Verifique sua conexão ou a senha.");
+    else setError("Erro ao entrar. Verifique seus dados.");
   }
 };
 
@@ -319,43 +340,56 @@ const Header: React.FC = () => {
             <h2 className="text-2xl font-black text-[#ff5722] mb-6 text-center uppercase italic">{isLoginView ? 'Login' : 'Cadastro'}</h2>
             {error && <div className="bg-red-50 text-red-600 p-3 rounded-md text-xs font-bold mb-4 text-center border border-red-100">{error}</div>}
             <div className="space-y-4">
-
-
-              {!isLoginView && <input type="text" placeholder="Nome" value={nameInput} onChange={(e) => setNameInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none" />}
-
-
-              <input type="email" placeholder="E-mail" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none" />
-              
-
+                {!isLoginView && (
+                  <input type="text" placeholder="Nome" value={nameInput} onChange={(e) => setNameInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none focus:border-[#ff5722]" />
+                )}
+                
+                <input type="email" placeholder="E-mail" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} className="w-full border p-3 rounded-lg outline-none focus:border-[#ff5722]" />
+                
                 <div className="relative">
                   <input 
                     type={showPassword ? "text" : "password"} 
                     placeholder="Senha" 
                     value={passwordInput} 
                     onChange={(e) => setPasswordInput(e.target.value)} 
-                    className="w-full border p-3 rounded-lg outline-none pr-10" 
+                    className="w-full border p-3 rounded-lg outline-none pr-10 focus:border-[#ff5722]" 
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#ff5722] z-10"
                   >
                     {showPassword ? <X size={18} /> : <Search size={18} className="rotate-45" />}
                   </button>
                 </div>
 
-              <button onClick={handleAuthAction} className="w-full bg-[#ff5722] text-white font-bold py-3 rounded-lg hover:brightness-110">{isLoginView ? 'Entrar' : 'Cadastrar'}</button>
+                {isLoginView && (
+                  <div className="flex justify-center">
+                    <button 
+                      onClick={handleResetPassword}
+                      className="text-[13px] font-bold text-[black] hover:text-[#ff5722]"
+                    >
+                      Esqueceu a senha?
+                    </button>
+                  </div>
+                )}
 
-              
-            </div>
-            <button onClick={handleGoogleLogin} className="w-full mt-4 flex items-center justify-center gap-3 border p-3 rounded-lg font-bold text-sm">
+                <button 
+                  onClick={handleAuthAction} 
+                  className="w-full bg-[#ff5722] text-white font-bold py-3 rounded-lg hover:scale-[1.02] transition-all uppercase tracking-widest text-sm shadow-md"
+                >
+                  {isLoginView ? 'Entrar' : 'Cadastrar'}
+                </button>
+              </div>
+
+            <button onClick={handleGoogleLogin} className="w-full mt-4 flex items-center justify-center gap-3 border p-3 rounded-lg font-bold text-sm hover:scale-105">
 
 
               <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" /> Google
             </button>
 
 
-            <button onClick={() => setIsLoginView(!isLoginView)} className="w-full mt-6 text-[#ff5722] text-sm font-bold text-center">
+            <button onClick={() => setIsLoginView(!isLoginView)} className="w-full mt-6 text-[black] text-sm font-bold text-center inline-block">
               {isLoginView ? 'Criar conta' : 'Já tenho conta'}
             </button>
           </div>

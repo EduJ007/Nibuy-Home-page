@@ -12,15 +12,8 @@ const categories = [
   { id: 11, name: 'Celulares', img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
   { id: 10, name: 'Relógios', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
   { id: 9, name: 'Tecnologia', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
-  { id: 12, name: 'Calçados', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
-  { id: 13, name: 'Saúde', img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
+  { id: 12, name: 'Calçados', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },{ id: 13, name: 'Saúde', img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
   { id: 14, name: 'Cozinha', img: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
-  { id: 15, name: 'Papelaria', img: 'https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' }, 
-  { id: 16, name: 'Acessórios', img: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' }, 
-  { id: 17, name: 'Joias', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
-  { id: 18, name: 'Bebês', img: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
-  { id: 19, name: 'Ferramentas', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' }, 
-  { id: 20, name: 'Livros', img: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=200&auto=format&fit=crop', href:'https://nibuy-produtos.vercel.app/' },
 ];
 
 const CategoryGrid: React.FC = () => {
@@ -36,7 +29,7 @@ const CategoryGrid: React.FC = () => {
       {/* MOBILE: Carrossel horizontal (overflow-x-auto)
           DESKTOP: Grid estático de 10 colunas
       */}
-      <div className="flex overflow-x-auto md:grid md:grid-cols-10 scrollbar-hide border-l border-t border-gray-200">
+      <div className="flex overflow-x-auto md:grid md:grid-cols-7 scrollbar-hide border-l border-t border-gray-200">
        {categories.map((cat) => (
               <a 
                 key={cat.id} 
