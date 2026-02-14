@@ -100,24 +100,51 @@ const Header: React.FC = () => {
   };
 
   const handleAuthAction = async () => {
-    try {
-      setError('');
-      if (isLoginView) {
-        await signInWithEmailAndPassword(auth, emailInput, passwordInput);
-      } else {
-        const res = await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
-        await setDoc(doc(db, "users", res.user.uid), {
-          name: nameInput,
-          email: emailInput,
-          photo: '',
-          createdAt: new Date().toISOString()
-        });
-      }
-      setShowLoginModal(false);
-    } catch (err: any) {
-      setError("Erro na autenticação. Verifique seus dados.");
+  try {
+    setError(''); // Limpa erro anterior
+    if (isLoginView) {
+      // LOGIN
+      await signInWithEmailAndPassword(auth, emailInput, passwordInput);
+    } else {
+      // CADASTRO
+      const res = await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
+      // Salva no Firestore
+      await setDoc(doc(db, "users", res.user.uid), {
+        name: nameInput,
+        email: emailInput,
+        photo: '',
+        createdAt: new Date().toISOString()
+      });
     }
-  };
+    setShowLoginModal(false);
+  } catch (err: any) {
+    console.error("Erro completo:", err.code); // Isso vai mostrar o código real no seu F12
+
+    // Tradutor de erros para o usuário:
+    switch (err.code) {
+      case 'auth/invalid-credential':
+        setError("E-mail ou senha incorretos.");
+        break;
+      case 'auth/user-not-found':
+        setError("Usuário não encontrado.");
+        break;
+      case 'auth/wrong-password':
+        setError("Senha incorreta.");
+        break;
+      case 'auth/email-already-in-use':
+        setError("Este e-mail já está em uso.");
+        break;
+      case 'auth/invalid-email':
+        setError("Formato de e-mail inválido.");
+        break;
+      case 'auth/weak-password':
+        setError("A senha deve ter pelo menos 6 caracteres.");
+        break;
+      default:
+        setError("Ocorreu um erro. Tente novamente.");
+    }
+  }
+};
 
   useEffect(() => {
   const handleOpenLogin = (e: any) => {
