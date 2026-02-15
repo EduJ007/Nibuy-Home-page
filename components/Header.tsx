@@ -7,7 +7,10 @@ import {
   signInWithPopup, 
   signOut, 
   onAuthStateChanged,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
+  linkWithCredential,
+  EmailAuthProvider
 } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -20,6 +23,17 @@ const Header: React.FC = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [isLoginView, setIsLoginView] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [loginWarning, setLoginWarning] = useState(false);
+  const [showAddPasswordModal, setShowAddPasswordModal] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [addPassLoading, setAddPassLoading] = useState(false);
+
+
+  const [notifications, setNotifications] = useState([
+  { id: 1, text: "Promoção nova disponível 🔥", read: false },
+  { id: 2, text: "Seu perfil foi atualizado com sucesso", read: false }
+]);
 
   const [user, setUser] = useState<{ name: string; email: string; photo: string } | null>(null);
   const [nameInput, setNameInput] = useState('');
@@ -60,11 +74,52 @@ const Header: React.FC = () => {
   };
 
   // Função da lupa/enter
-  const handleSearch = () => {
-    if (searchTerm.trim()) {
-      protectedRedirect(`https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`);
-    }
-  };
+ const handleSearch = () => {
+  if (!searchTerm.trim()) return;
+
+  if (!user) {
+    showLoginWarning(); // ⚠️ aviso bonito
+    return;
+  }
+
+  window.location.href =
+    `https://nibuy-produtos.vercel.app/?search=${encodeURIComponent(searchTerm.trim())}`;
+};
+
+      const handleUpdateProfile = async () => {
+  if (!user) return;
+
+  if (!editName.trim()) {
+    setError("O nome não pode ficar vazio.");
+    return;
+  }
+
+  try {
+    setUpdateLoading(true);
+
+    const userRef = doc(db, "users", auth.currentUser!.uid);
+
+    await updateDoc(userRef, {
+      name: editName.trim(),
+      photo: editPhoto.trim()
+    });
+
+    // Atualiza o estado local também
+    setUser({
+      ...user,
+      name: editName.trim(),
+      photo: editPhoto.trim()
+    });
+
+    setShowProfileModal(false);
+
+  } catch (error) {
+    console.error("Erro ao atualizar perfil:", error);
+    setError("Erro ao atualizar perfil.");
+  } finally {
+    setUpdateLoading(false);
+  }
+};
 
   /* --- EFEITOS (FIREBASE) --- */
   useEffect(() => {
@@ -93,66 +148,134 @@ const Header: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
+     const showLoginWarning = () => {
+  setLoginWarning(true);
+
+  setTimeout(() => {
+    setLoginWarning(false);
+  }, 3000);
+};
+
   /* --- FUNÇÕES DE AUTENTICAÇÃO --- */
   const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const userRef = doc(db, "users", result.user.uid);
-      const docSnap = await getDoc(userRef);
-      
-      if (!docSnap.exists()) {
-        await setDoc(userRef, {
-          name: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL,
-          createdAt: new Date().toISOString()
-        });
-      }
-      setShowLoginModal(false);
-    } catch (err: any) {
-      setError("Erro ao entrar com Google");
-    }
-  };
-
- const handleAuthAction = async (e?: React.MouseEvent | React.FormEvent) => {
-  if (e) e.preventDefault(); // Impede o Localhost de dar refresh e bugar o Firebase
+  setError("");
 
   try {
-    setError('');
-    const email = emailInput.trim(); 
-    const password = passwordInput;
+    const result = await signInWithPopup(auth, googleProvider);
 
-    if (!email || !password) {
-      setError("Preencha todos os campos!");
-      return;
-    }
+    const userRef = doc(db, "users", result.user.uid);
+    const docSnap = await getDoc(userRef);
 
-    console.log("Tentando autenticar:", email); // Para você ver no F12 se o e-mail está certo
-
-    if (isLoginView) {
-      await signInWithEmailAndPassword(auth, email, password);
-    } else {
-      if (!nameInput) { setError("Digite seu nome!"); return; }
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, "users", res.user.uid), {
-        name: nameInput,
-        email: email,
-        photo: '',
+    if (!docSnap.exists()) {
+      await setDoc(userRef, {
+        name: result.user.displayName,
+        email: result.user.email,
+        photo: result.user.photoURL,
         createdAt: new Date().toISOString()
       });
     }
-    
+
     setShowLoginModal(false);
+
   } catch (err: any) {
-    console.error("ERRO COMPLETO:", err.code, err.message);
-    
-    if (err.code === 'auth/invalid-credential') setError("E-mail ou senha incorretos.");
-    else if (err.code === 'auth/too-many-requests') setError("Muitas tentativas. Aguarde um pouco.");
-    else if (err.code === 'auth/internal-error') setError("Erro interno. Verifique sua conexão ou a senha.");
-    else setError("Erro ao entrar. Verifique seus dados.");
+
+    // ⚠️ Caso já exista conta com email/senha
+    if (err.code === "auth/account-exists-with-different-credential") {
+
+      const email = err.customData.email;
+
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+
+      setError(
+        "Este e-mail já está cadastrado com senha. Entre usando e-mail e senha primeiro."
+      );
+
+    } else {
+      setError("Erro ao entrar com Google");
+    }
   }
 };
 
+
+const handleAuthAction = async () => {
+  setError("");
+
+  if (!emailInput.trim() || !passwordInput.trim()) {
+    setError("Preencha todos os campos.");
+    return;
+  }
+
+  try {
+    if (isLoginView) {
+      // 🔐 LOGIN
+      await signInWithEmailAndPassword(
+        auth,
+        emailInput.trim(),
+        passwordInput.trim()
+      );
+
+      setShowLoginModal(false);
+      setEmailInput("");
+      setPasswordInput("");
+
+    } else {
+      // 🆕 CADASTRO
+
+      if (!nameInput.trim()) {
+        setError("Digite seu nome.");
+        return;
+      }
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        emailInput.trim(),
+        passwordInput.trim()
+      );
+
+      const newUser = userCredential.user;
+
+      await setDoc(doc(db, "users", newUser.uid), {
+        name: nameInput.trim(),
+        email: newUser.email,
+        photo: "",
+        createdAt: new Date().toISOString()
+      });
+
+      setShowLoginModal(false);
+      setIsLoginView(true);
+      setNameInput("");
+      setEmailInput("");
+      setPasswordInput("");
+    }
+
+  } catch (err: any) {
+    console.error("Erro Firebase:", err);
+
+    if (err.code === "auth/account-exists-with-different-credential") {
+      setError("Esta conta já foi criada com Google. Use o botão Google.");
+    } 
+    else if (err.code === "auth/user-not-found") {
+      setError("Usuário não encontrado.");
+    } 
+    else if (err.code === "auth/wrong-password") {
+      setError("Senha incorreta.");
+    } 
+    else if (err.code === "auth/email-already-in-use") {
+      setError("Esse e-mail já está cadastrado.");
+    } 
+    else if (err.code === "auth/invalid-email") {
+      setError("E-mail inválido.");
+    } 
+    else if (err.code === "auth/weak-password") {
+      setError("A senha deve ter pelo menos 6 caracteres.");
+    } 
+    else {
+      setError("Erro ao autenticar. Tente novamente.");
+    }
+  }
+};
+
+  
   useEffect(() => {
   const handleOpenLogin = (e: any) => {
     setError(e.detail?.message || "Você precisa estar logado.");
@@ -170,14 +293,70 @@ const Header: React.FC = () => {
     window.location.reload();
   };
   
+  const handleAddPassword = async () => {
+  if (!auth.currentUser) return;
+
+  if (!newPassword || newPassword.length < 6) {
+    setError("A senha deve ter pelo menos 6 caracteres.");
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    setError("As senhas não coincidem.");
+    return;
+  }
+
+  try {
+    setAddPassLoading(true);
+
+    // 🔥 Reautentica com Google
+    await signInWithPopup(auth, googleProvider);
+
+    const credential = EmailAuthProvider.credential(
+      auth.currentUser.email!,
+      newPassword
+    );
+
+    await linkWithCredential(auth.currentUser, credential);
+
+    setShowAddPasswordModal(false);
+    setNewPassword("");
+    setConfirmPassword("");
+
+    alert("Senha adicionada com sucesso! 🎉");
+
+  } catch (err: any) {
+    console.error(err);
+    setError("Erro ao adicionar senha.");
+  } finally {
+    setAddPassLoading(false);
+  }
+};
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#ff5722] shadow-md text-white">
       {/* Top Bar - Preservada 100% igual ao seu original */}
       <div className="hidden md:flex max-w-[1200px] mx-auto py-1.5 justify-between items-center text-xs px-4">
   <div className="flex gap-4 items-center">
-    <a href="https://nibuy-contact.vercel.app/" className="hover:text-gray-200 font-medium">Entrar em Contato</a>
+          <button
+          onClick={() => user
+            ? window.location.href = "https://nibuy-contact.vercel.app/"
+            : showLoginWarning()
+          }
+          className="hover:text-gray-200 font-medium"
+        >
+          Entrar em Contato
+        </button>
     <span>|</span>
-    <a href="https://sobre-nibuy.vercel.app/" className="hover:text-gray-200 font-medium">Sobre nós</a>
+              <button
+              onClick={() => user
+                ? window.location.href = "https://sobre-nibuy.vercel.app/"
+                : showLoginWarning()
+              }
+              className="hover:text-gray-200 font-medium"
+            >
+              Sobre nós
+            </button>
     <span>|</span>
     <div className="flex items-center gap-4 ml-1">
       <span className="font-medium">Siga-nos</span> 
@@ -189,12 +368,39 @@ const Header: React.FC = () => {
     </div>
   </div>
 
+{/* AVISO DE LOGIN NECESSÁRIO */}
+{loginWarning && (
+  <div className="fixed top-20 left-1/2 -translate-x-1/2 bg-white text-gray-800 px-6 py-4 rounded-xl shadow-2xl border border-orange-100 z-[999]">
+    
+    <p className="font-black text-[#ff5722] text-sm mb-1">
+      ⚠️ Acesso restrito
+    </p>
+
+    <p className="text-xs">
+      Você precisa estar logado para acessar esta área.
+    </p>
+  </div>
+)}
+
   <div className="flex gap-4 items-center font-bold">
     {/* AJUSTE DAS NOTIFICAÇÕES */}
     <button 
-      onClick={() => setShowNotifications(!showNotifications)} 
+                              onClick={() => {
+              if (!user) {
+                showLoginWarning(); // ← chama a função certa
+                return;
+              }
+
+              setShowNotifications(!showNotifications);
+            }}
       className="flex items-center gap-1 font-normal relative pr-2"
     >
+      {showNotifications && (
+  <div className="absolute top-full right-0 mt-2 w-64 bg-white text-gray-800 rounded-lg shadow-xl p-4 z-50">
+    <p className="text-sm font-bold text-[#ff5722] mb-2">Notificações</p>
+    <p className="text-xs text-gray-500">O Site está em desenvolvimento. se quiser ajudar dando um Feedback.</p>
+  </div>
+)}
       <div className="relative">
         <Bell size={18} />
         {notifCount > 0 && (
@@ -206,9 +412,16 @@ const Header: React.FC = () => {
       <span>Notificações</span>
     </button>
     
-    <a href="https://nibuy-central-ajuda.vercel.app/" className="flex items-center gap-1 font-medium">
-      <HelpCircle size={18} /> Central de ajuda
-    </a>
+              <button
+            onClick={() => user
+              ? window.location.href = "https://nibuy-central-ajuda.vercel.app/"
+              : showLoginWarning()
+            }
+            className="flex items-center gap-1 font-medium"
+          >
+            <HelpCircle size={18} /> Central de ajuda
+          </button>
+
     
     {!user && (
       <>
@@ -254,21 +467,61 @@ const Header: React.FC = () => {
             </button>
           ) : (
             <div className="flex items-center gap-3 cursor-pointer relative" onClick={() => setShowUserMenu(!showUserMenu)}>
-              <img src={user.photo} className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="User" />
+              <div className="w-12 h-12 rounded-full border-2 border-white overflow-hidden bg-gray-300 flex items-center justify-center shadow-sm">
+                  {user?.photo && user.photo.trim() !== "" ? (
+                    <img 
+                      src={user.photo} 
+                      className="w-full h-full object-cover" 
+                      alt="User" 
+                      onError={(e) => {
+                        // Se a imagem falhar, ele troca o src por um ícone de usuário padrão do Google
+                        (e.currentTarget as HTMLImageElement).src = "https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png";
+                      }}
+                    />
+                  ) : (
+                    /* Foto padrão caso o campo no banco esteja vazio */
+                    <img 
+                      src="https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png" 
+                      className="w-full h-full object-cover opacity-80" 
+                      alt="Padrão" 
+                    />
+                  )}
+                </div>
               <div className="hidden lg:block text-left">
-                <p className="text-[10px] opacity-90">Olá, {user.name.split(' ')[0]}</p>
-                <p className="text-xs font-bold uppercase tracking-tighter">Minha Conta</p>
+                <p className="text-[12px] opacity-90">Olá, {user.name.split(' ')[0]}</p>
+                <p className="text-[14px] font-bold uppercase tracking-tighter">Minha Conta</p>
               </div>
 
               {showUserMenu && (
                 <div className="absolute top-full right-0 mt-3 w-52 bg-white rounded-xl shadow-2xl text-gray-800 border border-gray-100 overflow-hidden z-[60]">
                   <div className="p-3 bg-gray-50 border-b flex items-center gap-2">
-                    <img src={user.photo} className="w-8 h-8 rounded-full" />
-                    <p className="font-bold text-xs truncate text-[#ff5722]">{user.name}</p>
+                   <img 
+                              src={
+                                user.photo && user.photo.trim() !== ""
+                                  ? user.photo
+                                  : "https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png"
+                              }
+                              className="w-12 h-12 rounded-full"
+                            />
+                    <p className="font-bold text-[15px] truncate text-[#ff5722]">{user.name}</p>
                   </div>
-                  <button onClick={() => { setShowProfileModal(true); setShowUserMenu(false); }} className="w-full text-left px-4 py-3 text-sm hover:bg-orange-50 flex items-center gap-2 font-bold">
+                  <button 
+                    onClick={() => {
+                      setEditName(user?.name || "");
+                      setEditPhoto(user?.photo || "");
+                      setShowProfileModal(true);
+                      setShowUserMenu(false);
+                    }}
+                    className="w-full text-left px-4 py-3 text-sm hover:bg-orange-50 flex items-center gap-2 font-bold"
+                  >
                     <Settings size={16} className="text-gray-400" /> Editar Perfil
                   </button>
+                  <button
+                        onClick={() => setShowAddPasswordModal(true)}
+                        className="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 flex items-center gap-2 font-bold"
+                      >
+                        🔐 Adicionar senha
+                      </button>
                   <button onClick={handleLogout} className="w-full text-left px-4 py-3 text-sm hover:bg-red-50 text-red-600 flex items-center gap-2 font-bold border-t border-gray-50">
                     <LogOut size={16} /> Sair da conta
                   </button>
@@ -290,13 +543,17 @@ const Header: React.FC = () => {
             </div>
             <div className="p-8 space-y-5">
               <div className="flex justify-center mb-4">
-                <img 
-                  src={editPhoto} 
-                  className="w-25 h-25 rounded-full border-4 border-orange-100 object-cover shadow-xl" 
-                  onError={(e) => {(e.target as HTMLImageElement).src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=error'}} 
-                />
-              </div>
-
+                    <img
+                      key={editPhoto}
+                      src={
+                        editPhoto && editPhoto.trim() !== ""
+                          ? editPhoto
+                          : "https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png"
+                      }
+                      alt="Preview"
+                      className="w-28 h-28 rounded-full border-4 border-orange-100 object-cover shadow-xl"
+                    />
+                  </div>
               <div className="space-y-1">
                 <h1 className="text-sm font-black uppercase text-[#ff5722] ml-1">Nome:</h1>
                 <input 
@@ -331,7 +588,65 @@ const Header: React.FC = () => {
           </div>
         </div>
       )}
+              {/* MODAL ADICIONAR SENHA */}
+{showAddPasswordModal && (
+  <div className="fixed inset-0 z-[130] flex items-center justify-center p-4">
+    
+    {/* Fundo escuro */}
+    <div
+      className="fixed inset-0 bg-black/70 backdrop-blur-md"
+      onClick={() => setShowAddPasswordModal(false)}
+    ></div>
 
+    {/* Caixa */}
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden z-10 relative text-gray-800">
+      
+      {/* Topo */}
+      <div className="bg-[#ff5722] p-6 text-white flex justify-between items-center">
+        <h3 className="font-black uppercase italic tracking-tighter text-xl">
+          Criar senha
+        </h3>
+        <button onClick={() => setShowAddPasswordModal(false)}>
+          <X size={30} />
+        </button>
+      </div>
+
+      {/* Conteúdo */}
+      <div className="p-8 space-y-5">
+
+        <p className="text-sm text-gray-600 text-center">
+          Sua conta foi criada com Google.<br />
+          Crie uma senha para poder entrar também com e-mail e senha.
+        </p>
+
+        <input
+          type="password"
+          placeholder="Nova senha"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          className="w-full border-2 border-gray-100 p-3 rounded-xl font-bold focus:border-[#ff5722] outline-none"
+        />
+
+        <input
+          type="password"
+          placeholder="Confirmar senha"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className="w-full border-2 border-gray-100 p-3 rounded-xl font-bold focus:border-[#ff5722] outline-none"
+        />
+
+        <button
+          onClick={handleAddPassword}
+          disabled={addPassLoading}
+          className="w-full bg-[#ff5722] text-white font-black py-4 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all"
+        >
+          {addPassLoading ? "Salvando..." : "Adicionar senha"}
+        </button>
+
+      </div>
+    </div>
+  </div>
+)}
       {/* Modal Login */}
       {showLoginModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -373,7 +688,7 @@ const Header: React.FC = () => {
                     </button>
                   </div>
                 )}
-
+                
                 <button 
                   onClick={handleAuthAction} 
                   className="w-full bg-[#ff5722] text-white font-bold py-3 rounded-lg hover:scale-[1.02] transition-all uppercase tracking-widest text-sm shadow-md"
