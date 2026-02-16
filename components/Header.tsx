@@ -386,21 +386,59 @@ const handleAuthAction = async () => {
     {/* AJUSTE DAS NOTIFICAÇÕES */}
     <button 
                               onClick={() => {
-              if (!user) {
-                showLoginWarning(); // ← chama a função certa
-                return;
-              }
+                                            if (!user) {
+                                              showLoginWarning();
+                                              return;
+                                            }
 
-              setShowNotifications(!showNotifications);
-            }}
+                                            const newState = !showNotifications;
+                                            setShowNotifications(newState);
+
+                                            // 🔥 Se abriu → marca todas como lidas
+                                            if (newState) {
+                                              setNotifications(prev =>
+                                                prev.map(n => ({ ...n, read: true }))
+                                              );
+                                              setNotifCount(0);
+                                            }
+                                          }}
       className="flex items-center gap-1 font-normal relative pr-2"
     >
-      {showNotifications && (
-  <div className="absolute top-full right-0 mt-2 w-64 bg-white text-gray-800 rounded-lg shadow-xl p-4 z-50">
-    <p className="text-sm font-bold text-[#ff5722] mb-2">Notificações</p>
-    <p className="text-xs text-gray-500">O Site está em desenvolvimento. se quiser ajudar dando um Feedback.</p>
-  </div>
-)}
+            {showNotifications && (
+          <div className="absolute top-full right-0 mt-3 w-80 bg-white text-gray-800 rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
+
+            {/* CABEÇALHO */}
+            <div className="bg-[#ff5722] text-white px-4 py-3 font-black flex justify-between items-center">
+              <span>Notificações</span>
+              <span className="text-xs opacity-80">
+                {notifications.filter(n => !n.read).length} novas
+              </span>
+            </div>
+
+            {/* LISTA */}
+            <div className="max-h-80 overflow-y-auto">
+
+              {notifications.length === 0 && (
+                <p className="p-6 text-center text-gray-400 text-sm">
+                  Nenhuma notificação
+                </p>
+              )}
+
+              {notifications.map(n => (
+                <div
+                  key={n.id}
+                  className={`px-4 py-3 border-b text-sm transition
+                    ${n.read ? "bg-white text-gray-500" : "bg-orange-50 font-bold"}
+                  `}
+                >
+                  {n.text}
+                </div>
+              ))}
+
+            </div>
+
+          </div>
+        )}
       <div className="relative">
         <Bell size={18} />
         {notifCount > 0 && (
