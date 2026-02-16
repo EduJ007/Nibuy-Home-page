@@ -1,6 +1,15 @@
 import React, { useMemo } from 'react';
 import { Star } from 'lucide-react';
 import { productsData } from '../products';
+import { auth } from '../firebase';
+
+const protectedRedirect = (url: string) => {
+  if (auth.currentUser) {
+    window.location.href = url;
+  } else {
+    window.dispatchEvent(new Event('showNibuyWarning'));
+  }
+};
 
 const DailyDiscover: React.FC = () => {
   const calculateDiscount = (priceStr: string, oldPriceStr?: string) => {
@@ -72,7 +81,7 @@ const DailyDiscover: React.FC = () => {
                      </div>
                      <span>{item.sold}</span>
                   </div>
-                  <div className="text-[10px] text-gray-400 mt-1 text-right">{item.location}</div>
+                  <div className="text-[10px] text-gray-400 mt-4 text-right">{item.location}</div>
                 </div>
               </div>
             </div>
@@ -80,16 +89,17 @@ const DailyDiscover: React.FC = () => {
         })}
       </div>
 
-      <div className="flex justify-center mt-12 pb-8">
-    <a href="https://nibuy-produtos.vercel.app/">
-        <button 
-          onClick={() => window.open('/todas-as-ofertas', '_self')}
+          <div className="flex justify-center mt-12 pb-8">
+        <button
+          onClick={() =>
+            protectedRedirect('https://nibuy-produtos.vercel.app/')
+          }
           className="px-20 py-3 bg-white border border-gray-300 text-gray-600 font-medium text-sm uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm rounded-sm"
         >
           Veja Mais
         </button>
-    </a>
       </div>
+
     </section>
   );
 };

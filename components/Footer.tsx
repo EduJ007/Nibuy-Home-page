@@ -1,6 +1,15 @@
 import React from 'react';
 // IMPORTAÇÕES DOS ÍCONES QUE VOCÊ USA NO MODELO ESCURO
 import { Instagram, Facebook, Music2 } from 'lucide-react';
+import { auth } from '../firebase';
+
+const protectedRedirect = (url: string) => {
+  if (auth.currentUser) {
+    window.location.href = url;
+  } else {
+    window.dispatchEvent(new Event('showNibuyWarning'));
+  }
+};
 
 const Footer: React.FC = () => {
   return (
@@ -37,16 +46,56 @@ const Footer: React.FC = () => {
         </div>
 
         {/* COLUNA 2: NAVEGAÇÃO (EXATAMENTE IGUAL) */}
-        <div>
-          <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">Navegação</h4>
-          <ul className="space-y-4 text-gray-400 text-sm">
-            <li><a href="https://nibuy-home-page.vercel.app/" className="hover:text-white transition-colors">Início</a></li>
-            <li><a href="https://sobre-nibuy.vercel.app/" className="hover:text-white transition-colors">Sobre o Nibuy</a></li>
-            <li><a href="https://nibuy-central-ajuda.vercel.app/" className="hover:text-white transition-colors">Central de Ajuda</a></li>
-            <li><a href="https://nibuy-contact.vercel.app/" className="hover:text-white transition-colors">Contato</a></li>
-            <li><a href="https://nibuy-produtos.vercel.app/" className="text-[#ff5722] hover:text-white transition-colors">Produtos</a></li>
-          </ul>
-        </div>
+        <ul className="space-y-4 text-gray-400 text-sm">
+          <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white border-l-2 border-[#ff5722] pl-3">
+                    Navegação
+                  </h4>
+                  <li>
+                <button
+                  onClick={() => protectedRedirect('https://nibuy-home-page.vercel.app/')}
+                  className="hover:text-white transition-colors"
+                >
+                  Página Principal
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => protectedRedirect('https://sobre-nibuy.vercel.app/')}
+                  className="hover:text-white transition-colors"
+                >
+                  Sobre o Nibuy
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => protectedRedirect('https://nibuy-central-ajuda.vercel.app/')}
+                  className="hover:text-white transition-colors"
+                >
+                  Central de Ajuda
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => protectedRedirect('https://nibuy-contact.vercel.app/')}
+                  className="hover:text-white transition-colors"
+                >
+                  Contato
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
+                  className="text-[#ff5722] hover:text-white transition-colors"
+                >
+                  Produtos
+                </button>
+              </li>
+            </ul>
+
 
         {/* COLUNA 3: SUPORTE (EXATAMENTE IGUAL) */}
         <div>
