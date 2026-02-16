@@ -333,8 +333,44 @@ const handleAuthAction = async () => {
   }
 };
 
+useEffect(() => {
+  const handleWarning = () => {
+    showLoginWarning();
+  };
+
+  window.addEventListener('showNibuyWarning', handleWarning);
+
+  return () => window.removeEventListener('showNibuyWarning', handleWarning);
+}, []);
+
+useEffect(() => {
+  const handleWarning = () => showLoginWarning();
+
+  window.addEventListener("showNibuyWarning", handleWarning);
+
+  return () =>
+    window.removeEventListener("showNibuyWarning", handleWarning);
+}, []);
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#ff5722] shadow-md text-white">
+      {loginWarning && (
+  <div className="fixed top-56 left-1/2 
+                  -translate-x-1/2 -translate-y-1/2
+                  bg-white text-gray-800 px-6 py-4 
+                  rounded-xl shadow-2xl border border-orange-100 
+                  z-[9999]">
+    
+    <p className="font-black text-[#ff5722] text-sm mb-1">
+      ⚠️ Acesso restrito
+    </p>
+
+    <p className="text-xs">
+      Você precisa estar logado para acessar esta área.
+    </p>
+
+  </div>
+)}
       {/* Top Bar - Preservada 100% igual ao seu original */}
       <div className="hidden md:flex max-w-[1200px] mx-auto py-1.5 justify-between items-center text-xs px-4">
   <div className="flex gap-4 items-center">
@@ -368,19 +404,7 @@ const handleAuthAction = async () => {
     </div>
   </div>
 
-{/* AVISO DE LOGIN NECESSÁRIO */}
-{loginWarning && (
-  <div className="fixed top-20 left-1/2 -translate-x-1/2 bg-white text-gray-800 px-6 py-4 rounded-xl shadow-2xl border border-orange-100 z-[999]">
-    
-    <p className="font-black text-[#ff5722] text-sm mb-1">
-      ⚠️ Acesso restrito
-    </p>
 
-    <p className="text-xs">
-      Você precisa estar logado para acessar esta área.
-    </p>
-  </div>
-)}
 
   <div className="flex gap-4 items-center font-bold">
     {/* AJUSTE DAS NOTIFICAÇÕES */}

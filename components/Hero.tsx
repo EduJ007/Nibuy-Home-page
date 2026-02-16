@@ -23,17 +23,16 @@ const Hero: React.FC = () => {
   ];
 
   const protectedRedirect = (url: string) => {
-    if (auth.currentUser) {
-      window.location.href = url;
-    } else {
-      // Dispara o sinal para o Header abrir o modal com a mensagem laranja
-      const event = new CustomEvent('openNibuyLogin', { 
-        detail: { message: "Você precisa estar logado para acessar as ofertas." } 
-      });
-      window.dispatchEvent(event);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  if (auth.currentUser) {
+    window.location.href = url;
+  } else {
+    // 🔥 dispara o aviso laranja
+    window.dispatchEvent(new Event('showNibuyWarning'));
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
 
   const nextSlide = () => setCurrentSlide((prev) => (prev === mainSlides.length - 1 ? 0 : prev + 1));
   const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? mainSlides.length - 1 : prev - 1));

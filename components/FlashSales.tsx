@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { productsData } from '../products';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { auth } from '../firebase';
+
+const protectedRedirect = (url: string) => {
+  if (auth.currentUser) {
+    window.location.href = url;
+  } else {
+    window.dispatchEvent(new Event('showNibuyWarning'));
+  }
+};
 
 const FlashSales: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({ h: 24, m: 0, s: 0 });
@@ -54,9 +63,14 @@ const FlashSales: React.FC = () => {
             <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[10px] md:text-sm">{format(timeLeft.s)}</div>
           </div>
         </div>
-        <a href="https://nibuy-produtos.vercel.app/" className="text-blue-600 font-black text-[10px] md:text-[13px] uppercase tracking-widest shrink-0">
-          Ver Tudo ›
-        </a>
+        <button
+              onClick={() =>
+                protectedRedirect("https://nibuy-produtos.vercel.app/")
+              }
+              className="text-blue-600 font-black text-[10px] md:text-[13px] uppercase tracking-widest shrink-0"
+            >
+              Ver Tudo ›
+            </button>
       </div>
 
       <div className="relative group">
