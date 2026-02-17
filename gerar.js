@@ -77,6 +77,22 @@ for (const item of list) {
 }
 
 // ---------- salvar products.ts ----------
+const mapa = new Map();
+
+for (const p of existingProducts) {
+  const chave =
+    p.name.toLowerCase().trim() +
+    "|" +
+    p.price.trim();
+
+  if (!mapa.has(chave)) {
+    mapa.set(chave, p);
+  }
+}
+
+const produtosSemDuplicados = Array.from(mapa.values());
+
+// ---------- salvar products.ts ----------
 const output = `export interface Product {
   id: number;
   idShopee: string;
@@ -93,7 +109,7 @@ const output = `export interface Product {
 }
 
 export const productsData: Product[] = ${JSON.stringify(
-  existingProducts,
+  produtosSemDuplicados,
   null,
   2
 )};
@@ -102,4 +118,4 @@ export const productsData: Product[] = ${JSON.stringify(
 fs.writeFileSync(PRODUCTS_FILE, output, "utf8");
 
 console.log("✅ Produtos novos adicionados:", added);
-console.log("📦 Total agora:", existingProducts.length);
+console.log("🧹 Total após remover duplicados:", produtosSemDuplicados.length);
