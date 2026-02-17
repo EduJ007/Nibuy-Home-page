@@ -13,7 +13,25 @@ export interface Product {
   link?: string;
 }
 
-export const productsData: Product[] = [
+  function removeDuplicados(produtos: Product[]): Product[] {
+  const mapa = new Map<string, Product>();
+
+  for (const p of produtos) {
+    const chave = (p.name + "|" + p.price)
+      .toLowerCase()
+      .trim();
+
+    if (!mapa.has(chave)) {
+      mapa.set(chave, p);
+    }
+  }
+
+  return Array.from(mapa.values());
+  }
+
+// 🧠 LISTA ORIGINAL (gerada pelo gerar.js)
+const rawProducts: Product[] = [
+
   {
     "id": 1,
     "idShopee": "21099552315",
