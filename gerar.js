@@ -7,32 +7,31 @@ const INPUT_FILE = path.resolve("./produtos.txt");
 // ---------- helpers ----------
 function toReal(value) {
   if (!value) return "R$ 0,00";
-  return (
-    "R$ " +
-    (Number(value) / 100000)
-      .toFixed(2)
-      .replace(".", ",")
-  );
+  return "R$ " + (Number(value) / 100000).toFixed(2).replace(".", ",");
 }
 
 // ---------- ler products.ts ----------
 let existingProducts = [];
 let lastId = 1;
-let existingShopeeIds = new Set();
 
 if (fs.existsSync(PRODUCTS_FILE)) {
   const file = fs.readFileSync(PRODUCTS_FILE, "utf8");
 
-  const match = file.match(/productsData:\s*Product\[]\s*=\s*(\[[\s\S]*\]);/);
+  const match = file.match(
+    /export const productsData:\s*Product\[\]\s*=\s*(\[[\s\S]*?\]);/
+  );
 
   if (match) {
-    existingProducts = eval(match[1]);
-    lastId =
-      existingProducts.reduce((max, p) => Math.max(max, p.id), 0) + 1;
+    try {
+      existingProducts = JSON.parse(match[1]);
 
-    existingProducts.forEach(p => {
-      if (p.idShopee) existingShopeeIds.add(String(p.idShopee));
-    });
+      
+
+      lastId =
+        existingProducts.reduce((max, p) => Math.max(max, p.id), 0) + 1;
+    } catch {
+      console.log("⚠️ Erro ao ler products.ts");
+    }
   }
 }
 
@@ -42,16 +41,21 @@ const json = JSON.parse(raw);
 
 const list = json?.data?.list || [];
 
+console.log("Produtos recebidos:", list.length);
+
+
 let added = 0;
 
+// ---------- adicionar novos ----------
 for (const item of list) {
   const p = item.batch_item_for_item_card_full;
   if (!p) continue;
 
   const shopeeId = String(item.item_id);
-  if (existingShopeeIds.has(shopeeId)) continue;
 
-  existingProducts.push({
+  
+
+  const newProduct = {
     id: lastId++,
     idShopee: shopeeId,
     name: p.name,
@@ -66,9 +70,9 @@ for (const item of list) {
     location: p.shop_location || "Brasil",
     isFlashSale: p.is_on_flash_sale === true,
     link: item.product_link || ""
-  });
+  };
 
-  existingShopeeIds.add(shopeeId);
+  existingProducts.push(newProduct);
   added++;
 }
 
@@ -97,5 +101,5 @@ export const productsData: Product[] = ${JSON.stringify(
 
 fs.writeFileSync(PRODUCTS_FILE, output, "utf8");
 
-console.log("✅ Produtos adicionados:", added);
+console.log("✅ Produtos novos adicionados:", added);
 console.log("📦 Total agora:", existingProducts.length);
