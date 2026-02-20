@@ -16,7 +16,6 @@ let lastId = 1;
 
 if (fs.existsSync(PRODUCTS_FILE)) {
   const file = fs.readFileSync(PRODUCTS_FILE, "utf8");
-
   const match = file.match(
     /export const productsData:\s*Product\[\]\s*=\s*(\[[\s\S]*?\]);/
   );
@@ -24,11 +23,7 @@ if (fs.existsSync(PRODUCTS_FILE)) {
   if (match) {
     try {
       existingProducts = JSON.parse(match[1]);
-
-      
-
-      lastId =
-        existingProducts.reduce((max, p) => Math.max(max, p.id), 0) + 1;
+      lastId = existingProducts.reduce((max, p) => Math.max(max, p.id), 0) + 1;
     } catch {
       console.log("⚠️ Erro ao ler products.ts");
     }
@@ -38,11 +33,9 @@ if (fs.existsSync(PRODUCTS_FILE)) {
 // ---------- ler produtos.txt ----------
 const raw = fs.readFileSync(INPUT_FILE, "utf8");
 const json = JSON.parse(raw);
-
 const list = json?.data?.list || [];
 
-console.log("Produtos recebidos:", list.length);
-
+console.log("Produtos recebidos no TXT:", list.length);
 
 let added = 0;
 
@@ -53,44 +46,36 @@ for (const item of list) {
 
   const shopeeId = String(item.item_id);
 
-  
-
   const newProduct = {
     id: lastId++,
     idShopee: shopeeId,
     name: p.name,
     price: toReal(p.price),
-    oldPrice: p.price_before_discount
-      ? toReal(p.price_before_discount)
-      : undefined,
+    oldPrice: p.price_before_discount ? toReal(p.price_before_discount) : undefined,
     img: `https://down-br.img.susercontent.com/file/${p.image}`,
     sold: p.historical_sold_text || p.sold_text || "0 vendidos",
     stock: p.stock || 0,
     rating: Number(p.item_rating?.rating_star?.toFixed(1) || 0),
     location: p.shop_location || "Brasil",
     isFlashSale: p.is_on_flash_sale === true,
-    link: item.product_link || ""
+    link: item.long_link || item.product_link || ""
   };
 
   existingProducts.push(newProduct);
   added++;
 }
 
-// ---------- salvar products.ts ----------
-const mapa = new Map();
-
-for (const p of existingProducts) {
-  const chave =
-    p.name.toLowerCase().trim() +
-    "|" +
-    p.price.trim();
-
-  if (!mapa.has(chave)) {
-    mapa.set(chave, p);
+/* COMENTADO PARA PERMITIR DUPLICADOS POR ENQUANTO
+  const mapa = new Map();
+  for (const p of existingProducts) {
+    const chave = p.name.toLowerCase().trim() + "|" + p.price.trim();
+    if (!mapa.has(chave)) { mapa.set(chave, p); }
   }
-}
+  const produtosFinal = Array.from(mapa.values());
+*/
 
-const produtosSemDuplicados = Array.from(mapa.values());
+// Agora usamos a lista completa sem o filtro do Map
+const produtosFinal = existingProducts;
 
 // ---------- salvar products.ts ----------
 const output = `export interface Product {
@@ -109,7 +94,7 @@ const output = `export interface Product {
 }
 
 export const productsData: Product[] = ${JSON.stringify(
-  produtosSemDuplicados,
+  produtosFinal,
   null,
   2
 )};
@@ -118,4 +103,4 @@ export const productsData: Product[] = ${JSON.stringify(
 fs.writeFileSync(PRODUCTS_FILE, output, "utf8");
 
 console.log("✅ Produtos novos adicionados:", added);
-console.log("🧹 Total após remover duplicados:", produtosSemDuplicados.length);
+console.log("🚀 Total no arquivo agora:", produtosFinal.length);
