@@ -2,20 +2,16 @@ import React from 'react';
 import { auth } from '../firebase';
 
 const categories = [
-  { id: 1, name: 'Eletrodomésticos', img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=200&auto=format&fit=crop' },
-  { id: 2, name: 'Moda', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format&fit=crop' },
-  { id: 3, name: 'Beleza', img: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=200&auto=format&fit=crop' },
-  { id: 4, name: 'Casa', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=200&auto=format&fit=crop' },
-  { id: 5, name: 'Gamer', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200&auto=format&fit=crop' },
-  { id: 6, name: 'Pets', img: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=200&auto=format&fit=crop' },
-  { id: 7, name: 'Esporte', img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=200&auto=format&fit=crop' },
-  { id: 8, name: 'Brinquedos', img: 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?q=80&w=200&auto=format&fit=crop' },
-  { id: 11, name: 'Celulares', img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=200&auto=format&fit=crop' },
-  { id: 10, name: 'Relógios', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200&auto=format&fit=crop' },
-  { id: 9, name: 'Tecnologia', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=200&auto=format&fit=crop' },
-  { id: 12, name: 'Calçados', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=200&auto=format&fit=crop' },
-  { id: 13, name: 'Saúde', img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=200&auto=format&fit=crop' },
-  { id: 14, name: 'Cozinha', img: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=200&auto=format&fit=crop' },
+   { id: 1, name: 'Moda & Beleza', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format&fit=crop' },
+  { id: 2, name: 'Tecnologia & Eletrônicos', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=200&auto=format&fit=crop' },
+  { id: 3, name: 'Casa & Decoração', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=200&auto=format&fit=crop' },
+  { id: 4, name: 'Games & Hobby', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200&auto=format&fit=crop' },
+  { id: 5, name: 'Bebês & Infantil', img: 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?q=80&w=200&auto=format&fit=crop' },
+  { id: 6, name: 'Automotivo', img: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=200&auto=format&fit=crop' },
+  { id: 7, name: 'Esporte & Lazer', img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=200&auto=format&fit=crop' },
+  { id: 8, name: 'Pets', img: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=200&auto=format&fit=crop' },
+  { id: 9, name: 'Outros', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200&auto=format&fit=crop' },
+   { id: 10, name: 'Super Ofertas', img: 'https://images.unsplash.com/photo-1607082350899-7e105aa886ae?q=80&w=200&auto=format&fit=crop' }
 ];
 
 const protectedRedirect = (url: string) => {
@@ -36,7 +32,7 @@ const CategoryGrid: React.FC = () => {
         </h2>
       </div>
 
-      <div className="flex overflow-x-auto md:grid md:grid-cols-7 border-l border-t border-gray-200">
+      <div className="flex overflow-x-auto md:grid md:grid-cols-5 border-l border-t border-gray-200">
 
         {categories.map((cat) => (
           <button

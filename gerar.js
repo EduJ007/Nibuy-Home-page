@@ -10,6 +10,27 @@ function toReal(value) {
   return "R$ " + (Number(value) / 100000).toFixed(2).replace(".", ",");
 }
 
+function detectCategory(name) {
+  const n = name.toLowerCase();
+
+  if (/(celular|smartphone|iphone|android|xiaomi)/.test(n)) return "Celulares";
+  if (/(fone|teclado|mouse|notebook|pc|tablet|monitor|ssd|hd)/.test(n)) return "Tecnologia";
+  if (/(camisa|blusa|calça|vestido|roupa|jaqueta)/.test(n)) return "Moda";
+  if (/(perfume|maquiagem|cosmético|skincare|batom)/.test(n)) return "Beleza";
+  if (/(sofá|mesa|cadeira|decoração|luminária)/.test(n)) return "Casa";
+  if (/(panela|air fryer|liquidificador|cafeteira)/.test(n)) return "Cozinha";
+  if (/(console|controle|playstation|xbox|nintendo|gamer)/.test(n)) return "Gamer";
+  if (/(brinquedo|lego|boneco|pelúcia)/.test(n)) return "Brinquedos";
+  if (/(bebê|fralda|mamadeira|carrinho)/.test(n)) return "Bebês";
+  if (/(cachorro|gato|pet|ração)/.test(n)) return "Pets";
+  if (/(bola|academia|fitness|bicicleta|esporte)/.test(n)) return "Esporte";
+  if (/(carro|moto|automotivo|farol|som automotivo)/.test(n)) return "Automotivo";
+  if (/(relógio|smartwatch)/.test(n)) return "Relógios";
+  if (/(saúde|vitamina|termômetro|pressão)/.test(n)) return "Saúde";
+
+  return "Outros";
+}
+
 // ---------- ler products.ts ----------
 let existingProducts = [];
 let lastId = 0;
@@ -58,19 +79,20 @@ try {
     }
 
     const newProduct = {
-      id: ++lastId, // Incrementa o ID global
-      idShopee: idShopeeAtual,
-      name: p.name,
-      price: toReal(p.price),
-      oldPrice: p.price_before_discount ? toReal(p.price_before_discount) : undefined,
-      img: `https://down-br.img.susercontent.com/file/${p.image}`,
-      sold: p.historical_sold_text || p.sold_text || "0 vendidos",
-      stock: p.stock || 0,
-      rating: Number(p.item_rating?.rating_star?.toFixed(1) || 0),
-      location: p.shop_location || "Brasil",
-      isFlashSale: p.is_on_flash_sale === true,
-      link: item.long_link || item.product_link || ""
-    };
+  id: ++lastId,
+  idShopee: idShopeeAtual,
+  name: p.name,
+  category: detectCategory(p.name), // 🔥 NOVO
+  price: toReal(p.price),
+  oldPrice: p.price_before_discount ? toReal(p.price_before_discount) : undefined,
+  img: `https://down-br.img.susercontent.com/file/${p.image}`,
+  sold: p.historical_sold_text || p.sold_text || "0 vendidos",
+  stock: p.stock || 0,
+  rating: Number(p.item_rating?.rating_star?.toFixed(1) || 0),
+  location: p.shop_location || "Brasil",
+  isFlashSale: p.is_on_flash_sale === true,
+  link: item.long_link || item.product_link || ""
+};
 
     existingProducts.push(newProduct);
     existingIds.add(idShopeeAtual); // Adiciona ao Set para evitar duplicados no mesmo lote
