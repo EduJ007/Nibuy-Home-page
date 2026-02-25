@@ -409,23 +409,7 @@ useEffect(() => {
   <div className="flex gap-4 items-center font-bold">
     {/* AJUSTE DAS NOTIFICAÇÕES */}
     <button 
-                              onClick={() => {
-                                            if (!user) {
-                                              showLoginWarning();
-                                              return;
-                                            }
-
-                                            const newState = !showNotifications;
-                                            setShowNotifications(newState);
-
-                                            // 🔥 Se abriu → marca todas como lidas
-                                            if (newState) {
-                                              setNotifications(prev =>
-                                                prev.map(n => ({ ...n, read: true }))
-                                              );
-                                              setNotifCount(0);
-                                            }
-                                          }}
+    
       className="flex items-center gap-1 font-normal relative pr-2"
     >
             {showNotifications && (
@@ -497,10 +481,13 @@ useEffect(() => {
 </div>
       {/* Main Header - Buscador e Perfil */}
       <div className="max-w-[1200px] mx-auto py-4 px-4 flex items-center gap-8">
-        <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => window.location.href = '/'}>
-          <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto" />
-          <span className="text-3xl font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
-        </div>
+      <div
+          className="hidden sm:flex items-center gap-3 cursor-pointer shrink-0"
+            onClick={() => window.location.href = '/'}
+          >
+            <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto" />
+            <span className="text-3xl font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
+          </div>
         
                  <div className="flex-1 flex bg-white rounded-sm p-1 items-center shadow-sm">
                   <input 
