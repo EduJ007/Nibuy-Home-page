@@ -480,7 +480,7 @@ useEffect(() => {
   </div>
 </div>
       {/* Main Header - Buscador e Perfil */}
-      <div className="max-w-[1200px] mx-auto py-4 px-4 flex items-center gap-8">
+      <div className="max-w-[1200px] mx-auto py-4 px-4 flex items-center gap-3 md:gap-5 ">
       <div
           className="hidden sm:flex items-center gap-3 cursor-pointer shrink-0"
             onClick={() => window.location.href = '/'}
