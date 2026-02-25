@@ -32,9 +32,9 @@ const CategoryGrid: React.FC = () => {
         </h2>
       </div>
 
-      <div className="flex overflow-x-auto md:grid md:grid-cols-5 border-l border-t border-gray-200">
+      <div className="grid grid-cols-3 md:grid-cols-5 border-l border-t border-gray-200">
 
-        {categories.map((cat) => (
+        {categories.slice(0, 6).map((cat) => (
           <button
             key={cat.id}
             onClick={() =>
@@ -72,7 +72,7 @@ const CategoryGrid: React.FC = () => {
           }
           className="text-[#ff5722] hover:text-[#e64a19] font-black text-[13px] uppercase tracking-widest transition-all flex items-center gap-2"
         >
-          Ver mais
+          Ver mais Categorias
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
           </svg>
