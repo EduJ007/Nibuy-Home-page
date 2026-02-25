@@ -14,9 +14,8 @@ const categories = [
   // 🔥 NOVAS
   { id: 9, name: 'Eletrodomésticos', img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=200&auto=format&fit=crop' },
   { id: 10, name: 'Móveis', img: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=200&auto=format&fit=crop' },
-  { id: 11, name: 'Iluminação', img: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=200&auto=format&fit=crop' },
   { id: 12, name: 'Papelaria & Escritório', img: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=200&auto=format&fit=crop' },
-  { id: 13, name: 'Ferramentas & Construção', img: 'https://images.unsplash.com/photo-1581091215367-59ab6b4d5b06?q=80&w=200&auto=format&fit=crop' },
+  { id: 13, name: 'Ferramentas & Construção', img: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=200&auto=format&fit=crop' },
   { id: 14, name: 'Segurança & Monitoramento', img: 'https://images.unsplash.com/photo-1558002038-1055e2e28ed1?q=80&w=200&auto=format&fit=crop' },
   { id: 15, name: 'Relógios & Acessórios', img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=200&auto=format&fit=crop' },
   { id: 16, name: 'Joias & Bijuterias', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=200&auto=format&fit=crop' },
@@ -34,7 +33,7 @@ const protectedRedirect = (url: string) => {
 
 const CategoryGrid: React.FC = () => {
   return (
-    <section className="bg-white mt-20 md:mt-24 w-[98%] max-w-[1400px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
+    <section className="bg-white mt-20 md:mt-15 w-[90%] max-w-[1600px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
 
       <div className="flex items-center px-6 py-4 border-b border-gray-200">
         <h2 className="text-[#ff5722] text-xl font-black uppercase italic tracking-tighter">
@@ -60,13 +59,13 @@ const CategoryGrid: React.FC = () => {
   >
 
             {/* IMAGEM */}
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-3 border-2 border-gray-100 group-hover:border-[#ff5722] transition-all shadow-sm">
-              <img
-                src={cat.img}
-                alt={cat.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden mb-3 border-2 border-gray-100 group-hover:border-[#ff5722] transition-all shadow-sm flex-shrink-0">
+                <img
+                  src={cat.img}
+                  alt={cat.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
             {/* TEXTO */}
             <span className="text-[11px] md:text-[13px] text-gray-900 font-extrabold uppercase tracking-tight leading-tight line-clamp-2 text-center">

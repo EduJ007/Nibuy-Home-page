@@ -47,27 +47,27 @@ const FlashSales: React.FC = () => {
   };
 
   return (
-    <section className="bg-white mt-12 md:mt-20 w-[95%] md:w-[98%] max-w-[1500px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
+    <section className="bg-white mt-12 md:mt-20 w-[93%] md:w-[98%] max-w-[1500px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
       
       {/* Header ajustado */}
       <div className="flex items-center justify-between px-4 md:px-8 py-4 md:py-5 border-b border-gray-300 bg-gray-50/20">
         <div className="flex flex-wrap items-center gap-2 md:gap-6">
-          <h2 className="text-[#ff5722] font-black text-sm md:text-2xl uppercase italic tracking-tighter shrink-0">
+          <h2 className="text-[#ff5722] font-black text-xl md:text-2xl uppercase italic tracking-tighter shrink-0">
             Ofertas Relâmpago
           </h2>
           <div className="flex gap-1 items-center scale-90 md:scale-100 origin-left">
-            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[10px] md:text-sm">{format(timeLeft.h)}</div>
+            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[14px] md:text-sm">{format(timeLeft.h)}</div>
             <span className="font-bold text-xs">:</span>
-            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[10px] md:text-sm">{format(timeLeft.m)}</div>
+            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[14px] md:text-sm">{format(timeLeft.m)}</div>
             <span className="font-bold text-xs">:</span>
-            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[10px] md:text-sm">{format(timeLeft.s)}</div>
+            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[14px] md:text-sm">{format(timeLeft.s)}</div>
           </div>
         </div>
         <button
               onClick={() =>
                 protectedRedirect("https://nibuy-produtos.vercel.app/")
               }
-              className="text-blue-600 font-black text-[10px] md:text-[13px] uppercase tracking-widest shrink-0"
+              className="text-blue-600 font-black text-[14px] md:text-[13px] uppercase tracking-widest shrink-0"
             >
               Ver Tudo ›
             </button>
@@ -84,7 +84,7 @@ const FlashSales: React.FC = () => {
             return (
               <div 
                 key={p.id} 
-                className={`w-[170px] md:w-auto flex-shrink-0 border-r border-b border-gray-150 p-4 md:p-6 transition-colors duration-200 hover:bg-gray-50/50 relative group/item snap-start 
+                className={`w-[210px] md:w-auto flex-shrink-0 border-r border-b border-gray-150 p-5 md:p-7 transition-colors duration-200 hover:bg-gray-50/50 relative group/item snap-start 
                   ${index >= 6 ? 'md:hidden' : ''}`}
               >
                 <div className="relative aspect-square rounded-xl md:rounded-2xl mb-3 md:mb-4 overflow-hidden bg-gray-50 border border-gray-100">
@@ -99,7 +99,7 @@ const FlashSales: React.FC = () => {
                     {p.oldPrice || `R$ ${vAntigo.toFixed(2).replace('.', ',')}`}
                   </span>
                   <div className="flex items-baseline mb-1.5 md:mb-2">
-                    <span className="text-lg md:text-xl font-black text-[#ff5722] italic tracking-tighter leading-none">
+                    <span className="text-xl md:text-2xl font-black text-[#ff5722] italic tracking-tighter leading-none">
                       {p.price}
                     </span>
                   </div>
@@ -109,7 +109,7 @@ const FlashSales: React.FC = () => {
                        {p.sold || '85%'} vendidos
                     </span>
                   </div>
-                  <a href={p.link || '#'} target="_blank" className="w-full py-2 bg-gray-900 text-white rounded-lg md:rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5 hover:bg-[#ff5722] transition-all">
+                  <a href={p.link || '#'} target="_blank" className="w-full py-2 bg-gray-900 text-white rounded-lg md:rounded-xl text-[10px] md:text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5 hover:bg-[#ff5722] transition-all">
                     Visualizar <ExternalLink size={10} />
                   </a>
                 </div>
