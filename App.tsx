@@ -6,6 +6,7 @@ import FlashSales from './components/FlashSales';
 import DailyDiscover from './components/DailyDiscover';
 import Footer from './components/Footer';
 import { productsData } from './products';
+import QuickLinks from './components/QuickLinks';
 
 const App: React.FC = () => {
   const [search, setSearch] = useState('');
@@ -26,6 +27,7 @@ const App: React.FC = () => {
         
          {!search && <Hero />}
 
+          <QuickLinks />
 
         <div className="max-w-[1200px] mx-auto px-4 lg:px-0">
 
