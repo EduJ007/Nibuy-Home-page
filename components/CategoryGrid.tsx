@@ -54,36 +54,46 @@ const CategoryGrid: React.FC = () => {
         </h2>
       </div>
 
-      {/* GRID 3x3 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-4">
+      <div className="grid grid-cols-3 gap-3 p-4">
 
-        {visible.map(cat => (
-          <button
-            key={cat.id}
-            onClick={() =>
-              protectedRedirect(
-                `https://nibuy-produtos.vercel.app/?cat=${encodeURIComponent(cat.name)}`
-              )
-            }
-            className="flex items-center gap-3 bg-gray-200 hover:bg-gray-100 px-4 py-3 rounded-xl transition-all shadow-sm"
-          >
-            {/* IMAGEM */}
-            <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
-              <img
-                src={cat.img}
-                alt={cat.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* TEXTO */}
-            <span className="text-sm font-extrabold text-gray-900 text-left">
-              {cat.name}
-            </span>
-          </button>
-        ))}
-
+  {visible.map(cat => (
+    <button
+      key={cat.id}
+      onClick={() =>
+        protectedRedirect(
+          `https://nibuy-produtos.vercel.app/?cat=${encodeURIComponent(cat.name)}`
+        )
+      }
+      className="
+        flex flex-col sm:flex-row items-center gap-2 sm:gap-3
+        bg-gray-200 hover:bg-gray-100
+        px-3 py-3 rounded-xl transition-all shadow-sm
+        text-center sm:text-left
+      "
+    >
+      {/* IMAGEM */}
+      <div className="
+        w-full h-24 sm:w-14 sm:h-14
+        rounded-xl overflow-hidden flex-shrink-0
+      ">
+        <img
+          src={cat.img}
+          alt={cat.name}
+          className="w-full h-full object-cover"
+        />
       </div>
+
+      {/* TEXTO */}
+      <span className="
+        text-[13px] sm:text-sm font-extrabold text-gray-900
+        leading-tight
+      ">
+        {cat.name}
+      </span>
+    </button>
+  ))}
+
+</div>
 
       {/* SETA ESQUERDA */}
       {page > 0 && (
