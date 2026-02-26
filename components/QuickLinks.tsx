@@ -25,7 +25,7 @@ const QuickLinks: React.FC = () => {
 
         {/* ⭐ RECOMENDADOS */}
         <button
-          onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/?cat=Tecnologia%20&%20Eletrônicos#produtos')}
+          onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/?cat=Tecnologia%20%26%20Eletr%C3%B4nicos#produtos')}
           className="px-5 py-2.5 bg-white border border-gray-300 rounded-lg font-bold hover:bg-gray-100 transition-all shadow-sm"
         >
           Recomendados ⭐
@@ -33,7 +33,7 @@ const QuickLinks: React.FC = () => {
 
         {/* 💸 BARATINHOS */}
         <button
-          onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/?cat=Casa%20&%20Decoração#produtos')}
+          onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/?cat=Casa%20%26%20Decora%C3%A7%C3%A3o#produtos')}
           className="px-5 py-2.5 bg-white border border-gray-300 rounded-lg font-bold hover:bg-gray-100 transition-all shadow-sm"
         >
           Baratinhos 💸
