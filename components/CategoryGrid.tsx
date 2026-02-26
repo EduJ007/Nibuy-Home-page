@@ -45,7 +45,7 @@ const CategoryGrid: React.FC = () => {
   };
 
   return (
-    <section className="bg-white mt-16 w-[95%] max-w-[1600px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
+    <section className="bg-white mt-16 w-[98%] max-w-[1600px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
 
       {/* TÍTULO */}
       <div className="flex items-center px-6 py-4 border-b border-gray-200">
@@ -85,7 +85,7 @@ const CategoryGrid: React.FC = () => {
 
       {/* TEXTO */}
       <span className="
-        text-[13px] sm:text-sm font-extrabold text-gray-900
+       mt-1 text-[13px] sm:text-sm font-extrabold text-gray-900
         leading-tight
       ">
         {cat.name}
