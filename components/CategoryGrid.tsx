@@ -73,7 +73,7 @@ const CategoryGrid: React.FC = () => {
     >
       {/* IMAGEM */}
       <div className="
-        w-full h-24 sm:w-14 sm:h-14
+        w-full  h-20 sm:w-16 sm:h-16
         rounded-xl overflow-hidden flex-shrink-0
       ">
         <img
