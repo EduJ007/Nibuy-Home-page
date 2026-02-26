@@ -17,7 +17,7 @@ const QuickLinks: React.FC = () => {
 
         {/* 🔥 OFERTAS — PRINCIPAL */}
         <button
-          onClick={() => protectedRedirect('/ofertas')}
+          onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/#produtos')}
           className="px-5 py-2.5 bg-white border border-gray-300 rounded-lg font-bold hover:bg-gray-100 transition-all shadow-sm"
         >
           Ofertas 🔥
