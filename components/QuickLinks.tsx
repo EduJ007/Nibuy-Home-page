@@ -19,26 +19,24 @@ const links: QuickLinkItem[] = [
   {
     label: 'Ofertas',
     url: 'https://nibuy-produtos.vercel.app/#produtos',
-    // Imagem: Fogo/Promoção 3D
     img: '/ofertaimg.png',
   },
- {
+  {
     label: 'Recomendados',
-    url: '?sort=sales#produtos', // "Mais Vendidos"
+    url: 'https://nibuy-produtos.vercel.app/?sort=sales#produtos', 
     img: 'https://img.freepik.com/vetores-gratis/cores-amarelas-brilhantes-da-estrela-3d-forma-de-estrela-suave-e-fofa-ilustracao-vetorial-realista-isolada-em-um-fundo-branco_145391-1342.jpg',
   },
   {
     label: 'Achadinhos',
-    url: '?sort=price_asc#produtos', // "Menor Preço"
+    url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#produtos',
     img: 'https://images.emojiterra.com/google/android-jellybean/1f50e.png',
   },
   {
     label: 'Lojas Oficiais',
-    url: '?official=true#produtos', // Filtro de Oficiais
+    url: 'https://nibuy-produtos.vercel.app/?official=true#produtos',
     img: 'https://static.vecteezy.com/system/resources/previews/028/766/353/large_2x/shopee-icon-symbol-free-png.png',
   },
 ];
-
 const QuickLinks: React.FC = () => {
   return (
     <section className="w-[96%] max-w-[1400px] mx-auto mt-16">
