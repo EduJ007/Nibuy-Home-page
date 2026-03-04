@@ -16,9 +16,6 @@ import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
 const Header: React.FC = () => {
   /* --- ESTADOS DO COMPONENTE --- */
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const [notifCount, setNotifCount] = useState(1);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [isLoginView, setIsLoginView] = useState(true);
@@ -30,10 +27,18 @@ const Header: React.FC = () => {
   const [addPassLoading, setAddPassLoading] = useState(false);
 
 
-  const [notifications, setNotifications] = useState([
-  { id: 1, text: "Promoção nova disponível 🔥", read: false },
-  { id: 2, text: "Seu perfil foi atualizado com sucesso", read: false }
+  const [showNotifications, setShowNotifications] = useState(false);
+const [showUserMenu, setShowUserMenu] = useState(false);
+
+const [notifications] = useState([
+  { id: 1, text: "Estamos Ajustando algumas coisas mas em caso de feedback só entrar em contato 👍" },
+  { id: 2, text: "Façam Login para acessar tudo que a Nibuy tem a oferecer" },
+  { id: 3, text: "No futuro vai ter produto de todo tipo de site, só aguardem" }
 ]);
+
+const notifCount = notifications.length;
+
+
 
   const [user, setUser] = useState<{ name: string; email: string; photo: string } | null>(null);
   const [nameInput, setNameInput] = useState('');
@@ -128,19 +133,21 @@ const Header: React.FC = () => {
         const docRef = doc(db, "users", firebaseUser.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          setUser({
-            name: data.name || '',
-            email: firebaseUser.email || '',
-            photo: data.photo || ''
-          });
-        } else {
-          setUser({
-            name: firebaseUser.displayName || '',
-            email: firebaseUser.email || '',
-            photo: firebaseUser.photoURL || ''
-          });
-        }
+  const data = docSnap.data();
+
+  setUser({
+    name: data.name || '',
+    email: firebaseUser.email || '',
+    photo: data.photo || ''
+  });
+
+} else {
+  setUser({
+    name: firebaseUser.displayName || '',
+    email: firebaseUser.email || '',
+    photo: firebaseUser.photoURL || ''
+  });
+}
       } else {
         setUser(null);
       }
@@ -167,12 +174,12 @@ const Header: React.FC = () => {
     const docSnap = await getDoc(userRef);
 
     if (!docSnap.exists()) {
-      await setDoc(userRef, {
+            await setDoc(userRef, {
         name: result.user.displayName,
         email: result.user.email,
         photo: result.user.photoURL,
-        createdAt: new Date().toISOString()
-      });
+        createdAt: new Date().toISOString(),
+    });
     }
 
     setShowLoginModal(false);
@@ -235,10 +242,10 @@ const handleAuthAction = async () => {
       const newUser = userCredential.user;
 
       await setDoc(doc(db, "users", newUser.uid), {
-        name: nameInput.trim(),
-        email: newUser.email,
-        photo: "",
-        createdAt: new Date().toISOString()
+  name: nameInput.trim(),
+  email: newUser.email,
+  photo: "",
+  createdAt: new Date().toISOString(),
       });
 
       setShowLoginModal(false);
@@ -334,16 +341,6 @@ const handleAuthAction = async () => {
 };
 
 useEffect(() => {
-  const handleWarning = () => {
-    showLoginWarning();
-  };
-
-  window.addEventListener('showNibuyWarning', handleWarning);
-
-  return () => window.removeEventListener('showNibuyWarning', handleWarning);
-}, []);
-
-useEffect(() => {
   const handleWarning = () => showLoginWarning();
 
   window.addEventListener("showNibuyWarning", handleWarning);
@@ -372,112 +369,119 @@ useEffect(() => {
   </div>
 )}
       {/* Top Bar - Preservada 100% igual ao seu original */}
-      <div className="hidden md:flex max-w-[1200px] mx-auto py-1.5 justify-between items-center text-xs px-4">
+     <div className="hidden md:flex max-w-[1200px] mx-auto py-1.5 justify-between items-center text-xs px-4">
+  
+  {/* ESQUERDA */}
   <div className="flex gap-4 items-center">
-          <button
-          onClick={() => user
-            ? window.location.href = "https://nibuy-contact.vercel.app/"
-            : showLoginWarning()
-          }
-          className="hover:text-gray-200 font-medium"
-        >
-          Entrar em Contato
-        </button>
+    
+    <button
+      onClick={() => user
+        ? window.location.href = "https://nibuy-contact.vercel.app/"
+        : showLoginWarning()
+      }
+      className="hover:text-gray-200 font-medium"
+    >
+      Entrar em Contato
+    </button>
+
     <span>|</span>
-              <button
-              onClick={() => user
-                ? window.location.href = "https://sobre-nibuy.vercel.app/"
-                : showLoginWarning()
-              }
-              className="hover:text-gray-200 font-medium"
-            >
-              Sobre nós
-            </button>
+
+    <button
+      onClick={() => user
+        ? window.location.href = "https://sobre-nibuy.vercel.app/"
+        : showLoginWarning()
+      }
+      className="hover:text-gray-200 font-medium"
+    >
+      Sobre nós
+    </button>
+
     <span>|</span>
+
     <div className="flex items-center gap-4 ml-1">
       <span className="font-medium">Siga-nos</span> 
       <div className="flex items-center gap-3">
-        <a href="https://instagram.com/nibuyoficial" target="_blank" className="text-white hover:opacity-80"><i className="fa-brands fa-instagram text-[21px]"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=61583962855568" target="_blank" className="text-white hover:opacity-80"><i className="fa-brands fa-facebook text-[19px]"></i></a>
-        <a href="https://pin.it/hFv1x89A5" target="_blank" className="text-white hover:opacity-80"><i className="fa-brands fa-pinterest text-[19px]"></i></a>
+        <a href="https://instagram.com/nibuyoficial" target="_blank" className="text-white hover:opacity-80">
+          <i className="fa-brands fa-instagram text-[21px]"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61583962855568" target="_blank" className="text-white hover:opacity-80">
+          <i className="fa-brands fa-facebook text-[19px]"></i>
+        </a>
+        <a href="https://pin.it/hFv1x89A5" target="_blank" className="text-white hover:opacity-80">
+          <i className="fa-brands fa-pinterest text-[19px]"></i>
+        </a>
       </div>
     </div>
   </div>
 
+  {/* DIREITA */}
+  <div className="flex items-center gap-1">
 
+    {/* NOTIFICAÇÕES */}
+    <div
+  className="relative flex items-center gap-2 font-normal cursor-pointer pr-2"
+  onMouseEnter={() => setShowNotifications(true)}
+  onMouseLeave={() => setShowNotifications(false)}
+>
+  {/* Ícone + Número */}
+  <div className="relative">
+    <Bell size={18} />
 
-  <div className="flex gap-4 items-center font-bold">
-    {/* AJUSTE DAS NOTIFICAÇÕES */}
-    <button 
-    
-      className="flex items-center gap-1 font-normal relative pr-2"
-    >
-            {showNotifications && (
-          <div className="absolute top-full right-0 mt-3 w-80 bg-white text-gray-800 rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
-
-            {/* CABEÇALHO */}
-            <div className="bg-[#ff5722] text-white px-4 py-3 font-black flex justify-between items-center">
-              <span>Notificações</span>
-              <span className="text-xs opacity-80">
-                {notifications.filter(n => !n.read).length} novas
-              </span>
-            </div>
-
-            {/* LISTA */}
-            <div className="max-h-80 overflow-y-auto">
-
-              {notifications.length === 0 && (
-                <p className="p-6 text-center text-gray-400 text-sm">
-                  Nenhuma notificação
-                </p>
-              )}
-
-              {notifications.map(n => (
-                <div
-                  key={n.id}
-                  className={`px-4 py-3 border-b text-sm transition
-                    ${n.read ? "bg-white text-gray-500" : "bg-orange-50 font-bold"}
-                  `}
-                >
-                  {n.text}
-                </div>
-              ))}
-
-            </div>
-
-          </div>
-        )}
-      <div className="relative">
-        <Bell size={18} />
-        {notifCount > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 bg-white text-[#ff5722] text-[9px] h-3.5 w-3.5 flex items-center justify-center rounded-full font-medium border border-[#ff5722] shadow-sm">
-            {notifCount}
-          </span>
-        )}
-      </div>
-      <span>Notificações</span>
-    </button>
-    
-              <button
-            onClick={() => user
-              ? window.location.href = "https://nibuy-central-ajuda.vercel.app/"
-              : showLoginWarning()
-            }
-            className="flex items-center gap-1 font-medium"
-          >
-            <HelpCircle size={18} /> Central de ajuda
-          </button>
-
-    
-    {!user && (
-      <>
-        <span className="opacity-50 font-normal">|</span>
-        <button onClick={() => { setIsLoginView(false); setShowLoginModal(true); }} className="hover:opacity-80">Cadastrar</button>
-        <span className="opacity-50 font-normal">|</span>
-        <button onClick={() => { setIsLoginView(true); setShowLoginModal(true); }} className="hover:opacity-80">Entre</button>
-      </>
+    {notifications.length > 0 && (
+      <span className="absolute -top-1.5 -right-2 bg-white text-[#ff5722] text-[10px] h-4 min-w-[16px] px-1 flex items-center justify-center rounded-full font-bold border border-[#ff5722] shadow">
+        {notifications.length}
+      </span>
     )}
   </div>
+
+  <span>Notificações</span>
+
+  {showNotifications && (
+    <div className="absolute top-full right-0 mt-4 w-96 bg-white rounded-xl shadow-xl border z-50 overflow-hidden">
+
+      <div className="px-5 py-4 bg-orange-500 text-white">
+        <h3 className="font-bold text-sm">Notificações</h3>
+      </div>
+
+      <div className="max-h-80 overflow-y-auto divide-y">
+        {notifications.length === 0 ? (
+          <div className="px-5 py-6 text-center text-gray-400 text-sm">
+            Nenhuma notificação
+          </div>
+        ) : (
+          notifications.map((n) => (
+            <div
+              key={n.id}
+              className="px-5 py-4 hover:bg-orange-50 transition"
+            >
+              <p className="text-sm font-medium text-gray-800">
+                {n.text}
+              </p>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="px-4 py-3 bg-gray-50 text-center text-xs text-gray-500">
+        Você tem {notifications.length} notificações
+      </div>
+
+
+    </div>
+  )}
+  </div>
+   {/* CENTRAL DE AJUDA */}
+  <button
+    onClick={() => user
+      ? window.location.href = "https://nibuy-central-ajuda.vercel.app/"
+      : showLoginWarning()
+    }
+    className="flex items-center gap-0.5 font-medium hover:text-gray-200"
+  >
+    <HelpCircle size={18} />
+    Central de ajuda
+  </button>
+</div>
 </div>
       {/* Main Header - Buscador e Perfil */}
       <div className="max-w-[1200px] mx-auto py-4 px-4 flex items-center gap-3 md:gap-5 ">

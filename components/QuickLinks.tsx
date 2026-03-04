@@ -19,17 +19,22 @@ const links: QuickLinkItem[] = [
   {
     label: 'Ofertas',
     url: 'https://nibuy-produtos.vercel.app/#produtos',
-    img: '/ofertaimg.png',
+    img: '/ofertasimg.png',
   },
   {
     label: 'Recomendados',
     url: 'https://nibuy-produtos.vercel.app/?sort=sales#produtos', 
-    img: 'https://img.freepik.com/vetores-gratis/cores-amarelas-brilhantes-da-estrela-3d-forma-de-estrela-suave-e-fofa-ilustracao-vetorial-realista-isolada-em-um-fundo-branco_145391-1342.jpg',
+    img: '/recomendadosimg.png',
   },
   {
     label: 'Achadinhos',
     url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#produtos',
-    img: 'https://images.emojiterra.com/google/android-jellybean/1f50e.png',
+    img: '/achadinhosimg.png',
+  },
+   {
+    label: 'Mais Vendidos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#produtos',
+    img: '/maisvendidosimg.png',
   },
   {
     label: 'Lojas Oficiais',

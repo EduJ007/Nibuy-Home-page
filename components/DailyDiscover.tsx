@@ -92,7 +92,7 @@ const DailyDiscover: React.FC = () => {
           <div className="flex justify-center mt-12 pb-8">
         <button
           onClick={() =>
-            protectedRedirect('https://nibuy-produtos.vercel.app/')
+            protectedRedirect('https://nibuy-produtos.vercel.app/#produtos')
           }
           className="px-20 py-3 bg-white border border-gray-300 text-gray-600 font-medium text-sm uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm rounded-sm"
         >
