@@ -5,7 +5,7 @@ import { auth } from '../firebase';
 
 const protectedRedirect = (url: string) => {
   if (auth.currentUser) {
-    window.location.href = url;
+    window.open(url, "_blank");
   } else {
     window.dispatchEvent(new Event('showNibuyWarning'));
   }
