@@ -18,7 +18,7 @@ const protectedRedirect = (url: string) => {
 const links: QuickLinkItem[] = [
   {
     label: 'Ofertas',
-    url: 'https://nibuy-produtos.vercel.app/?flash=true#produtos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=flash#filtros',
     img: '/ofertasimg.png',
   },
   {
@@ -33,7 +33,7 @@ const links: QuickLinkItem[] = [
   },
    {
     label: 'Mais Vendidos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#produtos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=sales#produtos',
     img: '/maisvendidosimg.png',
   },
   {
