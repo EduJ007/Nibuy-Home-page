@@ -23,22 +23,27 @@ const links: QuickLinkItem[] = [
   },
   {
     label: 'Recomendados',
-    url: 'https://nibuy-produtos.vercel.app/?sort=rating#produtos', 
+    url: 'https://nibuy-produtos.vercel.app/?sort=recomend#filtros',
     img: '/recomendadosimg.png',
   },
   {
-    label: 'Achadinhos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#produtos',
-    img: '/achadinhosimg.png',
+    label: 'Mais Baratos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#filtros',
+    img: '/maisbarato.png',
   },
-   {
+  {
     label: 'Mais Vendidos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=sales#produtos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=sales#filtros',
     img: '/maisvendidosimg.png',
   },
   {
+    label: 'Achadinhos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=deals#filtros',
+    img: '/achadinhosimg.png',
+  },
+  {
     label: 'Lojas Oficiais',
-    url: 'https://nibuy-produtos.vercel.app/?official=true#produtos',
+    url: 'https://nibuy-produtos.vercel.app/?official=true#filtros',
     img: 'https://static.vecteezy.com/system/resources/previews/028/766/353/large_2x/shopee-icon-symbol-free-png.png',
   },
 ];
@@ -53,7 +58,7 @@ const QuickLinks: React.FC = () => {
             className="flex flex-col items-center gap-3 group outline-none"
           >
             {/* Container da Imagem com efeito de borda laranja no hover */}
-            <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border-2 border-transparent group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg bg-gray-100 $`}>
+            <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border-2 border-transparent group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg bg-gray-100`}>
               <img 
                 src={link.img} 
                 alt={link.label} 
