@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
 
         <div key={currentSlide} className="relative z-10 animate-in zoom-in-95 duration-500 flex flex-col items-center">
           {mainSlides[currentSlide].icon}
-          <h2 className="text-3xl md:text-6xl font-black text-white italic tracking-tighter mb-4 drop-shadow-2xl uppercase leading-none px-2">
+          <h2 className="text-3xl md:text-6xl font-black text-white  tracking-tighter mb-4 drop-shadow-2xl uppercase leading-none px-2">
             {mainSlides[currentSlide].titulo}
           </h2>
           <p className="text-white text-sm md:text-xl mb-6 md:mb-8 opacity-90 font-medium max-w-[500px] leading-tight md:leading-relaxed">
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
         {/* Universo Gamer */}
         <div className="flex-1 bg-gradient-to-tr from-[#1a1a1a] to-[#333] rounded-xl shadow-xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group border border-white/5">
             <Gamepad2 className="text-orange-500 mb-4 group-hover:scale-110 transition-transform" size={40} />
-            <h3 className="text-white font-black italic text-2xl leading-tight mb-4 uppercase tracking-tight">UNIVERSO<br/>GAMER</h3>
+            <h3 className="text-white font-black  text-2xl leading-tight mb-4 uppercase tracking-tight">UNIVERSO<br/>GAMER</h3>
             <button 
                onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
                 className="text-xs bg-orange-500 text-white px-6 py-2.5 rounded-lg font-bold uppercase hover:bg-orange-600 transition-all shadow-lg"
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
         {/* Casa & Decoração */}
         <div className="flex-1 bg-[#fff2e6] rounded-xl shadow-xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden border border-orange-100 group">
             <Sofa className="text-[#ff5722] mb-4 group-hover:scale-110 transition-transform" size={40} />
-            <h3 className="text-[#ff5722] font-black italic text-2xl leading-tight mb-4 uppercase tracking-tight">CASA &<br/>DECORAÇÃO</h3>
+            <h3 className="text-[#ff5722] font-black  text-2xl leading-tight mb-4 uppercase tracking-tight">CASA &<br/>DECORAÇÃO</h3>
             <button 
                 onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
                 className="text-xs border-2 border-[#ff5722] text-[#ff5722] px-6 py-2 rounded-lg font-bold uppercase hover:bg-[#ff5722] hover:text-white transition-all shadow-sm"

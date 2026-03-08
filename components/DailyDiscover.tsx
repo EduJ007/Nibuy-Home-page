@@ -68,20 +68,20 @@ const DailyDiscover: React.FC = () => {
               </div>
               
               <div className="p-2 flex flex-col flex-1">
-                <h3 className="text-xs text-gray-800 line-clamp-2 mb-2 group-hover:text-[#ee4d2d] h-8">{item.name}</h3>
+                <h3 className="text-[11.5px] text-gray-800 line-clamp-2 mb-2 group-hover:text-[#ee4d2d] h-8">{item.name}</h3>
                 <div className="mt-auto">
                   <div className="flex flex-col mb-1">
-                    {item.oldPrice && <span className="text-[10px] text-gray-400 line-through">{item.oldPrice}</span>}
-                    <span className="text-lg text-[#ee4d2d] font-medium leading-none">{item.price}</span>
+                    {item.oldPrice && <span className="text-[12px] text-gray-400 line-through">{item.oldPrice}</span>}
+                    <span className="mt-0.5 text-lg text-[#ee4d2d] font-bold   leading-none">{item.price}</span>
                   </div>
-                  <div className="flex items-center justify-between mt-2 text-[10px] text-gray-500">
+                  <div className="flex items-center justify-between mt-2 text-[12px] text-gray-500">
                      <div className="flex items-center gap-0.5">
-                       <Star size={10} fill="#ffcc00" color="#ffcc00" />
+                       <Star size={14} fill="#ffcc00" color="#ffcc00" />
                        <span>{item.rating}</span>
                      </div>
-                     <span>{item.sold}</span>
+                     <span>{item.sold} Vendidos</span>
                   </div>
-                  <div className="text-[10px] text-gray-400 mt-4 text-right">{item.location}</div>
+                  <div className="text-[12px] text-gray-400 mt-4 text-right">{item.location}</div>
                 </div>
               </div>
             </div>
