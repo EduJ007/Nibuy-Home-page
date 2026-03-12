@@ -489,8 +489,8 @@ useEffect(() => {
           className="hidden sm:flex items-center gap-3 cursor-pointer shrink-0"
             onClick={() => window.location.href = '/'}
           >
-            <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto" />
-            <span className="text-3xl font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
+            <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto shadow-[0_0_6px_rgba(0,0,0,0.25)" />
+            <span className="text-3xl shadow-[0_0_6px_rgba(0,0,0,0.25) font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
           </div>
         
                  <div className="flex-1 flex bg-white rounded-sm p-1 items-center shadow-sm">
