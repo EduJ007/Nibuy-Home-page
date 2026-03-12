@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { productsData } from '../products';
-import { ExternalLink } from 'lucide-react';
 import { auth } from '../firebase';
 
 const protectedRedirect = (url: string) => {
@@ -13,128 +12,141 @@ const protectedRedirect = (url: string) => {
 
 const FlashSales: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
-  const [randomProducts, setRandomProducts] = useState<any[]>([]);
-
-  // Função de Semente para os produtos não mudarem no F5, apenas quando o cronómetro zerar
-  const getSeedProducts = (seed: number) => {
-    const allFlashSales = productsData.filter(p => p.isFlashSale);
-    const seededRandom = (s: number) => {
-      const x = Math.sin(s) * 10000;
-      return x - Math.floor(x);
-    };
-    return [...allFlashSales]
-      .sort((a, b) => seededRandom(a.id + seed) - seededRandom(b.id + seed))
-      .slice(0, 6);
-  };
+  const [paginatedProducts, setPaginatedProducts] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  
+  const ITEMS_PER_PAGE = 6;
+  const TOTAL_PAGES_LIMIT = 3; 
 
   useEffect(() => {
     const updateTimerAndProducts = () => {
-      // Horário de Brasília
       const now = new Date();
-      const brasiliaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
-      
-      // Reset à meia-noite
+      const brasiliaTime = new Date(
+        now.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" })
+      );
+
       const nextReset = new Date(brasiliaTime);
-      nextReset.setHours(24, 0, 0, 0); 
-
+      nextReset.setHours(24, 0, 0, 0);
       const diff = nextReset.getTime() - brasiliaTime.getTime();
-
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
       
-      setTimeLeft({ h, m, s });
+      setTimeLeft({
+        h: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        m: Math.floor((diff / (1000 * 60)) % 60),
+        s: Math.floor((diff / 1000) % 60),
+      });
 
-      // Produtos mudam apenas quando o dia mudar em Brasília
       const dateSeed = brasiliaTime.getFullYear() * 10000 + (brasiliaTime.getMonth() + 1) * 100 + brasiliaTime.getDate();
-      setRandomProducts(getSeedProducts(dateSeed));
+      
+      const seededRandom = (s: number) => {
+        const x = Math.sin(s) * 10000;
+        return x - Math.floor(x);
+      };
+
+      const allFlashSales = productsData.filter(p => p.isFlashSale);
+      const shuffled = [...allFlashSales]
+        .sort((a, b) => seededRandom(a.id + dateSeed) - seededRandom(b.id + dateSeed))
+        .slice(0, ITEMS_PER_PAGE * TOTAL_PAGES_LIMIT);
+
+      const start = currentPage * ITEMS_PER_PAGE;
+      setPaginatedProducts(shuffled.slice(start, start + ITEMS_PER_PAGE));
     };
 
     updateTimerAndProducts();
     const interval = setInterval(updateTimerAndProducts, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentPage]);
 
   const format = (n: number) => n.toString().padStart(2, '0');
-
   const parsePrice = (priceStr: string) => {
     if (!priceStr) return 0;
     return parseFloat(priceStr.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
   };
 
   return (
-    <section className="bg-white mt-12 md:mt-20 w-[93%] md:w-[93%] max-w-[1500px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
+    <section className="bg-white mt-12 md:mt-20 w-[93%] max-w-[1500px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
       
-      {/* HEADER ORIGINAL */}
+      {/* HEADER */}
       <div className="flex items-center justify-between px-4 md:px-8 py-4 md:py-5 border-b border-gray-300 bg-gray-50/20">
-        <div className="flex flex-wrap items-center gap-2 md:gap-6">
-          <h2 className="text-[#ff5722] font-black text-xl md:text-2xl uppercase tracking-tighter shrink-0">
+        <div className="flex flex-wrap items-center gap-2 md:gap-4">
+          <h2 className="text-[#ff5722] text-[24px] font-black uppercase tracking-tighter">
             Oferta Relâmpago
           </h2>
+
           <div className="flex gap-1 items-center scale-90 md:scale-110 origin-left">
-            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[14px] md:text-sm">{format(timeLeft.h)}</div>
+            <div className="bg-black text-white px-2 py-1 rounded-md font-bold text-sm">{format(timeLeft.h)}</div>
             <span className="font-bold text-xs">:</span>
-            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[14px] md:text-sm">{format(timeLeft.m)}</div>
+            <div className="bg-black text-white px-2 py-1 rounded-md font-bold text-sm">{format(timeLeft.m)}</div>
             <span className="font-bold text-xs">:</span>
-            <div className="bg-black text-white px-2 py-0.5 md:py-1 rounded-md font-bold text-[14px] md:text-sm">{format(timeLeft.s)}</div>
+            <div className="bg-black text-white px-2 py-1 rounded-md font-bold text-sm">{format(timeLeft.s)}</div>
           </div>
         </div>
-        <button onClick={() => protectedRedirect("https://nibuy-produtos.vercel.app/")} className="text-blue-600 font-black text-[14px] md:text-[13px] uppercase tracking-widest shrink-0">
+
+        <button
+          onClick={() => protectedRedirect("https://nibuy-produtos.vercel.app/")}
+          className="text-blue-600 left-full font-black text-sm uppercase tracking-widest hover:underline"
+        >
           Ver Tudo ›
         </button>
       </div>
 
-      {/* GRID ORIGINAL COM O ESTILO DOS CARDS VOLTADO */}
-      <div className="relative group">
-        <div className="flex overflow-x-auto sm:overflow-hidden border-l border-gray-50 scrollbar-hide snap-x snap-mandatory px-2 sm:px-0">
-          {randomProducts.map((p, index) => {
+      {/* ÁREA DOS PRODUTOS COM SETAS NAS LATERAIS */}
+      <div className="relative px-4 md:px-12 py-6">
+        
+        {/* SETA ESQUERDA */}
+        <button 
+          disabled={currentPage === 0}
+          onClick={() => setCurrentPage(prev => prev - 1)}
+          className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 items-center justify-center hover:bg-gray-100 text-[black] disabled:hidden shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10"
+        >
+          ❮
+        </button>
+
+        {/* GRID */}
+        <div className="flex md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 overflow-x-auto md:overflow-visible min-h-[320px] pb-2">
+          {paginatedProducts.map((p) => {
             const vAtual = parsePrice(p.price);
             const vAntigo = p.oldPrice ? parsePrice(p.oldPrice) : vAtual * 2.5;
             const valorDesconto = vAntigo > vAtual ? Math.round(((vAntigo - vAtual) / vAntigo) * 100) : 0;
-            
+
             return (
               <div
-                            key={p.id}
-                            className="w-[170px] sm:w-[190px] md:w-[200px] lg:w-[250px] flex-shrink-0 border-r border-b border-gray-150 p-5 md:p-7 transition-colors duration-200 hover:bg-gray-50/50 relative group/item snap-start"
-                          >
-                {/* Imagem com Badge de Desconto */}
-                <div className="relative aspect-square rounded-xl md:rounded-2xl mb-3 md:mb-4 overflow-hidden bg-gray-50 border border-gray-100">
-                  <img src={p.img} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover/item:scale-105" />
-                  <div className="absolute top-0 right-0 bg-[#ffe910] text-[#ff5722] text-[11px] md:text-[11px] font-black px-2 py-1 rounded-bl-xl md:rounded-bl-2xl shadow-sm z-10">
+                key={p.id}
+                onClick={() => protectedRedirect(p.link || '#')}
+                className="min-w-[210px] md:min-w-0 w-full flex flex-col bg-white rounded-lg p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-gray-200 hover:border-[#ff5722]"
+              >
+                <div className="relative flex items-center justify-center h-44 mb-3">
+                  <img src={p.img} alt={p.name} className="max-h-full object-contain rounded-lg" />
+                  <div className="absolute top-0 right-1 bg-[#ffe910] text-[#ff5722] text-[10px] font-black px-2 py-0.5 rounded-bl-xl">
                     -{valorDesconto}%
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <span className="text-gray-400 line-through text-[12px] md:text-[12px]">
-                    {p.oldPrice || `R$ ${vAntigo.toFixed(2).replace('.', ',')}`}
+                <span className="text-gray-400 line-through text-[14px]">
+                  {p.oldPrice || `R$ ${vAntigo.toFixed(2).replace('.', ',')}`}
+                </span>
+                <span className="block text-[24px] font-extrabold text-[#ff5722] tracking-tight">
+                  {p.price}
+                </span>
+
+                <div className="w-full bg-[#ff5722]/20 h-6 rounded-full relative overflow-hidden mt-auto">
+                  <div className="absolute left-0 top-0 h-full bg-[#ff5722] w-[85%] rounded-full transition-all duration-500"></div>
+                  <span className="absolute inset-0 text-[12px] font-bold text-white flex items-center justify-center uppercase">
+                    {p.sold || '85%'} vendidos
                   </span>
-                  <div className="flex items-baseline mb-1.5 md:mb-2">
-                    <span className="text-xl md:text-2xl font-black text-[#ff5722]  tracking-tighter">
-                      {p.price}
-                    </span>
-                  </div>
-
-                  {/* Barrinha de Progresso Original */}
-                  <div className="w-full bg-[#ff5722]/20 h-3 md:h-4 rounded-full relative overflow-hidden mb-3 md:mb-4">
-                    <div className="absolute left-0 top-0 h-full bg-[#ff5722] w-[85%] rounded-full"></div>
-                    <span className="absolute inset-0 text-[7px] md:text-[8px] font-black text-white flex items-center justify-center uppercase">
-                       {p.sold || '85%'} vendidos
-                    </span>
-                  </div>
-
-                  {/* Botão de Visualizar */}
-                  <button 
-                    onClick={() => protectedRedirect(p.link || '#')} 
-                    className="w-full py-2 bg-gray-900 text-white rounded-lg md:rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5 hover:bg-[#ff5722] transition-all border-none cursor-pointer"
-                  >
-                    Visualizar <ExternalLink size={10} />
-                  </button>
                 </div>
               </div>
             );
           })}
         </div>
+
+        {/* SETA DIREITA */}
+        <button 
+          disabled={currentPage >= TOTAL_PAGES_LIMIT - 1}
+          onClick={() => setCurrentPage(prev => prev + 1)}
+          className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 items-center justify-center hover:bg-gray-100 shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10 disabled:hidden"
+        >
+           ❯
+        </button>
       </div>
     </section>
   );

@@ -28,14 +28,15 @@ const App: React.FC = () => {
          {!search && <Hero />}
 
           <QuickLinks />
-        <FlashSales products={filteredProducts} />
+       
         <div className="max-w-[1200px] mx-auto px-4 lg:px-0">
 
           {!search && <CategoryGrid />}
 
   
         </div>
-        <div className="w-[96%] md:w-[96%] max-w-[1650px] mx-auto px-4 lg:px-0" >
+         <FlashSales products={filteredProducts} />
+        <div className="w-[98%] md:w-[98%] max-w-[1650px] mx-auto px-4 lg:px-0" >
         <DailyDiscover products={filteredProducts} />
         </div>
       </main>

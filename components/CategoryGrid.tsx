@@ -68,7 +68,7 @@ const CategoryGrid: React.FC = () => {
         flex flex-col sm:flex-row items-center gap-2 sm:gap-3
         bg-gray-200 hover:bg-gray-100
         px-3 py-3 rounded-xl transition-all shadow-sm
-        text-center sm:text-left
+        text-center sm:text-left 
       "
     >
       {/* IMAGEM */}
@@ -99,7 +99,7 @@ const CategoryGrid: React.FC = () => {
       {page > 0 && (
         <button
           onClick={prevPage}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 text-[black]"
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 text-[black] shadow-[0_0_6px_rgba(0,0,0,0.25)]"
         >
           ❮
         </button>
@@ -109,7 +109,7 @@ const CategoryGrid: React.FC = () => {
       {page < totalPages - 1 && (
         <button
           onClick={nextPage}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white  rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10"
         >
          ❯
         </button>
