@@ -158,7 +158,7 @@ const StartScreen: React.FC = () => {
         </h2>
 
         {error && (
-          <div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm text-center">
+          <div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-xm text-center">
             {error}
           </div>
         )}
@@ -171,7 +171,7 @@ const StartScreen: React.FC = () => {
               placeholder="Nome"
               value={nameInput}
               onChange={(e)=>setNameInput(e.target.value)}
-              className="w-full border p-3 rounded"
+              className="w-full border p-3 rounded text-lg"
             />
           )}
 
@@ -180,7 +180,7 @@ const StartScreen: React.FC = () => {
             placeholder="E-mail"
             value={emailInput}
             onChange={(e)=>setEmailInput(e.target.value)}
-            className="w-full border p-3 rounded"
+            className="w-full border p-3 rounded text-lg"
           />
 
           <div className="relative">
@@ -190,13 +190,13 @@ const StartScreen: React.FC = () => {
               placeholder="Senha"
               value={passwordInput}
               onChange={(e)=>setPasswordInput(e.target.value)}
-              className="w-full border p-3 rounded pr-10"
+              className="w-full border p-3 rounded pr-10 text-lg"
             />
 
             <button
               type="button"
               onClick={()=>setShowPassword(!showPassword)}
-              className="absolute right-3 top-3 text-sm"
+              className="absolute right-4 top-4 text-sm"
             >
               {showPassword ? "Ocultar" : "Ver"}
             </button>
@@ -206,7 +206,7 @@ const StartScreen: React.FC = () => {
           {isLoginView && (
             <button
               onClick={handleResetPassword}
-              className="text-sm text-gray-600"
+              className="text-sm text-gray-600 hover: color-[#ff5722]"
             >
               Esqueceu a senha?
             </button>
