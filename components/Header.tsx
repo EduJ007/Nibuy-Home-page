@@ -402,7 +402,7 @@ useEffect(() => {
       <span className="font-medium">Siga-nos</span> 
       <div className="flex items-center gap-3">
         <a href="https://instagram.com/nibuyoficial" target="_blank" className="text-white hover:opacity-80">
-          <i className="fa-brands fa-instagram text-[21px]"></i>
+          <i className="fa-brands fa-instagram text-[22px]"></i>
         </a>
         <a href="https://www.facebook.com/profile.php?id=61583962855568" target="_blank" className="text-white hover:opacity-80">
           <i className="fa-brands fa-facebook text-[19px]"></i>
@@ -419,7 +419,7 @@ useEffect(() => {
 
     {/* NOTIFICAÇÕES */}
     <div
-  className="relative flex items-center gap-2 font-normal cursor-pointer pr-2"
+  className="relative flex items-center gap-1 font-normal cursor-pointer pr-2"
   onMouseEnter={() => setShowNotifications(true)}
   onMouseLeave={() => setShowNotifications(false)}
 >
