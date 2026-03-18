@@ -27,6 +27,11 @@ const links: QuickLinkItem[] = [
     img: '/recomendadosimg.png',
   },
   {
+    label: 'Achadinhos',
+    url: 'https://nibuy-produtos.vercel.app/?sort=deals#filtros',
+    img: '/achadinhosimg.png',
+  },
+  {
     label: 'Mais Baratos',
     url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#filtros',
     img: '/maisbarato.png',
@@ -35,11 +40,6 @@ const links: QuickLinkItem[] = [
     label: 'Mais Vendidos',
     url: 'https://nibuy-produtos.vercel.app/?sort=sales#filtros',
     img: '/maisvendidosimg.png',
-  },
-  {
-    label: 'Achadinhos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=deals#filtros',
-    img: '/achadinhosimg.png',
   },
 ];
 const QuickLinks: React.FC = () => {
