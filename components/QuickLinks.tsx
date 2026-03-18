@@ -41,11 +41,6 @@ const links: QuickLinkItem[] = [
     url: 'https://nibuy-produtos.vercel.app/?sort=deals#filtros',
     img: '/achadinhosimg.png',
   },
-  {
-    label: 'Lojas Oficiais',
-    url: 'https://nibuy-produtos.vercel.app/?official=true#filtros',
-    img: 'https://static.vecteezy.com/system/resources/previews/028/766/353/large_2x/shopee-icon-symbol-free-png.png',
-  },
 ];
 const QuickLinks: React.FC = () => {
   return (
