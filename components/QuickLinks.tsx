@@ -68,7 +68,7 @@ const QuickLinks: React.FC = () => {
             </div>
             
             {/* Texto em negrito */}
-            <span className="text-[10px] md:text-xs font-black tracking-tighter text-gray-500 group-hover:text-orange-600 transition-colors">
+            <span className="text-[12px] md:text-xs font-black tracking-tighter text-gray-500 group-hover:text-orange-600 transition-colors">
               {link.label}
             </span>
           </button>
