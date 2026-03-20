@@ -49,7 +49,7 @@ const CategoryGrid: React.FC = () => {
 
       {/* TÍTULO */}
       <div className="flex items-center px-6 py-4 border-b border-gray-200">
-        <h2 className="text-[#ff5722] text-xl font-black uppercase  tracking-tighter">
+        <h2 className="text-[#ff5722] text-[22px] uppercase font-black tracking-tighter">
           Categorias
         </h2>
       </div>

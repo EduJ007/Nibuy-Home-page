@@ -53,7 +53,7 @@ const QuickLinks: React.FC = () => {
             className="flex flex-col items-center gap-3 group outline-none"
           >
             {/* Container da Imagem com efeito de borda laranja no hover */}
-            <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border-2 border-transparent group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg bg-gray-100`}>
+            <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-transparent group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg bg-gray-100`}>
               <img 
                 src={link.img} 
                 alt={link.label} 
@@ -63,7 +63,7 @@ const QuickLinks: React.FC = () => {
             </div>
             
             {/* Texto em negrito */}
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-tighter text-gray-500 group-hover:text-orange-600 transition-colors">
+            <span className="text-[10px] md:text-[14px] font-black  tracking-tighter text-gray-500 group-hover:text-orange-600 transition-colors">
               {link.label}
             </span>
           </button>

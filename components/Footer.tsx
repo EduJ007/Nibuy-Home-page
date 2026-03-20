@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
                   <li>
                 <button
                   onClick={() => protectedRedirect('https://nibuy-home-page.vercel.app/')}
-                  className="hover:text-white transition-colors"
+                   className="text-[#ff5722] hover:text-white transition-colors"
                 >
                   Página Principal
                 </button>
@@ -77,21 +77,14 @@ const Footer: React.FC = () => {
                 </button>
               </li>
 
-              <li>
-                <button
-                  onClick={() => protectedRedirect('https://nibuy-contact.vercel.app/')}
-                  className="hover:text-white transition-colors"
-                >
-                  Contato
-                </button>
-              </li>
+              
 
               <li>
                 <button
                   onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
-                  className="text-[#ff5722] hover:text-white transition-colors"
+                  className="hover:text-white transition-colors"
                 >
-                  Produtos
+                  Lista de Produtos
                 </button>
               </li>
             </ul>

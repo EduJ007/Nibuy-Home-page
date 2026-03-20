@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
       setTimeout(() => {
         setLoading(false);
-      }, 400);
+      }, 500);
     });
 
     return () => unsubscribe();
