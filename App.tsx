@@ -8,7 +8,6 @@ import FlashSales from './components/FlashSales';
 import DailyDiscover from './components/DailyDiscover';
 import Footer from './components/Footer';
 import QuickLinks from './components/QuickLinks';
-import StartScreen from './components/StartScreen';
 import AuthModal from './components/AuthModal';
 
 import { productsData } from './products';
@@ -75,24 +74,6 @@ const App: React.FC = () => {
       </div>
     );
   }
-
-  // 🚪 Usuário não logado
-  if (!user) {
-    return (
-      <>
-        <StartScreen />
-
-        {authMode && (
-          <AuthModal
-            mode={authMode}
-            onClose={() => setAuthMode(null)}
-          />
-        )}
-      </>
-    );
-  }
-
-  // 🛒 Loja (usuário logado)
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
 
