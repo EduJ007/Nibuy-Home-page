@@ -1,115 +1,110 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Gamepad2, Sofa, Sparkles } from 'lucide-react';
+import { ShoppingBag, Zap, ArrowRight, Gamepad2, Sofa } from 'lucide-react';
 import { auth } from '../firebase';
+import { productsData, Product } from '../products';
 
 const Hero: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const mainSlides = [
-    { 
-      titulo: "OFERTAS EM UM SÓ LUGAR", 
-      sub: "Produtos selecionados com preços que cabem no seu bolso.", 
-      btn: "Ver Ofertas",
-      link: "https://nibuy-produtos.vercel.app/",
-      icon: <Sparkles className="mb-4 text-orange-200" size={48} />
-    },
-    { 
-      titulo: "NOVIDADES NIBUY 2026", 
-      sub: "As tendências que acabaram de chegar na nossa vitrine tecnológica.", 
-      btn: "Conferir Agora",
-      link: "https://nibuy-produtos.vercel.app/",
-      icon: <Sparkles className="mb-4 text-orange-100" size={48} />
-    }
-  ];
-
-  const protectedRedirect = (url: string) => {
-  if (auth.currentUser) {
-    window.location.href = url;
-  } else {
-    // 🔥 dispara o aviso laranja
-    window.dispatchEvent(new Event('showNibuyWarning'));
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-};
-
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev === mainSlides.length - 1 ? 0 : prev + 1));
-  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? mainSlides.length - 1 : prev - 1));
+  const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 4000);
-    return () => clearInterval(timer);
-  }, [mainSlides.length]);
+    if (productsData && productsData.length > 0) {
+      const randomIndex = Math.floor(Math.random() * productsData.length);
+      setCurrentProduct(productsData[randomIndex]);
+
+      const timer = setInterval(() => {
+        const nextIndex = Math.floor(Math.random() * productsData.length);
+        setCurrentProduct(productsData[nextIndex]);
+      }, 12000); 
+
+      return () => clearInterval(timer);
+    }
+  }, []);
+
+  const protectedRedirect = (url?: string) => {
+    if (!url) return;
+    if (auth.currentUser) {
+      window.location.href = url;
+    } else {
+      window.dispatchEvent(new Event('showNibuyWarning'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  if (!currentProduct) return null;
 
   return (
-    /* Mudança aqui: Mantive o grid mas removi o flex-col do mobile para evitar empilhamento */
-    <div className="w-[98%] max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 animate-in fade-in duration-700">
-      
-      {/* BANNER PRINCIPAL: Agora ocupa 1 col no mobile e 2 col no desktop */}
-      <div className="md:col-span-2 relative h-[300px] md:h-[450px] group overflow-hidden rounded-xl shadow-2xl bg-[#ff5722] flex items-center justify-center text-center p-6 md:p-12">
+    <section className="bg-gray-200 pt-24 md:pt-40 lg:pt-5 pb-10">
+      <div className="w-[95%] max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <div className="absolute top-[-50%] left-[-10%] w-[60%] h-[200%] bg-white/10 rotate-12 blur-3xl pointer-events-none"></div>
+        {/* BANNER PRINCIPAL - SEM CORTE DE LETRAS */}
+        <div className="lg:col-span-2 relative min-h-[580px] md:h-[600px] lg:h-[550px] overflow-hidden rounded-[2rem] md:rounded-[2.5rem] shadow-2xl bg-[#ff5722] flex flex-col md:flex-row">
+          
+          {/* Lado Esquerdo: Texto */}
+          <div className="w-full md:w-1/2 p-7 md:p-10 lg:p-14 flex flex-col justify-center items-center md:items-start text-center md:text-left z-20 order-1">
+            <div className="inline-flex items-center gap-2 bg-black/20 backdrop-blur-md text-white px-4 py-1.5 rounded-full mb-6 text-[10px] font-black uppercase tracking-widest">
+                <Zap size={14} fill="currentColor" /> Oferta em Destaque
+            </div>
+            
+            {/* Removi o italic e ajustei o line-height para não cortar as letras */}
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter mb-6 uppercase leading-tight drop-shadow-md line-clamp-3 pb-1">
+              {currentProduct.name}
+            </h2>
+            
+            <div className="flex flex-col mb-8">
+              {currentProduct.oldPrice && (
+                <span className="text-orange-200 line-through text-lg md:text-xl font-bold opacity-80 mb-1">{currentProduct.oldPrice}</span>
+              )}
+              <span className="text-5xl md:text-6xl lg:text-7xl font-black text-white drop-shadow-xl leading-none">
+                {currentProduct.price}
+              </span>
+            </div>
 
-        {/* Setas (Escondidas no mobile para não atrapalhar o toque) */}
-        <button onClick={prevSlide} className="hidden md:block absolute left-6 z-10 p-3 bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all border border-white/20">
-          <ChevronLeft size={28} />
-        </button>
-        <button onClick={nextSlide} className="hidden md:block absolute right-6 z-10 p-3 bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all border border-white/20">
-          <ChevronRight size={28} />
-        </button>
-
-        <div key={currentSlide} className="relative z-10 animate-in zoom-in-95 duration-500 flex flex-col items-center">
-          {mainSlides[currentSlide].icon}
-          <h2 className="text-3xl md:text-6xl font-black text-white  tracking-tighter mb-4 drop-shadow-2xl uppercase leading-none px-2">
-            {mainSlides[currentSlide].titulo}
-          </h2>
-          <p className="text-white text-sm md:text-xl mb-6 md:mb-8 opacity-90 font-medium max-w-[500px] leading-tight md:leading-relaxed">
-            {mainSlides[currentSlide].sub}
-          </p>
-          <button 
-           onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
-            className="bg-white text-[#ff5722] font-black py-3 md:py-4 px-8 md:px-12 rounded-full hover:scale-105 transition-all uppercase text-[10px] md:text-sm tracking-widest active:scale-95 shadow-lg"
-          >
-            {mainSlides[currentSlide].btn}
-          </button>
-        </div>
-
-        {/* Indicadores */}
-        <div className="absolute bottom-4 md:bottom-6 flex gap-3">
-          {mainSlides.map((_, i) => (
-            <div key={i} className={`h-1.5 transition-all duration-500 rounded-full ${currentSlide === i ? 'bg-white w-8 md:w-10' : 'bg-white/30 w-2 md:w-3'}`} />
-          ))}
-        </div>
-      </div>
-
-      {/* BANNERS LATERAIS: Agora com "hidden md:flex" para sumir no celular */}
-      <div className="hidden md:flex flex-col gap-4 h-[450px]">
-        {/* Universo Gamer */}
-        <div className="flex-1 bg-gradient-to-tr from-[#1a1a1a] to-[#333] rounded-xl shadow-xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group border border-white/5">
-            <Gamepad2 className="text-orange-500 mb-4 group-hover:scale-110 transition-transform" size={40} />
-            <h3 className="text-white font-black  text-2xl leading-tight mb-4 uppercase tracking-tight">UNIVERSO<br/>GAMER</h3>
             <button 
-               onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
-                className="text-xs bg-orange-500 text-white px-6 py-2.5 rounded-lg font-bold uppercase hover:bg-orange-600 transition-all shadow-lg"
+              onClick={() => protectedRedirect(currentProduct.link)}
+              className="w-full md:w-auto bg-white text-[#ff5722] font-black py-4 md:py-5 px-10 md:px-12 rounded-xl md:rounded-2xl hover:scale-105 transition-all uppercase text-xs md:text-sm shadow-2xl flex items-center justify-center gap-3 active:scale-95"
             >
-                Ver Coleção
+              <ShoppingBag size={20} />
+              Aproveitar agora
             </button>
+          </div>
+
+          {/* Lado Direito: Imagem */}
+          <div className="w-full md:w-1/2 relative flex items-center justify-center p-8 md:p-10 z-10 order-2 flex-grow">
+             <div className="absolute inset-0 bg-white/10 blur-[80px] rounded-full scale-75"></div>
+             
+             <img 
+               key={currentProduct.id}
+               src={currentProduct.img} 
+               alt={currentProduct.name} 
+               className="relative z-10 max-h-[280px] md:max-h-[90%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-700 hover:scale-105 rounded-xl animate-in fade-in zoom-in-90"
+             />
+          </div>
         </div>
 
-        {/* Casa & Decoração */}
-        <div className="flex-1 bg-[#fff2e6] rounded-xl shadow-xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden border border-orange-100 group">
-            <Sofa className="text-[#ff5722] mb-4 group-hover:scale-110 transition-transform" size={40} />
-            <h3 className="text-[#ff5722] font-black  text-2xl leading-tight mb-4 uppercase tracking-tight">CASA &<br/>DECORAÇÃO</h3>
-            <button 
+        {/* BANNERS LATERAIS */}
+        <div className="hidden lg:flex flex-col gap-6">
+          <div className="flex-1 bg-gray-900 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl border border-white/5 group">
+              <Gamepad2 className="text-orange-500 mb-4 group-hover:scale-110 transition-transform" size={48} />
+              <h3 className="text-white font-black text-2xl lg:text-3xl italic uppercase leading-tight mb-2">Universo<br/>Gamer</h3>
+              <button onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')} className="text-orange-500 font-bold uppercase text-[10px] flex items-center gap-2 hover:gap-4 transition-all mt-4">
+                Ver Coleção <ArrowRight size={16} />
+              </button>
+          </div>
+
+          <div className="flex-1 bg-white border-2 border-orange-50 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl group">
+              <Sofa className="text-[#ff5722] mb-4 group-hover:scale-110 transition-transform" size={48} />
+              <h3 className="text-gray-900 font-black text-2xl lg:text-3xl italic uppercase leading-tight mb-4">Casa &<br/>Estilo</h3>
+              <button 
                 onClick={() => protectedRedirect('https://nibuy-produtos.vercel.app/')}
-                className="text-xs border-2 border-[#ff5722] text-[#ff5722] px-6 py-2 rounded-lg font-bold uppercase hover:bg-[#ff5722] hover:text-white transition-all shadow-sm"
-            >
+                className="bg-[#ff5722] text-white px-8 py-3 rounded-2xl font-black uppercase text-[10px] shadow-lg hover:bg-orange-600 transition-all"
+              >
                 Explorar
-            </button>
+              </button>
+          </div>
         </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 
