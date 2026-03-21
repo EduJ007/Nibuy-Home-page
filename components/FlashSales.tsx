@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Importa o hook
 import { productsData } from '../products';
-import { auth } from '../firebase';
-
-const protectedRedirect = (url: string) => {
-  if (auth.currentUser) {
-    window.open(url, "_blank");
-  } else {
-    window.dispatchEvent(new Event('showNibuyWarning'));
-  }
-};
 
 const FlashSales: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
   const [paginatedProducts, setPaginatedProducts] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const navigate = useNavigate(); // 2. Inicializa o hook
   
   const ITEMS_PER_PAGE = 6;
   const TOTAL_PAGES_LIMIT = 3; 
+
+  // Função de redirecionamento ajustada
+  const handleRedirect = (url: string) => {
+    if (!url) return;
+
+    if (url.startsWith('http')) {
+      // Se for link externo (Amazon/Shopee), abre em nova aba
+      window.open(url, "_blank");
+    } else {
+      // Se for link interno (ex: /Lista-produtos), usa o navigate
+      navigate(url);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const updateTimerAndProducts = () => {
@@ -57,7 +64,9 @@ const FlashSales: React.FC = () => {
   }, [currentPage]);
 
   const format = (n: number) => n.toString().padStart(2, '0');
-  const parsePrice = (priceStr: string) => {
+  
+  const parsePrice = (priceStr: string | number) => {
+    if (typeof priceStr === 'number') return priceStr;
     if (!priceStr) return 0;
     return parseFloat(priceStr.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
   };
@@ -82,36 +91,34 @@ const FlashSales: React.FC = () => {
         </div>
 
         <button
-          onClick={() => protectedRedirect("https://nibuy-produtos.vercel.app/")}
-          className="text-blue-600 left-full font-black text-sm uppercase tracking-widest hover:underline"
+          onClick={() => handleRedirect("/Lista-produtos?sort=flash")} // 3. Rota interna com filtro
+          className="text-blue-600 font-black text-sm uppercase tracking-widest hover:underline"
         >
           Ver Tudo ›
         </button>
       </div>
 
-      {/* ÁREA DOS PRODUTOS COM SETAS NAS LATERAIS */}
+      {/* ÁREA DOS PRODUTOS */}
       <div className="relative px-4 md:px-12 py-6">
         
-        {/* SETA ESQUERDA */}
         <button 
           disabled={currentPage === 0}
           onClick={() => setCurrentPage(prev => prev - 1)}
-          className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 items-center justify-center hover:bg-gray-100 text-[black] disabled:hidden shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10"
+          className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 items-center justify-center hover:bg-gray-100 text-black disabled:hidden shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10"
         >
           ❮
         </button>
 
-        {/* GRID */}
         <div className="flex md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 overflow-x-auto md:overflow-visible min-h-[320px] pb-2">
           {paginatedProducts.map((p) => {
             const vAtual = parsePrice(p.price);
-            const vAntigo = p.oldPrice ? parsePrice(p.oldPrice) : vAtual * 2.5;
-            const valorDesconto = vAntigo > vAtual ? Math.round(((vAntigo - vAtual) / vAntigo) * 100) : 0;
+            const vAntigo = p.oldPrice ? parsePrice(p.oldPrice) : vAtual * 1.3;
+            const valorDesconto = vAntigo > vAtual ? Math.round(((vAntigo - vAtual) / vAntigo) * 100) : 15;
 
             return (
               <div
                 key={p.id}
-                onClick={() => protectedRedirect(p.link || '#')}
+                onClick={() => handleRedirect(p.link || '#')} // 4. Abre o link externo do produto
                 className="min-w-[210px] md:min-w-0 w-full flex flex-col bg-white rounded-lg p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-gray-200 hover:border-[#ff5722]"
               >
                 <div className="relative flex items-center justify-center h-44 mb-3">
@@ -128,9 +135,9 @@ const FlashSales: React.FC = () => {
                   {p.price}
                 </span>
 
-                <div className="w-full bg-[#ff5722]/20 h-6 rounded-full relative overflow-hidden mt-auto">
+                <div className="w-full bg-gray-100 h-6 rounded-full relative overflow-hidden mt-auto">
                   <div className="absolute left-0 top-0 h-full bg-[#ff5722] w-[85%] rounded-full transition-all duration-500"></div>
-                  <span className="absolute inset-0 text-[12px] font-bold text-white flex items-center justify-center uppercase">
+                  <span className="absolute inset-0 text-[10px] font-black text-white flex items-center justify-center uppercase drop-shadow-sm">
                     {p.sold || '85%'} vendidos
                   </span>
                 </div>
@@ -139,13 +146,12 @@ const FlashSales: React.FC = () => {
           })}
         </div>
 
-        {/* SETA DIREITA */}
         <button 
           disabled={currentPage >= TOTAL_PAGES_LIMIT - 1}
           onClick={() => setCurrentPage(prev => prev + 1)}
           className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 items-center justify-center hover:bg-gray-100 shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10 disabled:hidden"
         >
-           ❯
+            ❯
         </button>
       </div>
     </section>

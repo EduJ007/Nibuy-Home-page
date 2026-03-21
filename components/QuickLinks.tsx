@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom'; // 1. Importa o navigate
 
 interface QuickLinkItem {
   label: string;
@@ -7,53 +7,55 @@ interface QuickLinkItem {
   img: string;
 }
 
-const protectedRedirect = (url: string) => {
-  if (auth.currentUser) {
-    window.location.href = url;
-  } else {
-    window.dispatchEvent(new Event('showNibuyWarning'));
-  }
-};
-
 const links: QuickLinkItem[] = [
   {
     label: 'Ofertas',
-    url: 'https://nibuy-produtos.vercel.app/?sort=flash#filtros',
+    url: '/Lista-produtos?sort=flash#filtros', // URLs internas sem o domínio da Vercel
     img: '/ofertasimg.png',
   },
   {
     label: 'Recomendados',
-    url: 'https://nibuy-produtos.vercel.app/?sort=recomend#filtros',
+    url: '/Lista-produtos?sort=recomend#filtros',
     img: '/recomendadosimg.png',
   },
   {
     label: 'Achadinhos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=deals#filtros',
+    url: '/Lista-produtos?sort=deals#filtros',
     img: '/achadinhosimg.png',
   },
   {
     label: 'Mais Baratos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=price_asc#filtros',
+    url: '/Lista-produtos?sort=price_asc#filtros',
     img: '/maisbarato.png',
   },
   {
     label: 'Mais Vendidos',
-    url: 'https://nibuy-produtos.vercel.app/?sort=sales#filtros',
+    url: '/Lista-produtos?sort=sales#filtros',
     img: '/maisvendidosimg.png',
   },
 ];
+
 const QuickLinks: React.FC = () => {
+  const navigate = useNavigate(); // 2. Inicializa o hook
+
+  const handleNavigation = (url: string) => {
+    // Navegação interna suave sem recarregar a página
+    navigate(url);
+    // Garante que a página comece no topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <section className="w-[96%] max-w-[1400px] mx-auto mt-16">
       <div className="flex flex-wrap justify-center gap-8 md:gap-14">
         {links.map((link, index) => (
           <button
             key={index}
-            onClick={() => protectedRedirect(link.url)}
+            onClick={() => handleNavigation(link.url)} // 3. Usa a nova função
             className="flex flex-col items-center gap-3 group outline-none"
           >
-            {/* Container da Imagem com efeito de borda laranja no hover */}
-            <div className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-transparent group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg bg-gray-100`}>
+            {/* Container da Imagem */}
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-transparent group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg bg-gray-100">
               <img 
                 src={link.img} 
                 alt={link.label} 
@@ -63,7 +65,7 @@ const QuickLinks: React.FC = () => {
             </div>
             
             {/* Texto em negrito */}
-            <span className="text-[10px] md:text-[14px] font-black  tracking-tighter text-gray-500 group-hover:text-orange-600 transition-colors">
+            <span className="text-[10px] md:text-[14px] font-black tracking-tighter text-gray-500 group-hover:text-orange-600 transition-colors uppercase">
               {link.label}
             </span>
           </button>

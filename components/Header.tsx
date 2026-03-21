@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Bell, HelpCircle, User, LogOut, Settings, Camera, Check, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { auth, db, googleProvider } from '../firebase'; 
 import { 
   createUserWithEmailAndPassword, 
@@ -374,27 +375,20 @@ useEffect(() => {
   {/* ESQUERDA */}
   <div className="flex gap-4 items-center">
     
-    <button
-      onClick={() => user
-        ? window.location.href = "https://nibuy-central-ajuda.vercel.app/"
-        : showLoginWarning()
-      }
-      className="hover:text-gray-200 font-medium"
-    >
-      Entrar em contato
-    </button>
-
+   <Link
+    to="/Contato"
+    className="hover:text-gray-200 font-medium flex items-center gap-1"
+  >
+    Entrar em Contato
+  </Link>
     <span>|</span>
 
-    <button
-      onClick={() => user
-        ? window.location.href = "https://sobre-nibuy.vercel.app/"
-        : showLoginWarning()
-      }
-      className="hover:text-gray-200 font-medium"
-    >
-      Sobre nós
-    </button>
+    <Link
+    to="/Sobre-nós"
+    className="hover:text-gray-200 font-medium flex items-center gap-1"
+  >
+    Sobre Nós
+  </Link>
 
     <span>|</span>
 
@@ -471,27 +465,24 @@ useEffect(() => {
   )}
   </div>
    {/* CENTRAL DE AJUDA */}
-  <button
-    onClick={() => user
-      ? window.location.href = "https://nibuy-central-ajuda.vercel.app/"
-      : showLoginWarning()
-    }
-    className="flex items-center gap-0.5 font-medium hover:text-gray-200"
-  >
-    <HelpCircle size={18} />
-    Central de ajuda
-  </button>
+ <Link
+  to="/Central-de-ajuda"
+  className="flex items-center gap-1 font-medium hover:text-gray-200"
+>
+  <HelpCircle size={18} />
+  <span>Central de Ajuda</span>
+</Link>
 </div>
 </div>
       {/* Main Header - Buscador e Perfil */}
       <div className="max-w-[1200px] mx-auto py-4 px-4 flex items-center gap-3 md:gap-5 ">
-      <div
-          className="hidden sm:flex items-center gap-3 cursor-pointer shrink-0"
-            onClick={() => window.location.href = '/'}
-          >
-            <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto shadow-[0_0_6px_rgba(0,0,0,0.25)" />
-            <span className="text-3xl shadow-[0_0_6px_rgba(0,0,0,0.25) font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
-          </div>
+      <Link 
+  to="/" 
+  className="hidden sm:flex items-center gap-3 cursor-pointer shrink-0"
+>
+  <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto shadow-[0_0_6px_rgba(0,0,0,0.25)]" />
+  <span className="text-3xl font-black hidden md:block">𝙉𝙞𝙗𝙪𝙮</span>
+</Link>
         
                  <div className="flex-1 flex bg-white rounded-sm p-1 items-center shadow-sm">
                   <input 

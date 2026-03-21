@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom'; // 1. Importa o hook
 
 const categories = [
   { id: 1, name: 'Moda & Beleza', img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format&fit=crop' },
@@ -21,33 +21,28 @@ const categories = [
   { id: 17, name: 'Viagem & Malas', img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200&auto=format&fit=crop' }
 ];
 
-const protectedRedirect = (url: string) => {
-  if (auth.currentUser) window.location.href = url;
-  else window.dispatchEvent(new Event('showNibuyWarning'));
-};
-
-const ITEMS_PER_PAGE = 9; // 3 linhas × 3 colunas
+const ITEMS_PER_PAGE = 9;
 
 const CategoryGrid: React.FC = () => {
   const [page, setPage] = useState(0);
+  const navigate = useNavigate(); // 2. Inicializa o navigate
 
   const start = page * ITEMS_PER_PAGE;
   const visible = categories.slice(start, start + ITEMS_PER_PAGE);
-
   const totalPages = Math.ceil(categories.length / ITEMS_PER_PAGE);
 
-  const nextPage = () => {
-    if (page < totalPages - 1) setPage(page + 1);
+  const handleCategoryClick = (categoryName: string) => {
+    // 3. Redireciona para a lista com o parâmetro de categoria
+    // Nota: mudei de 'cat' para 'categoria' para bater com o useEffect da Lista
+    navigate(`/Lista-produtos?categoria=${encodeURIComponent(categoryName)}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const prevPage = () => {
-    if (page > 0) setPage(page - 1);
-  };
+  const nextPage = () => { if (page < totalPages - 1) setPage(page + 1); };
+  const prevPage = () => { if (page > 0) setPage(page - 1); };
 
   return (
     <section className="bg-white mt-16 w-[98%] max-w-[1600px] mx-auto rounded-2xl shadow-sm border border-gray-300 overflow-hidden relative">
-
-      {/* TÍTULO */}
       <div className="flex items-center px-6 py-4 border-b border-gray-200">
         <h2 className="text-[#ff5722] text-[22px] uppercase font-black tracking-tighter">
           Categorias
@@ -55,66 +50,43 @@ const CategoryGrid: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-3 p-4">
+        {visible.map(cat => (
+          <button
+            key={cat.id}
+            onClick={() => handleCategoryClick(cat.name)} // 4. Chama a função de navegação
+            className="
+              flex flex-col sm:flex-row items-center gap-2 sm:gap-3
+              bg-gray-200 hover:bg-gray-100
+              px-3 py-3 rounded-xl transition-all shadow-sm
+              text-center sm:text-left 
+            "
+          >
+            <div className="w-full h-20 sm:w-16 sm:h-16 rounded-xl overflow-hidden flex-shrink-0">
+              <img
+                src={cat.img}
+                alt={cat.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-  {visible.map(cat => (
-    <button
-      key={cat.id}
-      onClick={() =>
-        protectedRedirect(
-          `https://nibuy-produtos.vercel.app/?cat=${encodeURIComponent(cat.name)}`
-        )
-      }
-      className="
-        flex flex-col sm:flex-row items-center gap-2 sm:gap-3
-        bg-gray-200 hover:bg-gray-100
-        px-3 py-3 rounded-xl transition-all shadow-sm
-        text-center sm:text-left 
-      "
-    >
-      {/* IMAGEM */}
-      <div className="
-        w-full  h-20 sm:w-16 sm:h-16
-        rounded-xl overflow-hidden flex-shrink-0
-      ">
-        <img
-          src={cat.img}
-          alt={cat.name}
-          className="w-full h-full object-cover"
-        />
+            <span className="mt-1 text-[13px] sm:text-sm font-extrabold text-gray-900 leading-tight">
+              {cat.name}
+            </span>
+          </button>
+        ))}
       </div>
 
-      {/* TEXTO */}
-      <span className="
-       mt-1 text-[13px] sm:text-sm font-extrabold text-gray-900
-        leading-tight
-      ">
-        {cat.name}
-      </span>
-    </button>
-  ))}
-
-</div>
-
-      {/* SETA ESQUERDA */}
       {page > 0 && (
-        <button
-          onClick={prevPage}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 text-[black] shadow-[0_0_6px_rgba(0,0,0,0.25)]"
-        >
+        <button onClick={prevPage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 text-black shadow-[0_0_6px_rgba(0,0,0,0.25)]">
           ❮
         </button>
       )}
 
-      {/* SETA DIREITA */}
       {page < totalPages - 1 && (
-        <button
-          onClick={nextPage}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white  rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10"
-        >
-         ❯
+        <button onClick={nextPage} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-gray-100 shadow-[0_0_6px_rgba(0,0,0,0.25)] z-10">
+          ❯
         </button>
       )}
-
     </section>
   );
 };

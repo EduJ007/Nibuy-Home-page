@@ -1,17 +1,11 @@
 import React, { useMemo } from 'react';
 import { Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // 1. Importa o hook
 import { productsData } from '../products';
-import { auth } from '../firebase';
-
-const protectedRedirect = (url: string) => {
-  if (auth.currentUser) {
-    window.location.href = url;
-  } else {
-    window.dispatchEvent(new Event('showNibuyWarning'));
-  }
-};
 
 const DailyDiscover: React.FC = () => {
+  const navigate = useNavigate(); // 2. Inicializa o hook
+
   const calculateDiscount = (priceStr: string, oldPriceStr?: string) => {
     if (!oldPriceStr) return null;
     const price = parseFloat(priceStr.replace(/[^\d,]/g, '').replace(',', '.'));
@@ -22,6 +16,7 @@ const DailyDiscover: React.FC = () => {
   };
 
   const discoverProducts = useMemo(() => {
+    // Filtra produtos que não são flash sale para a descoberta diária
     const baseProducts = productsData.filter(p => p.isFlashSale === false);
     const today = new Date();
     const dateSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
@@ -29,6 +24,7 @@ const DailyDiscover: React.FC = () => {
     let shuffled = [...baseProducts];
     let seed = dateSeed;
     
+    // Algoritmo de embaralhamento baseado na data (muda todo dia)
     for (let i = shuffled.length - 1; i > 0; i--) {
       seed = (seed * 9301 + 49297) % 233280;
       const rnd = seed / 233280;
@@ -37,6 +33,12 @@ const DailyDiscover: React.FC = () => {
     }
     return shuffled.slice(0, 24);
   }, []);
+
+  const handleSeeMore = () => {
+    // 3. Navegação interna suave
+    navigate('/Lista-produtos');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <section className="mt-20">
@@ -72,7 +74,7 @@ const DailyDiscover: React.FC = () => {
                 <div className="mt-auto">
                   <div className="flex flex-col mb-1">
                     {item.oldPrice && <span className="text-[12px] text-gray-400 line-through">{item.oldPrice}</span>}
-                    <span className="mt-0.5 text-lg text-[#ee4d2d] font-bold   leading-none">{item.price}</span>
+                    <span className="mt-0.5 text-lg text-[#ee4d2d] font-bold leading-none">{item.price}</span>
                   </div>
                   <div className="flex items-center justify-between mt-2 text-[12px] text-gray-500">
                      <div className="flex items-center gap-0.5">
@@ -89,12 +91,10 @@ const DailyDiscover: React.FC = () => {
         })}
       </div>
 
-          <div className="flex justify-center mt-12 pb-8">
+      <div className="flex justify-center mt-12 pb-8">
         <button
-          onClick={() =>
-            protectedRedirect('https://nibuy-produtos.vercel.app/#produtos')
-          }
-          className="px-20 py-3 bg-white border border-gray-300 text-gray-600 font-medium text-sm uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm rounded-sm"
+          onClick={handleSeeMore} // 4. Usa a nova função de navegação
+          className="px-20 py-3 bg-white border border-gray-300 text-gray-600 font-medium text-sm uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm rounded-sm active:scale-95"
         >
           Veja Mais
         </button>
