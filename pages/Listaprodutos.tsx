@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import FilterBar from '../components/ListaprodutosComponents/FilterBar'
+import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ListaprodutosComponents/ProductCard'
 import PageLoader from '../components/ListaprodutosComponents/GeminiRecommendation'
 import { productsData } from '../products'
@@ -25,6 +26,7 @@ const parsePrice = (price: string | number | undefined | null) => {
 
 // ------------------ COMPONENTE DA PÁGINA ------------------
 const Listaprodutos: React.FC = () => {
+  const location = useLocation(); // Chame o hook aqui
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [activeStore, setActiveStore] = useState('Todas');
@@ -37,31 +39,28 @@ const Listaprodutos: React.FC = () => {
   const productsPerPage = 24;
 
   useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(location.search);
   
   // 1. Termo de busca
-  const searchFromUrl = params.get('search');
-  if (searchFromUrl) setSearchTerm(decodeURIComponent(searchFromUrl));
+  const searchFromUrl = params.get('search') || ''; 
+  setSearchTerm(decodeURIComponent(searchFromUrl));
 
-  // 2. Categoria (IMPORTANTE: Garanta que o nome bate com o seu productsData)
-  const categoryFromUrl = params.get('categoria');
-  if (categoryFromUrl) {
-    // Decodifica o nome da categoria (ex: "Moda%20%26%20Beleza" vira "Moda & Beleza")
-    setActiveCategory(decodeURIComponent(categoryFromUrl));
-  }
+  // 2. Categoria
+  const categoryFromUrl = params.get('categoria') || 'Todos';
+  setActiveCategory(decodeURIComponent(categoryFromUrl));
 
   // 3. Ordenação
-  const sortFromUrl = params.get('sort');
-  if (sortFromUrl) setSortBy(sortFromUrl);
+  const sortFromUrl = params.get('sort') || 'default';
+  setSortBy(sortFromUrl);
 
   // 4. Loja
-  const storeFromUrl = params.get('loja');
-  if (storeFromUrl) setActiveStore(storeFromUrl);
+  const storeFromUrl = params.get('loja') || 'Todas';
+  setActiveStore(storeFromUrl);
 
-  // Se houver qualquer parâmetro de filtro, volta para a página 1
-  if (params.toString()) setCurrentPage(1);
+  // Sempre que a URL mudar, voltamos para a página 1
+  setCurrentPage(1);
 
-}, [window.location.search]);
+}, [location.search]);
   // -------------------------------------------------------------
 
   // 2. O useMemo vem logo abaixo dele
