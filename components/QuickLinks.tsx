@@ -26,7 +26,7 @@ const QuickLinks: React.FC = () => {
   return (
     <section className="w-[96%] max-w-[1400px] mx-auto mt-12 md:mt-16">
       {/* Voltamos para o flex-wrap para mostrar todos no mobile sem precisar de scroll lateral */}
-      <div className="flex flex-wrap justify-center gap-8 md:gap-14">
+      <div className="flex flex-wrap justify-center gap-6 md:gap-14">
         {links.map((link, index) => (
           <button
             key={index}
