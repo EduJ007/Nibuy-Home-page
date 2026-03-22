@@ -41,7 +41,7 @@ const DailyDiscover: React.FC = () => {
   };
 
   return (
-    <section className="mt-20">
+    <section className="mt-24">
       <div className="bg-white border-b-4 border-[#ff5722] py-4 mb-4 shadow-sm">
         <h2 className="text-center text-[#ff5722] uppercase font-bold text-lg tracking-widest">
           Descobertas do Dia
@@ -91,7 +91,7 @@ const DailyDiscover: React.FC = () => {
         })}
       </div>
 
-      <div className="flex justify-center mt-12 pb-8">
+      <div className="flex justify-center mt-16 pb-8">
         <button
           onClick={handleSeeMore} // 4. Usa a nova função de navegação
           className="px-20 py-3 bg-white border border-gray-300 text-gray-600 font-medium text-sm uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm rounded-sm active:scale-95"
