@@ -1,110 +1,126 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ShoppingBag, Zap, ArrowRight, Gamepad2, Sofa } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // 1. Importação do hook
+import { useNavigate } from 'react-router-dom';
 import { productsData, Product } from '../products';
 
 const Hero: React.FC = () => {
-  const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
-  const navigate = useNavigate(); // 2. Inicialização do hook
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate();
+
+  // Seleciona os top 5 produtos para o banner não ficar infinito
+  const featuredProducts = productsData.slice(0, 5);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev === featuredProducts.length - 1 ? 0 : prev + 1));
+  }, [featuredProducts.length]);
 
   useEffect(() => {
-    if (productsData && productsData.length > 0) {
-      const randomIndex = Math.floor(Math.random() * productsData.length);
-      setCurrentProduct(productsData[randomIndex]);
-
-      const timer = setInterval(() => {
-        const nextIndex = Math.floor(Math.random() * productsData.length);
-        setCurrentProduct(productsData[nextIndex]);
-      }, 12000); 
-
-      return () => clearInterval(timer);
-    }
-  }, []);
+    if (isPaused) return;
+    const timer = setInterval(nextSlide, 8000); // 8 segundos é o tempo ideal de leitura
+    return () => clearInterval(timer);
+  }, [nextSlide, isPaused]);
 
   const handleRedirect = (url?: string) => {
     if (!url) return;
-    
     if (url.startsWith('http')) {
-      // Links externos (Amazon/Shopee) abrem em nova aba normalmente
       window.open(url, '_blank');
     } else {
-      // 3. Navegação interna suave (SPA) sem reload de página
-      navigate(url); 
-      // Opcional: rola para o topo caso a nova página seja longa
+      navigate(url);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
+  const currentProduct = featuredProducts[currentIndex];
+
   if (!currentProduct) return null;
 
   return (
-    <section className="bg-gray-200 pt-24 md:pt-40 lg:pt-5 pb-10">
-      <div className="w-[95%] max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <section className="bg-gray-200 pt-[10px] md:pt-[10px] lg:pt-5 pb-8 overflow-hidden">
+    <div className="w-[95%] max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      {/* BANNER PRINCIPAL - MAIS BAIXO (450px) */}
+      <div 
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        className="lg:col-span-2 group relative min-h-[450px] md:h-[480px] lg:h-[450px] overflow-hidden rounded-[2.5rem]  bg-[#ff5722] flex flex-col md:flex-row transition-all duration-500"
+      >
         
-        {/* BANNER PRINCIPAL */}
-        <div className="lg:col-span-2 relative min-h-[580px] md:h-[600px] lg:h-[550px] overflow-hidden rounded-[2rem] md:rounded-[2.5rem] shadow-2xl bg-[#ff5722] flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2 p-7 md:p-10 lg:p-14 flex flex-col justify-center items-center md:items-start text-center md:text-left z-20 order-1">
-            <div className="inline-flex items-center gap-2 bg-black/20 backdrop-blur-md text-white px-4 py-1.5 rounded-full mb-6 text-[10px] font-black uppercase tracking-widest">
-                <Zap size={14} fill="currentColor" /> Oferta em Destaque
-            </div>
-            
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter mb-6 uppercase leading-tight drop-shadow-md line-clamp-3 pb-1">
-              {currentProduct.name}
-            </h2>
-            
-            <div className="flex flex-col mb-8">
-              {currentProduct.oldPrice && (
-                <span className="text-orange-200 line-through text-lg md:text-xl font-bold opacity-80 mb-1">{currentProduct.oldPrice}</span>
-              )}
-              <span className="text-5xl md:text-6xl lg:text-7xl font-black text-white drop-shadow-xl leading-none">
-                {currentProduct.price}
-              </span>
-            </div>
+        {/* IMAGEM - Ajustada para o novo tamanho */}
+        <div className="w-full md:w-1/2 relative flex items-center justify-center p-2 md:p-8 z-10 order-1 md:order-2 flex-grow bg-white/5 md:bg-transparent">
+   <div className="absolute inset-0 bg-white/10 blur-[60px] rounded-full scale-90 animate-pulse"></div>
+   <img 
+     key={`img-${currentProduct.id}`}
+     src={currentProduct.img} 
+     alt={currentProduct.name} 
+     /* Aumentei a max-h no mobile de 180px para 260px e a largura para 90% */
+     className="relative z-10 max-h-[260px] sm:max-h-[300px] md:max-h-[90%] w-[90%] md:w-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.3)] transition-all duration-700 hover:scale-105"
+   />
+</div>
 
-            <button 
-              onClick={() => handleRedirect(currentProduct.link)}
-              className="w-full md:w-auto bg-white text-[#ff5722] font-black py-4 md:py-5 px-10 md:px-12 rounded-xl md:rounded-2xl hover:scale-105 transition-all uppercase text-xs md:text-sm shadow-2xl flex items-center justify-center gap-3 active:scale-95"
-            >
-              <ShoppingBag size={20} />
-              Aproveitar agora
-            </button>
+{/* TEXTO - Com mais espaço para os Dots */}
+<div 
+  key={`text-${currentProduct.id}`} 
+  /* Adicionei pb-16 no mobile para dar espaço aos dots lá embaixo */
+  className="w-full md:w-1/2 p-6 pb-16 md:p-10 flex flex-col justify-center items-center md:items-start text-center md:text-left z-20 order-2 md:order-1"
+>
+  <div className="hidden sm:inline-flex items-center gap-2 bg-black/20 backdrop-blur-md text-white px-3 py-1 rounded-full mb-4 text-[9px] font-black uppercase tracking-widest">
+      <Zap size={12} fill="currentColor" /> Oferta em Destaque
+  </div>
+  
+  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tighter mb-4 uppercase leading-tight line-clamp-2">
+    {currentProduct.name}
+  </h2>
+  
+  <div className="flex items-center md:items-start gap-3 md:flex-col mb-5">
+    <span className="text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-lg">
+      {currentProduct.price}
+    </span>
+    {currentProduct.oldPrice && (
+      <span className="text-orange-100 line-through text-base font-bold opacity-70">{currentProduct.oldPrice}</span>
+    )}
+  </div>
+
+  <button 
+    onClick={() => handleRedirect(currentProduct.link)}
+    /* Botão um pouco mais compacto no mobile para não subir demais */
+    className="w-full sm:w-auto bg-white text-[#ff5722] font-black py-3 px-8 rounded-xl hover:bg-orange-50 transition-all uppercase text-xs shadow-xl flex items-center justify-center gap-2 active:scale-95"
+  >
+    <ShoppingBag size={18} />
+    Aproveitar agora
+  </button>
+</div>
+
+{/* DOTS - Posicionados com precisão */}
+<div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-30">
+  {featuredProducts.map((_, index) => (
+    <button
+      key={index}
+      onClick={() => setCurrentIndex(index)}
+      /* Aumentei um pouco a opacidade dos dots inativos para ficarem mais visíveis no fundo laranja */
+      className={`h-1.5 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-8 bg-white' : 'w-2 bg-white/50'}`}
+    />
+  ))}
+</div>
+</div>
+        {/* BANNERS LATERAIS - Também acompanham a altura menor */}
+      <div className="hidden lg:flex flex-col gap-6">
+          {/* Banner Gamer */}
+          <div className="flex-1 bg-gray-900 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl border border-white/5 group cursor-pointer"
+               onClick={() => handleRedirect('/Lista-produtos?categoria=Gamer')}>
+              <Gamepad2 className="text-orange-500 mb-2 group-hover:scale-110 transition-transform" size={40} />
+              <h3 className="text-white font-black text-xl italic uppercase leading-tight">Universo Gamer</h3>
+              <div className="text-orange-500 font-bold uppercase text-[9px] flex items-center gap-2 mt-2">Ver Coleção <ArrowRight size={14} /></div>
           </div>
 
-          <div className="w-full md:w-1/2 relative flex items-center justify-center p-8 md:p-10 z-10 order-2 flex-grow">
-             <div className="absolute inset-0 bg-white/10 blur-[80px] rounded-full scale-75"></div>
-             <img 
-               key={currentProduct.id}
-               src={currentProduct.img} 
-               alt={currentProduct.name} 
-               className="relative z-10 max-h-[280px] md:max-h-[90%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-700 hover:scale-105 rounded-xl animate-in fade-in zoom-in-90"
-             />
+          {/* Banner Casa */}
+          <div className="flex-1 bg-white border-2 border-orange-50 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl group cursor-pointer"
+               onClick={() => handleRedirect('/Lista-produtos?categoria=Casa')}>
+              <Sofa className="text-[#ff5722] mb-2 group-hover:scale-110 transition-transform" size={40} />
+              <h3 className="text-gray-900 font-black text-xl italic uppercase leading-tight">Casa & Estilo</h3>
+              <div className="mt-3 bg-[#ff5722] text-white px-6 py-2 rounded-xl font-black uppercase text-[9px]">Explorar</div>
           </div>
-        </div>
-
-        {/* BANNERS LATERAIS */}
-        <div className="hidden lg:flex flex-col gap-6">
-          <div className="flex-1 bg-gray-900 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl border border-white/5 group">
-              <Gamepad2 className="text-orange-500 mb-4 group-hover:scale-110 transition-transform" size={48} />
-              <h3 className="text-white font-black text-2xl lg:text-3xl italic uppercase leading-tight mb-2">Universo<br/>Gamer</h3>
-              <button 
-                onClick={() => handleRedirect('/Lista-produtos')} 
-                className="text-orange-500 font-bold uppercase text-[10px] flex items-center gap-2 hover:gap-4 transition-all mt-4"
-              >
-                Ver Coleção <ArrowRight size={16} />
-              </button>
-          </div>
-
-          <div className="flex-1 bg-white border-2 border-orange-50 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl group">
-              <Sofa className="text-[#ff5722] mb-4 group-hover:scale-110 transition-transform" size={48} />
-              <h3 className="text-gray-900 font-black text-2xl lg:text-3xl italic uppercase leading-tight mb-4">Casa &<br/>Estilo</h3>
-              <button 
-                onClick={() => handleRedirect('/Lista-produtos')}
-                className="bg-[#ff5722] text-white px-8 py-3 rounded-2xl font-black uppercase text-[10px] shadow-lg hover:bg-orange-600 transition-all"
-              >
-                Explorar
-              </button>
-          </div>
-        </div>
+      </div>
 
       </div>
     </section>
