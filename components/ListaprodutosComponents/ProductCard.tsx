@@ -70,11 +70,11 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
         {/* Preços */}
         <div className="mt-auto">
           {product.oldPrice && (
-            <p className="text-gray-400 text-[10px] line-through font-medium">
+            <p className="text-gray-400 text-[12px] line-through font-medium">
               {product.oldPrice}
             </p>
           )}
-          <p className="text-[#ff5722] text-xl font-black tracking-tighter">
+          <p className="text-[#ff5722] text-[24px] font-black tracking-tighter">
             {product.price}
           </p>
         </div>

@@ -47,14 +47,14 @@ const Hero: React.FC = () => {
       >
         
         {/* IMAGEM - Ajustada para o novo tamanho */}
-        <div className="w-full md:w-1/2 relative flex items-center justify-center p-2 md:p-8 z-10 order-1 md:order-2 flex-grow bg-white/5 md:bg-transparent">
+        <div className="w-full md:w-1/2 relative  flex items-center justify-center p-2 md:p-8 z-10 order-1 md:order-2 flex-grow bg-white/5 md:bg-transparent">
    <div className="absolute inset-0 bg-white/10 blur-[60px] rounded-full scale-90 animate-pulse"></div>
    <img 
      key={`img-${currentProduct.id}`}
      src={currentProduct.img} 
      alt={currentProduct.name} 
      /* Aumentei a max-h no mobile de 180px para 260px e a largura para 90% */
-     className="relative z-10 max-h-[260px] sm:max-h-[300px] md:max-h-[90%] w-[90%] md:w-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.3)] transition-all duration-700 hover:scale-105"
+     className="relative z-10 max-h-[260px] rounded-xl sm:max-h-[300px] md:max-h-[90%] w-[90%] md:w-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.3)] transition-all duration-700 hover:scale-105"
    />
 </div>
 
