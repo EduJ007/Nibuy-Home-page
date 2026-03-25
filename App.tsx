@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import QuickLinks from './components/QuickLinks';
 import AuthModal from './components/AuthModal';
 import CentralAjuda from './pages/CentralAjuda';
+import ProductDetails from './pages/ProductDetails';
 
 import { productsData } from './products';
 import Sobrenos from './pages/Sobrenos';
@@ -96,6 +97,8 @@ const App: React.FC = () => {
          <Route path="/Lista-produtos" element={<Listaprodutos />} />
 
          <Route path="/Contato" element={<Contato />} />
+
+         <Route path="/produto/:externalId" element={<ProductDetails />} />
         </Routes>
       </main>
 

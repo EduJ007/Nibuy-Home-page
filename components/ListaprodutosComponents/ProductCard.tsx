@@ -1,89 +1,106 @@
 import React from 'react';
-import { Star, MapPin, CheckCircle2 } from 'lucide-react';
+import { Star, MapPin, CheckCircle2, ShoppingCart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard: React.FC<{ product: any }> = ({ product }) => {
+  const navigate = useNavigate();
+
   const getStoreInfo = (link?: string) => {
     if (link?.includes('shopee')) return { name: 'Shopee', color: 'text-[#ee4d2d]' };
     if (link?.includes('mercadolivre')) return { name: 'Mercado Livre', color: 'text-[#333]' };
     if (link?.includes('amazon')) return { name: 'Amazon', color: 'text-[#232f3e]' };
-    return { name: 'Loja', color: 'text-gray-500' };
+    return { name: 'Oficial', color: 'text-gray-500' };
   };
 
   const store = getStoreInfo(product.link);
 
+  // Função para navegar para os detalhes do produto
+  const handleCardClick = () => {
+    navigate(`/produto/${product.externalId}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <div className="
-    group relative bg-white rounded-xl overflow-hidden 
-    transition-all duration-300 ease-in-out
-    border-2 border-transparent 
-    hover:border-[#ff5722] hover:shadow-xl
-     flex flex-col h-full relative">
+    <div 
+      onClick={handleCardClick}
+      className="group relative bg-white rounded-sm overflow-hidden transition-all duration-200 ease-in-out border border-transparent hover:border-[#ee4d2d] hover:shadow-lg flex flex-col h-full cursor-pointer hover:-translate-y-1"
+    >
       
-      {/* Badge Discreta de Oferta Relâmpago */}
-      {product.isFlashSale && (
-        <div className="absolute top-2 right-2 z-20 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm">
-          ⚡ RELÂMPAGO
+      {/* SELO DE DESCONTO (AMARELO) */}
+      {product.discount && (
+        <div className="absolute top-0 right-0 z-20 bg-[#ffe910] text-[#ee4d2d] text-[10px] font-bold px-1.5 py-1 flex flex-col items-center leading-tight">
+          <span>{product.discount}</span>
+          <span className="text-[8px] uppercase">OFF</span>
         </div>
       )}
 
-      {/* Imagem com respiro (sem ficar gigante) */}
-      <div className="relative overflow-hidden bg-white p-2">
+      {/* Badge Oferta Relâmpago */}
+      {product.isFlashSale && (
+        <div className="absolute top-2 left-2 z-20 bg-[#ee4d2d] text-white text-[8px] font-bold px-2 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
+          <span className="animate-pulse">⚡</span> RELÂMPAGO
+        </div>
+      )}
+
+      {/* ÁREA DA IMAGEM */}
+      <div className="relative aspect-square overflow-hidden bg-gray-50 p-0">
         <img 
           src={product.img} 
           alt={product.name} 
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" 
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
         />
       </div>
       
-      <div className="p-3 flex flex-col flex-grow">
-        {/* Loja e Oficial em texto simples */}
-        <div className="flex items-center gap-2 mb-1">
-          <span className={`${store.color} text-[10px] font-black uppercase tracking-tight italic`}>
+      <div className="p-2 md:p-3 flex flex-col flex-grow">
+        {/* Loja e Oficial */}
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <span className={`${store.color} text-[9px] font-black uppercase tracking-tight italic bg-gray-100 px-1 rounded-sm`}>
             {store.name}
           </span>
           {product.isOfficial && (
-            <CheckCircle2 size={12} className="text-blue-500" />
+            <div className="flex items-center gap-0.5 text-[#ee4d2d] text-[9px] font-bold">
+               <CheckCircle2 size={10} className="fill-current text-white bg-[#ee4d2d] rounded-full" />
+               Oficial
+            </div>
           )}
         </div>
 
-        {/* Nome do Produto - 2 linhas limpas */}
-        <h3 className="text-gray-800 font-bold text-xs leading-tight line-clamp-2 mb-2 h-[32px]">
+        {/* Nome do Produto */}
+        <h3 className="text-gray-700 text-[12px] md:text-[13px] leading-snug line-clamp-2 mb-2 h-[34px] group-hover:text-[#ee4d2d] transition-colors">
           {product.name}
         </h3>
 
-        {/* Métricas Simplificadas (Rating e Vendas na mesma linha) */}
-        <div className="flex items-center gap-2 mb-3 text-[11px]">
-           <div className="flex items-center gap-0.5 text-yellow-500 font-bold">
-              <Star size={12} fill="currentColor" />
-              <span>{product.rating || '4.8'}</span>
-           </div>
-           <span className="text-gray-400">|</span>
-           <span className="text-gray-500 font-medium">{product.sold} vendidos</span>
-        </div>
-
-        {/* Localização pequena e elegante */}
-        <div className="flex items-center gap-1 text-gray-400 text-[10px] mb-3">
-          <MapPin size={10} />
-          <span className="truncate">{product.location || 'Brasil'}</span>
-        </div>
-        
         {/* Preços */}
-        <div className="mt-auto">
+        <div className="mt-auto mb-2">
+          <div className="flex items-center gap-2">
+            <span className="text-[#ee4d2d] text-lg md:text-xl font-medium leading-none">
+              {product.price}
+            </span>
+            {product.discount && (
+               <span className="bg-[#ffeee8] text-[#ee4d2d] text-[10px] px-1 font-bold">-{product.discount}</span>
+            )}
+          </div>
           {product.oldPrice && (
-            <p className="text-gray-400 text-[12px] line-through font-medium">
+            <p className="text-gray-400 text-[11px] line-through">
               {product.oldPrice}
             </p>
           )}
-          <p className="text-[#ff5722] text-[24px] font-black tracking-tighter">
-            {product.price}
-          </p>
         </div>
 
-        {/* Botão Simples e Direto */}
-        <a href={product.link} target="_blank" rel="noopener noreferrer" 
-           className="mt-3 block w-full bg-[#ff5722] text-white text-[11px] font-bold py-2.5 rounded-lg text-center hover:brightness-110 transition-all uppercase">
-          Comprar
-        </a>
+        {/* Avaliação e Vendas */}
+        <div className="flex items-center justify-between mt-1 pt-2 border-t border-gray-50 text-[10px] md:text-[11px]">
+           <div className="flex items-center gap-0.5 text-[#ee4d2d]">
+              <Star size={12} fill="currentColor" />
+              <span className="font-bold text-gray-700">{product.rating || '4.9'}</span>
+           </div>
+           <span className="text-gray-400">{product.sold} vendidos</span>
+        </div>
+
+        {/* Botão de ação rápida (Estilo Mobile Shopee) */}
+        <div className="mt-3 flex gap-1">
+          <button className="flex-1 bg-[#ee4d2d] text-white text-[11px] font-bold py-2 rounded-sm hover:bg-[#d73211] transition-all uppercase flex items-center justify-center gap-1">
+            Ver Detalhes
+          </button>
+        </div>
       </div>
     </div>
   );
