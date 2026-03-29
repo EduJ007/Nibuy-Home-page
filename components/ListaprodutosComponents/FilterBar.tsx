@@ -59,10 +59,22 @@ const FilterBar: React.FC<FilterBarProps> = ({
           {openDropdown === 'cat' && (
             <div className="absolute top-[110%] left-0 w-full bg-white border border-gray-100 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto p-2">
               {categories.map(cat => (
-                <button key={cat} onClick={() => { onSelectCategory(cat); setOpenDropdown(null); }}
-                  className={`w-full text-left px-4 py-2 rounded-lg text-xs font-bold uppercase mb-1 transition-all ${activeCategory === cat ? 'bg-[#ff5722] text-white' : 'hover:bg-gray-50 text-gray-500'}`}>
-                  {cat}
-                </button>
+               <button 
+                key={cat} 
+                onClick={() => { 
+                  // Criamos o link com o parâmetro certo
+                  const params = new URLSearchParams(window.location.search);
+                  params.set('categoria', cat); 
+                  // Navega para a mesma página com o novo parâmetro
+                  window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+                  
+                  onSelectCategory(cat); 
+                  setOpenDropdown(null); 
+                }}
+                className={`w-full text-left px-4 py-2 rounded-lg text-xs font-bold uppercase mb-1 transition-all ${activeCategory === cat ? 'bg-[#ff5722] text-white' : 'hover:bg-gray-50 text-gray-500'}`}
+              >
+                {cat}
+              </button>
               ))}
             </div>
           )}

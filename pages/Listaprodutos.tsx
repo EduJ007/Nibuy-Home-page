@@ -133,6 +133,34 @@ const Listaprodutos: React.FC = () => {
     setIsFilterOpen(false);
   };
 
+  useEffect(() => {
+  const params = new URLSearchParams(location.search);
+  
+  // ... (seus outros filtros: search, categoria, sort, loja)
+
+  // 5. Pegar a página da URL (se não existir, padrão é 1)
+  const pageFromUrl = parseInt(params.get('page') || '1');
+  setCurrentPage(pageFromUrl);
+
+}, [location.search]);
+
+// 2. Atualizar a URL sempre que a página ou filtros mudarem
+useEffect(() => {
+  const params = new URLSearchParams();
+  
+  if (searchTerm) params.set('search', searchTerm);
+  if (activeCategory !== 'Todos') params.set('categoria', activeCategory);
+  if (activeStore !== 'Todas') params.set('loja', activeStore);
+  if (sortBy !== 'default') params.set('sort', sortBy);
+  
+  // Só coloca a página na URL se for maior que 1 (estética)
+  if (currentPage > 1) params.set('page', currentPage.toString());
+  
+  const newRelativePathQuery = window.location.pathname + '?' + params.toString();
+  
+  // Usamos replaceState para não encher o histórico de "voltar" com cada troca de página
+  window.history.replaceState({}, '', newRelativePathQuery);
+}, [activeCategory, activeStore, sortBy, searchTerm, currentPage]);
   return (
     <div className="min-h-screen bg-gray-200">
       {isFilterOpen && (
