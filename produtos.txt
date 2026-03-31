@@ -1,1 +1,1718 @@
-{"event_id":"b7d0ada3-529c-4886-b9d8-daba58aa8f1a"}
+{
+    "polycard_client_model": {
+        "polycard_context": {
+            "contract_version": "1.0.0",
+            "picture_template": "https://http2.mlstatic.com/D_{square}_NP{2x}_{id}-{size}{sanitized_title}.webp",
+            "picture_size_default": "AB",
+            "url_prefix": "https://",
+            "type": "grid-card",
+            "card_size": "large",
+            "checkbox": false,
+            "thousand_separator": ".",
+            "decimal_separator": ",",
+            "styles_default": [],
+            "picture_square_default": "Q",
+            "url_fragments_default": "#polycard_client=affiliates"
+        },
+        "polycards": [
+            {
+                "unique_id": "ffb0a67119d43c146cf",
+                "metadata": {
+                    "id": "MLB4199477415",
+                    "product_id": "MLB55279338",
+                    "user_product_id": "MLBU3412781134",
+                    "url": "www.mercadolivre.com.br/cronmetro-digital-profissional-esportivo-1100s-alarme-hora-data-bussola-portatil-display-lcd-corrida-treino-nataco-futebol-crossfit-preto/p/MLB55279338",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB4199477415&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB4199477415",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "969683-MLA108958611898_032026"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Cronômetro Digital Profissional Esportivo 1/100s Alarme Hora Data Bússola Portátil Display Lcd Corrida Treino Natação Futebol Crossfit Preto",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "20%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 19,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "8d62468219d43c146cf",
+                "metadata": {
+                    "id": "MLB6156860112",
+                    "product_id": "MLB26518510",
+                    "user_product_id": "MLBU3716386087",
+                    "url": "www.mercadolivre.com.br/colher-concha-pegador-sorvete-inox-bola-ejetor-profissional/p/MLB26518510",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB6156860112&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB6156860112",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "759574-MLA99580870860_122025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Colher Concha Pegador Sorvete Inox Bola Ejetor Profissional Prata",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 12%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 19,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "6e43a1d919d43c146cf",
+                "metadata": {
+                    "id": "MLB3815732423",
+                    "user_product_id": "MLBU1462752110",
+                    "url": "www.mercadolivre.com.br/capa-banco-termica-impermeavel-cg-125-150-160-ybr-factor-faz/up/MLBU1462752110",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB3815732423&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB3815732423",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "user_product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "824010-MLB106467853882_022026"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Capa Banco Termica Impermeável Cg 125 150 160 Ybr Factor Faz Preto",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "19%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 23.99,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "636580a619d43c146cf",
+                "metadata": {
+                    "id": "MLB3601421563",
+                    "user_product_id": "MLBU1140630285",
+                    "url": "www.mercadolivre.com.br/10-folhas-ima-manta-imantada-adesivada-a4-03mm/up/MLBU1140630285",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB3601421563&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB3601421563",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "user_product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "967502-MLB40605046985_012020"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "10 Folhas Imã Manta Imantada Adesivada A4 0,3mm Preto Liso",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 12%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 33.17,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "2543dd4c19d43c146cf",
+                "metadata": {
+                    "id": "MLB4268514789",
+                    "user_product_id": "MLBU3512997612",
+                    "url": "www.mercadolivre.com.br/espumas-fone-compativel-jbl-tune600-t450-t450bt-t500bt-t500/up/MLBU3512997612",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB4268514789&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB4268514789",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "user_product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "982027-MLB96512791951_102025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Espumas Fone Compatível Jbl Tune600 T450 T450bt T500bt T500 Preto",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "17%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 33.9,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "a2ab09b419d43c146cf",
+                "metadata": {
+                    "id": "MLB3985746385",
+                    "product_id": "MLB37505403",
+                    "user_product_id": "MLBU3037357184",
+                    "url": "www.mercadolivre.com.br/guardanapo-embalado-restaurante-18x20cm-500-sachs-2fls/p/MLB37505403",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB3985746385&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB3985746385",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "782491-MLA99447994052_112025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Guardanapo Embalado Restaurante 18x20cm 500 Sachês 2fls Branco",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 12%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 38.95,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "1733762b19d43c146cf",
+                "metadata": {
+                    "id": "MLB4330196227",
+                    "user_product_id": "MLBU3636515066",
+                    "url": "www.mercadolivre.com.br/fonte-generica-12v2a-para-camera-ip-de-seguranca-fita-led/up/MLBU3636515066",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB4330196227&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB4330196227",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "user_product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "656679-MLB99163976078_112025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Fonte Genérica 12v-2a Para Câmera Ip De Segurança Fita Led",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "13%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 28.66,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "c0dd1e3a19d43c146cf",
+                "metadata": {
+                    "id": "MLB6204925866",
+                    "product_id": "MLB63955125",
+                    "user_product_id": "MLBU3427853066",
+                    "url": "www.mercadolivre.com.br/absorventes-para-seios-cremer-absorvente-para-seios-90-unidades/p/MLB63955125",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB6204925866&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB6204925866",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "960698-MLA104006654331_012026"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Absorventes Para Seios Cremer Absorvente Para Seios 90 Unidades Branco",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "20%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 50.69,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "4ae2789619d43c146cf",
+                "metadata": {
+                    "id": "MLB5258743876",
+                    "product_id": "MLB42624515",
+                    "user_product_id": "MLBU2959856643",
+                    "url": "www.mercadolivre.com.br/organizador-de-mesa-3-bandejas-p-documento-papel-escritorio/p/MLB42624515",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB5258743876&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB5258743876",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "965745-MLA96151547721_102025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Organizador De Mesa 3 Bandejas P/ Documento Papel Escritório",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 12%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 49.99,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "e447482f19d43c146cf",
+                "metadata": {
+                    "id": "MLB6501273542",
+                    "product_id": "MLB52761735",
+                    "user_product_id": "MLBU3852401574",
+                    "url": "www.mercadolivre.com.br/saco-de-lixo-100lts-reforcado-preto-c-100-unidades/p/MLB52761735",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB6501273542&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB6501273542",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "794749-MLA87791397832_072025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Saco De Lixo 100lts Reforçado- Preto - C/ 100 Unidades",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 12%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 70,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "53cb36c19d43c146cf",
+                "metadata": {
+                    "id": "MLB5576140266",
+                    "product_id": "MLB39021521",
+                    "user_product_id": "MLBU3355793879",
+                    "url": "www.mercadolivre.com.br/mixer-misturador-de-henna-com-5-ponteiras-para-estetica-e-sobrancelhas/p/MLB39021521",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB5576140266&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB5576140266",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "684356-MLU77968961792_082024"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Mixer Misturador De Henna Com 5 Ponteiras Para Estética E Sobrancelhas",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "22%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 19,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "129b89d319d43c146cf",
+                "metadata": {
+                    "id": "MLB3971174627",
+                    "product_id": "MLB45969293",
+                    "user_product_id": "MLBU1711077241",
+                    "url": "www.mercadolivre.com.br/kit-12-ventosas-com-bomba-ventosaterapia-massoterapia-chines/p/MLB45969293",
+                    "url_fragments": "#polycard_client=affiliates&wid=MLB3971174627&sid=affiliates",
+                    "url_params": "?pdp_filters=item_id%3AMLB3971174627",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "product"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "654388-MLA82034084076_022025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "RECOMENDADO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#333333"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Kit 12 Ventosas Com Bomba Ventosaterapia Massoterapia Chines",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 16%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 39.89,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "4b4805ff19d43c146cf",
+                "metadata": {
+                    "id": "MLB3990310103",
+                    "url": "produto.mercadolivre.com.br/MLB-3990310103-escova-pet-autolimpante-rasqueadeira-magica-pelos-ces-gatos-_JM",
+                    "url_fragments": "#polycard_client=affiliates",
+                    "url_params": "?searchVariation=183025095214",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "item"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "732017-MLB90033340793_082025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen",
+                    "variation_id": "183025095214"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Escova Pet Autolimpante Rasqueadeira Magica Pelos Cães Gatos",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 12%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 19.43,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "dfb472c319d43c146cf",
+                "metadata": {
+                    "id": "MLB2610259282",
+                    "url": "produto.mercadolivre.com.br/MLB-2610259282-trocador-americano-comoda-varias-cores-bebe-enxovais-_JM",
+                    "url_fragments": "#polycard_client=affiliates",
+                    "url_params": "?searchVariation=178781135969",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "item"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "809613-MLB49635590385_042022"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen",
+                    "variation_id": "178781135969"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "OFERTA DO DIA",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#3483FA"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Trocador Americano Comoda Várias Cores Bebe Enxovais",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "20%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 79.48,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "d70b5aca19d43c146cf",
+                "metadata": {
+                    "id": "MLB4224395075",
+                    "url": "produto.mercadolivre.com.br/MLB-4224395075-conversor-veicular-adaptador-starlink-mini-12v24v-p-30v-_JM",
+                    "url_fragments": "#polycard_client=affiliates",
+                    "url_params": "?searchVariation=190668466146",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "item"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "920048-MLB106794472000_022026"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen",
+                    "variation_id": "190668466146"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Conversor Veicular Adaptador Starlink Mini 12v/24v P/ 30v",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "9%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 247,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "e62e46ad19d43c146cf",
+                "metadata": {
+                    "id": "MLB4943557752",
+                    "url": "produto.mercadolivre.com.br/MLB-4943557752-tecido-chroma-key-fundo-fotografico-300-x-190-metros-_JM",
+                    "url_fragments": "#polycard_client=affiliates",
+                    "url_params": "?searchVariation=181192792454",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "item"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "606929-MLB91451641391_092025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen",
+                    "variation_id": "181192792454"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Tecido Chroma Key Fundo Fotografico 3,00 X 1,90 Metros",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "21%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 39.9,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "b1c388619d43c146cf",
+                "metadata": {
+                    "id": "MLB2893818869",
+                    "url": "produto.mercadolivre.com.br/MLB-2893818869-conjunto-uniforme-baba-domestica-camareira-copeira-empregada-_JM",
+                    "url_fragments": "#polycard_client=affiliates",
+                    "url_params": "?searchVariation=180713209267",
+                    "vertical": "",
+                    "extra_commission": "true",
+                    "type": "item"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "708709-MLB97927091916_112025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen",
+                    "variation_id": "180713209267"
+                },
+                "components": [
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Conjunto Uniforme Babá Domestica Camareira Copeira Empregada",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "pill": {
+                                "text": "GANHOS {extra}",
+                                "values": [
+                                    {
+                                        "key": "extra",
+                                        "type": "label",
+                                        "label": {
+                                            "text": "EXTRA"
+                                        },
+                                        "styles": {
+                                            "font_weight": "bold",
+                                            "font_style": "italic"
+                                        }
+                                    }
+                                ],
+                                "styles": {
+                                    "color_hex": "#FFFFFF",
+                                    "font_weight": "bold",
+                                    "background_color_hex": "#000000"
+                                }
+                            },
+                            "label": {
+                                "text": "24%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 74.94,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unique_id": "e6ec8e8419d43c146cf",
+                "metadata": {
+                    "id": "MLB4301132368",
+                    "url": "produto.mercadolivre.com.br/MLB-4301132368-cinto-tatico-militar-engate-rapido-fivela-metal-anti-alergic-_JM",
+                    "url_fragments": "#polycard_client=affiliates",
+                    "url_params": "?searchVariation=181499372473",
+                    "vertical": "",
+                    "extra_commission": "false",
+                    "type": "item"
+                },
+                "pictures": {
+                    "scale": "FILL",
+                    "pictures": [
+                        {
+                            "id": "752213-MLB92675810277_092025"
+                        }
+                    ],
+                    "square": "Q",
+                    "alt_text": "Imagen",
+                    "variation_id": "181499372473"
+                },
+                "components": [
+                    {
+                        "type": "highlight",
+                        "id": "highlight",
+                        "highlight": {
+                            "text": "MAIS VENDIDO",
+                            "styles": {
+                                "color_hex": "#FFFFFF",
+                                "background_color_hex": "#FF7733"
+                            }
+                        }
+                    },
+                    {
+                        "type": "title",
+                        "id": "title",
+                        "title": {
+                            "text": "Cinto Tático Militar Engate Rápido Fivela Metal Anti Alérgic",
+                            "long_title": false
+                        }
+                    },
+                    {
+                        "type": "chip",
+                        "id": "affiliates_commission_chip",
+                        "chip": {
+                            "inverted": false,
+                            "inline": true,
+                            "label": {
+                                "text": "GANHOS 16%",
+                                "styles": {
+                                    "font_weight": "semibold"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "price",
+                        "id": "price",
+                        "price": {
+                            "current_price": {
+                                "value": 21.95,
+                                "currency": "BRL",
+                                "decimal_style": "superscript"
+                            }
+                        }
+                    },
+                    {
+                        "type": "action_links",
+                        "id": "action_links",
+                        "action_links": [
+                            {
+                                "id": "share_action",
+                                "type": "button",
+                                "hierarchy": "quiet",
+                                "size": "medium",
+                                "text": "Compartilhar"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "contract_version": "1.0.0"
+    },
+    "container_url": "https://lista.mercadolivre.com.br/_Container_aff-hub-ipv-score-domains-mlb",
+    "filters": [
+        {
+            "id": "extra_commission",
+            "name": "Comisión extra"
+        },
+        {
+            "id": "best_seller",
+            "name": "Más vendidos"
+        }
+    ],
+    "sort": {
+        "id": "relevance",
+        "name": "Mais relevantes"
+    },
+    "available_sorts": [
+        {
+            "id": "lowest_price",
+            "name": "Menor preço"
+        },
+        {
+            "id": "highest_price",
+            "name": "Maior preço"
+        }
+    ]
+}

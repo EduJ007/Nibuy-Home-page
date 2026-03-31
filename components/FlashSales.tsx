@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { productsData } from '../products';
+import { Zap } from 'lucide-react';
 
 const FlashSales: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
   const [paginatedProducts, setPaginatedProducts] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
   const navigate = useNavigate();
   
-  const ITEMS_PER_PAGE = 6;
-  const TOTAL_PAGES_LIMIT = 3; 
+  const ITEMS_TO_SHOW = 6;
 
   useEffect(() => {
     const updateTimerAndProducts = () => {
@@ -34,67 +33,69 @@ const FlashSales: React.FC = () => {
       const allFlashSales = productsData.filter(p => p.isFlashSale);
       const shuffled = [...allFlashSales]
         .sort((a, b) => seededRandom(Number(a.id) + dateSeed) - seededRandom(Number(b.id) + dateSeed))
-        .slice(0, ITEMS_PER_PAGE * TOTAL_PAGES_LIMIT);
+        .slice(0, ITEMS_TO_SHOW);
 
-      const start = currentPage * ITEMS_PER_PAGE;
-      setPaginatedProducts(shuffled.slice(start, start + ITEMS_PER_PAGE));
+      setPaginatedProducts(shuffled);
     };
 
     updateTimerAndProducts();
     const interval = setInterval(updateTimerAndProducts, 1000);
     return () => clearInterval(interval);
-  }, [currentPage]);
+  }, []);
 
   const format = (n: number) => n.toString().padStart(2, '0');
 
   return (
-    <section className="bg-white mt-20 md:mt-20 w-[95%] md:w-[95%] max-w-[1600px] mx-auto md:rounded-lg shadow-sm overflow-hidden border-b md:border border-gray-200">
+    <section className="bg-white mt-10 w-full max-w-[1600px] mx-auto md:rounded-2xl shadow-xl border border-orange-100 overflow-hidden">
       
-      {/* HEADER */}
-      <div className="flex items-center justify-between px-4 py-3 md:py-5 bg-white border-b border-gray-100">
-        <div className="flex items-center gap-3 md:gap-6">
-          <h2 className="text-[#ff5722] text-lg md:text-2xl font-black uppercase italic tracking-tighter">
-            Oferta <span className="text-[#ff5722]">Relâmpago</span>
+      {/* HEADER DINÂMICO */}
+      <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 bg-gradient-to-r from-[#ff5722] to-[#ff8a50]">
+        <div className="flex items-center gap-4 mb-3 md:mb-0">
+          <div className="bg-white p-2 rounded-lg text-[#ff5722] animate-pulse">
+            <Zap size={24} fill="currentColor" />
+          </div>
+          <h2 className="text-white text-xl md:text-2xl font-black uppercase italic tracking-tighter flex items-center gap-2">
+            Ofertas <span className="bg-white text-[#ff5722] px-2 rounded">Relâmpago</span>
           </h2>
 
-          <div className="flex gap-1 items-center">
-            <span className="bg-black text-white px-1.5 py-0.5 rounded font-bold text-sm">{format(timeLeft.h)}</span>
-            <span className="font-bold text-black">:</span>
-            <span className="bg-black text-white px-1.5 py-0.5 rounded font-bold text-sm">{format(timeLeft.m)}</span>
-            <span className="font-bold text-black">:</span>
-            <span className="bg-black text-white px-1.5 py-0.5 rounded font-bold text-sm">{format(timeLeft.s)}</span>
+          <div className="flex gap-2 items-center ml-2">
+            <span className="bg-black/20 text-white px-2 py-1 rounded-md font-mono font-bold text-lg backdrop-blur-sm border border-white/20">{format(timeLeft.h)}</span>
+            <span className="font-bold text-white animate-bounce">:</span>
+            <span className="bg-black/20 text-white px-2 py-1 rounded-md font-mono font-bold text-lg backdrop-blur-sm border border-white/20">{format(timeLeft.m)}</span>
+            <span className="font-bold text-white animate-bounce">:</span>
+            <span className="bg-black/20 text-white px-2 py-1 rounded-md font-mono font-bold text-lg backdrop-blur-sm border border-white/20">{format(timeLeft.s)}</span>
           </div>
         </div>
 
-        <button onClick={() => navigate("/Lista-produtos?sort=flash")} className="text-[#ff5722] font-medium text-xs md:text-[16px] flex items-center">
-          Ver Tudo <span className="ml-1 text-lg">›</span>
+        <button onClick={() => navigate("/Lista-produtos?sort=flash")} className="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-5 rounded-full border border-white/30 transition-all text-sm uppercase tracking-widest">
+          Ver Todas as Ofertas
         </button>
       </div>
 
-      {/* ÁREA DOS PRODUTOS - Scroll horizontal no mobile */}
-      <div className="relative px-2 md:px-4 py-4">
-        <div className="flex overflow-x-auto md:grid md:grid-cols-6 gap-2 md:gap-3 no-scrollbar snap-x">
+      {/* ÁREA DOS PRODUTOS */}
+      <div className="px-4 py-6 bg-orange-50/30">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-6 gap-4 no-scrollbar snap-x">
           {paginatedProducts.map((p) => (
             <div
               key={p.id}
               onClick={() => { navigate(`/produto/${p.externalId}`); window.scrollTo(0,0); }} 
-              className="min-w-[160px] md:min-w-0 flex flex-col bg-white rounded-sm p-1 border border-transparent hover:border-[#ff5722] transition-all cursor-pointer group snap-start"
+              className="min-w-[180px] md:min-w-0 flex flex-col bg-white rounded-xl p-2 shadow-sm border border-transparent hover:border-[#ff5722] transition-all cursor-pointer group snap-start relative overflow-hidden"
             >
-              <div className="relative aspect-square mb-2 bg-gray-50 overflow-hidden">
-                <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
-                <div className="absolute top-0 right-0 bg-[#ffe910]/90 text-[#ff5722] text-[12px] font-black px-1.5 py-0.5 rounded-bl-md">
-                  -{p.discount || '20%'}
+              <div className="relative aspect-square mb-3 bg-white rounded-lg overflow-hidden border border-gray-50">
+                <img src={p.img} alt={p.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute top-0 right-0 bg-[#ffe910] text-[#ff5722] text-[12px] font-black px-2 py-1 rounded-bl-xl shadow-md">
+                  {p.discount || '20% OFF'}
                 </div>
               </div>
 
-              <div className="flex flex-col items-center mt-auto">
-                <span className="text-[#ff5722] text-lg font-bold leading-none mb-2">{p.price}</span>
+              <div className="flex flex-col items-center mt-auto px-1">
+                <span className="text-[#ff5722] text-2xl font-black italic tracking-tighter mb-3">{p.price}</span>
                 
-                {/* BARRA DE VENDIDOS */}
-                <div className="w-full bg-[#ff5722] h-5 rounded-full relative overflow-hidden">
-                  <div className="absolute left-0 top-0 h-full bg-[#ee4d2d] w-[70%] rounded-full"></div>
-                  <span className="absolute inset-0 text-[12px] font-bold text-white flex items-center justify-center uppercase ">
-                    {p.sold} Vendidos
+                {/* BARRA DE VENDIDOS ESTILO SHOPEE */}
+                <div className="w-full bg-[#ffbdad] h-5 rounded-full relative overflow-hidden border border-[#ff5722]/20">
+                  <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#ff5722] to-[#ee4d2d] w-[75%] rounded-full shadow-[inset_-2px_0_4px_rgba(0,0,0,0.1)]"></div>
+                  <span className="absolute inset-0 text-[10px] font-black text-white flex items-center justify-center uppercase tracking-tighter">
+                    {p.sold || 'QUASE ESGOTADO'} Vendidos
                   </span>
                 </div>
               </div>

@@ -76,8 +76,15 @@ const Listaprodutos: React.FC = () => {
     }
 
     if (activeStore && activeStore !== 'Todas') {
-      result = result.filter(p => p.store === activeStore);
-    }
+  // Convertemos o nome da loja (ex: 'Mercado Livre') para o formato da plataforma (ex: 'mercadolivre')
+  const storeToPlatform = activeStore.toLowerCase().replace(/\s/g, '');
+  
+  result = result.filter(p => {
+    // Verificamos tanto 'platform' quanto 'store' caso existam
+    const productPlatform = (p.platform || p.store || '').toLowerCase().replace(/\s/g, '');
+    return productPlatform === storeToPlatform;
+  });
+}
 
     if (maxPrice && parseFloat(maxPrice) > 0) {
       result = result.filter(p => parsePrice(p.price) <= parseFloat(maxPrice));

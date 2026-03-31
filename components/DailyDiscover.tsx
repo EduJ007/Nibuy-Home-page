@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Star } from 'lucide-react';
+import { Star, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { productsData } from '../products';
 
@@ -25,16 +25,17 @@ const DailyDiscover: React.FC = () => {
   }, []);
 
   return (
-    <section className="mt-20 md:mt-16 px-2 md:px-1 max-w-[1630px] mx-auto">
-      {/* HEADER NIBUY */}
-      <div className="bg-white border-b-4 border-[#ff5722] py-4 mb-6 shadow-sm  top-[70px] md:top-[120px] z-30">
-        <h2 className="text-center text-[#ff5722] uppercase font-black text-lg md:text-xl tracking-widest">
-          Descobertas do Dia
+    <section className="mt-20  px-4 max-w-[1625px] mx-auto">
+      {/* HEADER ESTILIZADO */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="h-8 w-1.5 bg-[#ff5722] rounded-full"></div>
+        <h2 className="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-tighter">
+          Descobertas <span className="text-[#ff5722]">do Dia</span>
         </h2>
       </div>
 
       {/* GRID */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         {discoverProducts.map((item) => (
           <div 
             key={item.id} 
@@ -42,56 +43,55 @@ const DailyDiscover: React.FC = () => {
               navigate(`/produto/${item.externalId}`);
               window.scrollTo(0, 0);
             }}
-            className="bg-white rounded-sm shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col border border-transparent hover:border-[#ff5722] relative"
+            className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col border border-gray-100 hover:border-[#ff5722]/30 relative overflow-hidden hover:-translate-y-1"
           >
-            {/* SELO DE DESCONTO AMARELO (IGUAL À FOTO) */}
+            {/* SELO DE DESCONTO */}
             {item.discount && (
-              <div className="absolute top-0 right-0 z-20 bg-[#ffe910] text-[#ff5722] text-[10px] md:text-[12px] font-bold px-1.5 py-1 flex flex-col items-center leading-tight">
-                <span>{item.discount}</span>
-                <span className="text-[8px] md:text-[9px]">OFF</span>
+              <div className="absolute top-0 right-0 z-20 bg-[#ffe910] text-[#ff5722] text-[11px] font-black px-2 py-1 rounded-bl-xl shadow-sm">
+                {item.discount} OFF
               </div>
             )}
 
-            {/* IMAGEM COM PADDING PARA NÃO COLAR NA BORDA */}
-            <div className="relative aspect-square overflow-hidden bg-white ">
+            {/* IMAGEM */}
+            <div className="relative aspect-square overflow-hidden bg-gray-50 p-2">
               <img 
                 src={item.img} 
                 alt={item.name} 
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
               />
             </div>
             
             {/* CONTEÚDO */}
-            <div className="p-2 md:p-3 flex flex-col flex-1">
-              {/* TÍTULO: Aumentei para line-clamp-2 e altura fixa para alinhar tudo */}
-              <h3 className="text-[12px] md:text-[13px] text-gray-700 line-clamp-2 mb-2 h-8 md:h-9 leading-tight group-hover:text-[#ff5722]">
+            <div className="p-3 flex flex-col flex-1">
+              <h3 className="text-[13px] text-gray-600 line-clamp-2 mb-2 h-10 leading-tight font-medium group-hover:text-[#ff5722]">
                 {item.name}
               </h3>
               
               <div className="mt-auto">
-                {/* PREÇO ANTIGO: Cinza e riscado */}
-                <div className="h-4 flex items-center mb-0.5">
+                <div className="h-4">
                   {item.oldPrice && (
-                    <span className="text-[11px] md:text-[12px] text-gray-400 line-through">
+                    <span className="text-[11px] text-gray-400 line-through">
                       {item.oldPrice}
                     </span>
                   )}
                 </div>
 
-                {/* PREÇO ATUAL: Laranja Nibuy, Bold e Italic como na foto */}
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-[18px] md:text-[22px] text-[#ff5722] font-bold italic tracking-tighter leading-none">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xl text-[#ff5722] font-black italic tracking-tighter">
                     {item.price}
                   </span>
+                  <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ShoppingCart size={16} />
+                  </div>
                 </div>
 
-                {/* RATING E VENDIDOS: Estrela amarela e texto discreto */}
-                <div className="flex items-center justify-between text-[11px] md:text-[12px] text-gray-500 pt-1 border-t border-gray-50">
+                {/* FOOTER DO CARD */}
+                <div className="flex items-center justify-between text-[11px] pt-2 border-t border-gray-50">
                    <div className="flex items-center gap-1">
-                     <Star size={12} fill="#ffcc00" className="text-[#ffcc00]" />
-                     <span className="font-bold text-gray-800">{item.rating || '4.8'}</span>
+                     <Star size={10} fill="#ffcc00" className="text-[#ffcc00]" />
+                     <span className="font-bold text-gray-700">{item.rating || '4.8'}</span>
                    </div>
-                   <span className="text-gray-400">{item.sold || '1mil+'} Vendidos</span>
+                   <span className="text-gray-400 font-medium">{item.sold || '1mil+'} vendidos</span>
                 </div>
               </div>
             </div>
@@ -102,9 +102,10 @@ const DailyDiscover: React.FC = () => {
       <div className="flex justify-center mt-12 pb-10">
         <button
           onClick={() => navigate('/Lista-produtos')}
-          className="w-full md:w-auto md:px-24 py-3 bg-white border border-gray-200 text-gray-500 font-bold text-sm uppercase hover:border-[#ff5722] hover:text-[#ff5722] transition-all rounded-sm shadow-sm active:scale-95"
+          className="group flex items-center gap-3 px-12 py-4 bg-[#ff5722] text-white font-black text-sm uppercase rounded-full shadow-lg hover:shadow-[#ff5722]/40 transition-all hover:scale-105 active:scale-95"
         >
-          Veja Mais
+          Explorar Mais Produtos
+          <span className="group-hover:translate-x-1 transition-transform">→</span>
         </button>
       </div>
     </section>

@@ -4,142 +4,137 @@ import path from "path";
 const PRODUCTS_FILE = path.resolve("./products.ts");
 const INPUT_FILE = path.resolve("./produtos.txt");
 
-// --- FUNÇÕES DE APOIO (MANTIDAS) ---
-function toReal(value) {
-  if (!value) return "R$ 0,00";
-  return "R$ " + (Number(value) / 100000).toFixed(2).replace(".", ",");
-}
+// --- FUNÇÕES DE APOIO ---
 
-function formatNumber(num) {
-  if (!num) return "0";
-  if (num >= 1000) return (num / 1000).toFixed(1).replace('.', ',') + 'mil';
-  return num.toString();
+function toReal(value) {
+  if (value === undefined || value === null) return "R$ 0,00";
+  // Se for Shopee (valor gigante em centavos) divide, se for ML usa normal
+  const num = value > 10000 ? Number(value) / 100000 : Number(value);
+  return "R$ " + num.toFixed(2).replace(".", ",");
 }
 
 function detectCategory(name) {
   const n = name.toLowerCase();
   const categories = [
-    { cat: 'Tecnologia & Eletrônicos', keywords: /(celular|smartphone|iphone|android|xiaomi|fone|headset|teclado|mouse|gamer|notebook|laptop|pc|tablet|monitor|ssd|hd|memória|ram|placa|cpu|gpu|carregador|cabo|usb|adaptador|projetor|caixa de som|bluetooth|informática|smart|watch|led|ring light|tripé|microfone|webcam|roteador|wifi)/ },
-    { cat: 'Moda & Beleza', keywords: /(camisa|blusa|calça|vestido|roupa|jaqueta|tênis|sapato|sandália|maquiagem|batom|perfume|creme|skincare|cabelo|shampoo|esmaltes|base|máscara|cílios|biquíni|lingerie|meia|short|bermuda|moletom|tricô|unha|pincel|corretivo|protetor solar)/ },
-    { cat: 'Casa & Decoração', keywords: /(decoração|luminária|cama|banho|cortina|tapete|espelho|quadro|almofada|vaso|vela|organizador|cabide|piscina|jardim|lençol|fronha|toalha|difusor|estátua|prateleira)/ },
-    { cat: 'Móveis', keywords: /(sofá|mesa|cadeira|estante|armário|guarda-roupa|escrivaninha|comoda|rack|poltrona|banqueta|móvel|balcão|cabeceira|puf|escritório)/ },
-    { cat: 'Games & Hobby', keywords: /(game|jogo|ps5|ps4|ps3|xbox|nintendo|switch|controle|joystick|card|colecionável|action figure|tabuleiro|quebra-cabeça|drone|retro|fliperama|manche|lego|pokémon|funko)/ },
-    { cat: 'Bebês & Infantil', keywords: /(bebê|infantil|criança|brinquedo|fralda|mamadeira|carrinho|chupeta|boneca|body|kids|maternidade|mordedor|andador|pelúcia|slime)/ },
-    { cat: 'Automotivo', keywords: /(carro|moto|veículo|pneu|capacete|limpador|som automotivo|led automotivo|óleo|peças|acessório|retrovisor|chaveiro|multimídia|capa de banco)/ },
-    { cat: 'Esporte & Lazer', keywords: /(esporte|academia|fitness|musculação|bicicleta|bike|bola|pesca|camping|trilha|yoga|crossfit|suplemento|garrafa|whey|creatina|luva|skate|patins)/ },
-    { cat: 'Pets', keywords: /(pet|cachorro|gato|ração|coleira|aquário|brinquedo pet|caixa de areia|shampoo pet|guia|peitoral|comedouro|bebedouro|petisco)/ },
-    { cat: 'Eletrodomésticos', keywords: /(geladeira|fogão|micro-ondas|máquina de lavar|air fryer|liquidificador|batedeira|aspirador|ferro|ventilador|ar condicionado|mixer|cafeteira|torredeira|umidificador)/ },
-    { cat: 'Papelaria & Escritório', keywords: /(papelaria|caderno|caneta|lápis|estojo|mochila|impressora|tinta|papel|agenda|calculadora|post-it|marca texto|tesoura|grampeador)/ },
-    { cat: 'Ferramentas & Construção', keywords: /(ferramenta|furadeira|parafusadeira|martelo|chave|trena|escada|pintura|tinta|reforma|cement|torneira|chuveiro|disjuntor|alicate|serra)/ },
-    { cat: 'Segurança & Monitoramento', keywords: /(câmera|segurança|monitoramento|alarme|sensor|fechadura|interfone|vigilância|dvr|ip cam|babá eletrônica)/ },
-    { cat: 'Relógios & Acessórios', keywords: /(relógio|smartwatch|pulseira|óculos|sol|carteira|cinto|boné|chapéu|touca|luva|cachecol)/ },
-    { cat: 'Joias & Bijuterias', keywords: /(joia|bijuteria|anel|colar|brinco|corrente|pingente|prata|ouro|semijoia|tornozeleira|aliança)/ },
-    { cat: 'Livros & Education', keywords: /(livro|e-book|curso|apostila|didático|literatura|leitura|kindle|mangá|hq|quadrinhos|dicionário)/ },
-    { cat: 'Viagem & Malas', keywords: /(viagem|mala|mochila de viagem|frasqueira|necessaire|passaporte|cadeado|etiqueta de mala|almofada de pescoço)/ }
+    { cat: 'Smartphone & Tablets', keywords: /(iphone|celular|smartphone|android|xiaomi|samsung|motorola|realme|tablet|ipad|kindle|redmi|poco)/ },
+    { cat: 'Informática & PC', keywords: /(notebook|laptop|ssd|memória|ram|placa|cpu|gpu|teclado|mouse|monitor|roteador|wifi|impressora|nobreak|hub|hd externo|cooler|gabinete)/ },
+    { cat: 'Áudio & Vídeo', keywords: /(fone|headset|bluetooth|caixa de som|alexa|echo|projetor|smart tv|televisão|microfone|webcam|soundbar|jbl)/ },
+    { cat: 'Games & Geek', keywords: /(ps5|xbox|nintendo|switch|gamer|jogo|controle|joystick|card|pokémon|funko|geek|action figure|lego|console)/ },
+    { cat: 'Beleza & Skincare', keywords: /(maquiagem|batom|perfume|creme|skincare|shampoo|cabelo|esmaltes|base|corretivo|protetor solar|gloss|hidratante|sérum|secador|chapinha)/ },
+    { cat: 'Moda Masculina', keywords: /(camisa|camiseta|calça|bermuda|cueca|short|jaqueta|moletom|sapato|tênis|boné|sunga|carteira|cinto)/ },
+    { cat: 'Moda Feminina', keywords: /(vestido|blusa|saia|lingerie|biquíni|body|tricô|salto|sandália|bolsa|joia|brinco|colar|anel)/ },
+    { cat: 'Eletrodomésticos', keywords: /(geladeira|fogão|máquina de lavar|climatizador|ar condicionado|micro-ondas|freezer|adega|lava louça)/ },
+    { cat: 'Eletroportáteis', keywords: /(air fryer|fritadeira|mixer|liquidificador|batedeira|cafeteira|aspirador|ferro de passar|sanduicheira|panela elétrica)/ },
+    { cat: 'Cozinha & Mesa', keywords: /(faca|tábua|pote|garrafa|termos|copo|stanley|talher|prato|assadeira|escorredor|abridor|balança digital|pano de prato)/ },
+    { cat: 'Casa & Decoração', keywords: /(luminária|led|tapete|cortina|almofada|espelho|quadro|vaso|vela|difusor|organizador|cabide|prateleira|estátua|parede)/ },
+    { cat: 'Cama, Mesa & Banho', keywords: /(lençol|fronha|cobertor|edredom|toalha|travesseiro|manta|colchão)/ },
+    { cat: 'Saúde & Cuidados', keywords: /(suplemento|whey|creatina|vitamina|termômetro|medidor|massageador|curativo|irrigador|escova elétrica|dental|lixa pés|maca peruana)/ },
+    { cat: 'Ferramentas & Obra', keywords: /(furadeira|parafusadeira|martelo|trena|chave|alicate|pintura|tinta|torneira|chuveiro|disjuntor|cloro|serra|escada|genco)/ },
+    { cat: 'Automotivo & Moto', keywords: /(pneu|capacete|óleo|carro|moto|retrovisor|multimídia|limpador|som automotivo|peças|partida|arranque|titan|bros|fan)/ },
+    { cat: 'Esporte & Lazer', keywords: /(academia|musculação|bicicleta|bike|bola|yoga|crossfit|luva|skate|patins|lanterna|canivete|camping)/ },
+    { cat: 'Bebês & Brinquedos', keywords: /(bebê|infantil|brinquedo|fralda|mamadeira|carrinho|chupeta|boneca|pelúcia|escolar|mochila|patinete)/ },
+    { cat: 'Pets', keywords: /(pet|cachorro|gato|ração|coleira|aquário|areia|shampoo pet|bebedouro|comedouro|petisco)/ },
+    { cat: 'Papelaria & Envio', keywords: /(papel|caneta|caderno|estojo|organizador|envelope|segurança|embalagem|correios|etiqueta|fita)/ },
+    { cat: 'Acessórios & Outros', keywords: /(relógio|smartwatch|óculos|sol|pulseira|isqueiro|pilha|carregador portátil|power bank)/ }
   ];
   for (const item of categories) {
     if (item.keywords.test(n)) return item.cat;
   }
-  return "Outros";
+  return "Diversos";
 }
 
+// --- LÓGICA PRINCIPAL ---
+
 try {
-  // 1. CARREGAR PRODUTOS EXISTENTES
+  // 1. Carregar produtos que já existem
   let existingProducts = [];
   if (fs.existsSync(PRODUCTS_FILE)) {
-    const fileContent = fs.readFileSync(PRODUCTS_FILE, "utf8");
-    // Extrai o JSON de dentro da string do arquivo .ts
-    const jsonMatch = fileContent.match(/export const productsData: Product\[\] = (\[[\s\S]*\]);/);
-    if (jsonMatch && jsonMatch[1]) {
-      existingProducts = JSON.parse(jsonMatch[1]);
-    }
+    const content = fs.readFileSync(PRODUCTS_FILE, "utf8");
+    const match = content.match(/export const productsData: Product\[\] = (\[[\s\S]*\]);/);
+    if (match) existingProducts = JSON.parse(match[1]);
   }
 
-  // 2. CRIAR SET DE IDs PARA NÃO REPETIR
   const seenIds = new Set(existingProducts.map(p => p.externalId));
-  const finalProducts = [...existingProducts];
+  const newItems = [];
 
-  // 3. PROCESSAR NOVOS PRODUTOS
+  // 2. Ler o arquivo de entrada
+  if (!fs.existsSync(INPUT_FILE)) {
+    console.error("❌ Arquivo produtos.txt não encontrado!");
+    process.exit(1);
+  }
   const rawData = fs.readFileSync(INPUT_FILE, "utf8");
   const jsonData = JSON.parse(rawData);
-  const items = jsonData.data.list;
 
-  let newCount = 0;
+  // 3. Identificar se é ML ou Shopee e processar
+  
+  // --- CASO MERCADO LIVRE ---
+  if (jsonData.polycard_client_model) {
+    const cards = jsonData.polycard_client_model.polycards || [];
+    cards.forEach(card => {
+      const meta = card.metadata;
+      if (seenIds.has(meta.id)) return;
 
-  for (const item of items) {
-    const p = item.batch_item_for_item_card_full;
-    if (!p) continue;
+      const title = card.components.find(c => c.type === "title")?.title?.text || "Produto ML";
+      const priceVal = card.components.find(c => c.type === "price")?.price?.current_price?.value;
+      const discountText = card.components.find(c => c.type === "chip")?.chip?.label?.text || "";
 
-    const externalId = String(item.item_id || p.itemid || "");
+      newItems.push({
+        id: Math.floor(Math.random() * 10000000),
+        externalId: meta.id,
+        platform: "mercadolivre",
+        name: title,
+        category: detectCategory(title),
+        link: meta.url.startsWith('http') ? meta.url : `https://${meta.url}`,
+        price: toReal(priceVal),
+        discount: discountText,
+        img: `https://http2.mlstatic.com/D_Q_NP_${card.pictures.pictures[0].id}-F.webp`,
+        gallery: [],
+        sold: "Destaque",
+        rating: 4.9,
+        isFlashSale: false,
+        freeShipping: true,
+        description: "Selecionado do Mercado Livre."
+      });
+      seenIds.add(meta.id);
+    });
+  } 
+  
+  // --- CASO SHOPEE ---
+  else if (jsonData.data?.list) {
+    jsonData.data.list.forEach(item => {
+      const p = item.batch_item_for_item_card_full;
+      if (!p) return;
+      const extId = String(item.item_id || p.itemid);
+      if (seenIds.has(extId)) return;
 
-    // Se o ID já existe no arquivo (ou foi visto agora), pula
-    if (seenIds.has(externalId)) continue;
-    
-    seenIds.add(externalId);
-    newCount++;
-
-    const mainImg = `https://down-br.img.susercontent.com/file/${p.image}`;
-    const rawImages = Array.from(new Set(p.images || []));
-    const gallery = rawImages
-        .map(img => `https://down-br.img.susercontent.com/file/${img}`)
-        .filter(url => url !== mainImg);
-
-    const filteredVariations = (p.tier_variations || [])
-      .filter(v => v.options && v.options.length > 0)
-      .map(v => ({
-        name: v.name,
-        options: v.options.slice(0, 6),
-        images: v.images ? v.images.map(img => `https://down-br.img.susercontent.com/file/${img}`) : []
-      }));
-
-    finalProducts.push({
-      id: Math.floor(Math.random() * 10000000),
-      externalId: externalId,
-      shopId: String(item.shopid || p.shopid || ""),
-      shopName: p.shop_name || "Loja Oficial",
-      shopImg: p.shop_avatar ? `https://down-br.img.susercontent.com/file/${p.shop_avatar}` : null,
-      shopRating: Number(p.shop_rating?.toFixed(1) || 0),
-      name: p.name,
-      category: detectCategory(p.name),
-      link: item.long_link || item.product_link || "",
-      price: toReal(p.price),
-      oldPrice: p.price_before_discount ? toReal(p.price_before_discount) : undefined,
-      discount: p.discount || "",
-      img: mainImg,
-      gallery: gallery,
-      sold: p.historical_sold_text || "0 vendidos",
-      historicalSold: p.historical_sold || 0,
-      likedCount: p.liked_count || 0,
-      rating: Number(p.item_rating?.rating_star?.toFixed(1) || 0),
-      ratingCount: formatNumber(p.item_rating?.rating_count?.[0] || 0),
-      ratingDetailed: p.item_rating?.rating_count || [],
-      isFlashSale: p.is_on_flash_sale || false,
-      freeShipping: p.show_free_shipping || item.is_free_shipping || false,
-      isOfficialShop: p.is_official_shop || false,
-      isVerified: p.shopee_verified || false,
-      location: p.shop_location || "Brasil",
-      stock: p.stock || 0,
-      brand: "Shopee", 
-      description: "Confira todos os detalhes deste produto diretamente na loja oficial clicando em Comprar Agora.",
-      specs: (p.attributes || []).map(attr => ({ label: attr.name, value: attr.value })),
-      variations: filteredVariations.length > 0 ? filteredVariations : null, 
-      voucher: p.voucher_info ? { 
-        code: p.voucher_info.voucher_code, 
-        label: p.voucher_info.label,
-        discount: p.voucher_info.discount_value 
-      } : null,
-      bundle: p.bundle_deal_info ? { label: p.bundle_deal_info.bundle_deal_label } : null
+      newItems.push({
+        id: Math.floor(Math.random() * 10000000),
+        externalId: extId,
+        platform: "shopee",
+        name: p.name,
+        category: detectCategory(p.name),
+        link: item.long_link || item.product_link,
+        price: toReal(p.price),
+        oldPrice: p.price_before_discount ? toReal(p.price_before_discount) : undefined,
+        discount: p.discount || "",
+        img: `https://down-br.img.susercontent.com/file/${p.image}`,
+        gallery: (p.images || []).map(img => `https://down-br.img.susercontent.com/file/${img}`),
+        sold: p.historical_sold_text || "0 vendidos",
+        rating: Number(p.item_rating?.rating_star?.toFixed(1) || 0),
+        isFlashSale: p.is_on_flash_sale || false,
+        freeShipping: p.show_free_shipping || false,
+        description: "Confira na Shopee."
+      });
+      seenIds.add(extId);
     });
   }
 
-  // 4. SALVAR TUDO JUNTO
+  // 4. Salvar tudo de volta no products.ts
+  const finalArray = [...existingProducts, ...newItems];
   const output = `export interface Product {
   id: number;
   externalId: string;
-  shopId: string;
-  shopName: string;
-  shopImg: string | null;
-  shopRating: number;
+  platform: 'shopee' | 'mercadolivre';
   name: string;
   category: string;
   link: string;
@@ -149,29 +144,17 @@ try {
   img: string;
   gallery: string[];
   sold: string;
-  historicalSold: number;
-  likedCount: number;
   rating: number;
-  ratingCount: string;
-  ratingDetailed: number[];
   isFlashSale: boolean;
   freeShipping: boolean;
-  isOfficialShop: boolean;
-  isVerified: boolean;
-  location: string;
-  stock: number;
-  brand: string;
   description: string;
-  specs: { label: string, value: string }[];
-  variations: { name: string; options: string[]; images?: string[] }[] | null;
-  voucher?: { code?: string; label: string; discount?: any } | null;
-  bundle?: { label: string } | null;
 }
-export const productsData: Product[] = ${JSON.stringify(finalProducts, null, 2)};`;
+
+export const productsData: Product[] = ${JSON.stringify(finalArray, null, 2)};`;
 
   fs.writeFileSync(PRODUCTS_FILE, output, "utf8");
-  console.log(`✅ Finalizado! Total: ${finalProducts.length} produtos (${newCount} novos adicionados).`);
+  console.log(`🚀 Sucesso! Adicionados: ${newItems.length} | Total na base: ${finalArray.length}`);
 
 } catch (e) {
-  console.error("❌ Erro:", e);
+  console.error("❌ Erro ao processar:", e.message);
 }
