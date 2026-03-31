@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
               <img 
                 src={currentProduct.img} 
                 alt={currentProduct.name} 
-                className="relative z-10 max-h-[240px] md:max-h-[320px] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-in zoom-in-75 duration-500"
+                className="relative z-10 max-h-[240px] md:max-h-[320px] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-in zoom-in-75 duration-500 rounded-xl"
               />
             </div>
 
