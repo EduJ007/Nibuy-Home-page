@@ -1,1718 +1,1396 @@
 {
-    "polycard_client_model": {
-        "polycard_context": {
-            "contract_version": "1.0.0",
-            "picture_template": "https://http2.mlstatic.com/D_{square}_NP{2x}_{id}-{size}{sanitized_title}.webp",
-            "picture_size_default": "AB",
-            "url_prefix": "https://",
-            "type": "grid-card",
-            "card_size": "large",
-            "checkbox": false,
-            "thousand_separator": ".",
-            "decimal_separator": ",",
-            "styles_default": [],
-            "picture_square_default": "Q",
-            "url_fragments_default": "#polycard_client=affiliates"
-        },
-        "polycards": [
-            {
-                "unique_id": "ffb0a67119d43c146cf",
-                "metadata": {
-                    "id": "MLB4199477415",
-                    "product_id": "MLB55279338",
-                    "user_product_id": "MLBU3412781134",
-                    "url": "www.mercadolivre.com.br/cronmetro-digital-profissional-esportivo-1100s-alarme-hora-data-bussola-portatil-display-lcd-corrida-treino-nataco-futebol-crossfit-preto/p/MLB55279338",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB4199477415&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB4199477415",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "969683-MLA108958611898_032026"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Cronômetro Digital Profissional Esportivo 1/100s Alarme Hora Data Bússola Portátil Display Lcd Corrida Treino Natação Futebol Crossfit Preto",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
+    "success": true,
+    "error_code": 1000000,
+    "result": {
+        "result": {
+            "kp_ds_item_list": [
+                {
+                    "ds_item_type": "GOODS",
+                    "common_rec_goods": {
+                        "goods_id": 606476911371035,
+                        "mall_id": 634418225370654,
+                        "title": "Mesa de Puzzle Rotativa de 500 peças | Inclui 4 Gavetas Cobertas, Tabuleiro de Puzzle Inclinável 2 em 1, Estrutura Rotativa e Ajustável, Design Antiderrapante, Camada de Armazenamento de Feltro Incorporada, Material de Poliéster Cinzento",
+                        "thumb_url": "https://img.kwcdn.com/product/fancy/8930a731-680d-448d-b8cf-0d817126b9f0.jpg",
+                        "sales_tip": "236 vendidos",
+                        "sales_tip_text": [
+                            "236",
+                            "vendidos"
+                        ],
+                        "link_url": "goods.html?_bg_fs=1&goods_id=606476911371035&top_gallery_url=https%3A%2F%2Fimg.kwcdn.com%2Fproduct%2Ffancy%2F8930a731-680d-448d-b8cf-0d817126b9f0.jpg&_web_cover=thumb_url&pic_h=800&pic_w=800&spec_gallery_id=598551&_oak_page_source=613",
+                        "page_alt": "mesa de puzzle   de 500 peças |   4 gavetas cobertas, tabuleiro de puzzle inclinável 2  , estrutura   e ajustável, design antiderrapante,   de armazenamento de   incorporada, material de poliéster  ",
+                        "seo_link_url": "/br/mesa-de-puzzle--de-500-pe%C3%A7as--4-gavetas-cobertas-tabuleiro-de-puzzle-inclin%C3%A1vel-2--estrutura--e-ajust%C3%A1vel-design-antiderrapante--de-armazenamento-de--incorporada-material-de-poli%C3%A9ster--g-606476911371035.html?top_gallery_url=https%3A%2F%2Fimg.kwcdn.com%2Fproduct%2Ffancy%2F8930a731-680d-448d-b8cf-0d817126b9f0.jpg&_web_cover=thumb_url&pic_h=800&pic_w=800&spec_gallery_id=598551&_oak_page_source=613",
+                        "image": {
+                            "id": 598551,
+                            "url": "https://img.kwcdn.com/product/fancy/8930a731-680d-448d-b8cf-0d817126b9f0.jpg",
+                            "width": 800,
+                            "height": 800,
+                            "code": "%26598551%26%26%26%26-1%26"
+                        },
+                        "price_info": {
+                            "price": 1993,
+                            "currency": "BRL",
+                            "currency_str": "R$",
+                            "price_str": "R$19,93",
+                            "price_text": [
+                                "R$",
+                                "19,93",
+                                ""
+                            ],
+                            "split_price_text": [
+                                "R$",
+                                "175",
+                                ",79",
+                                ""
+                            ],
+                            "original_price": 17579,
+                            "market_price": 17770,
+                            "market_price_str": "177,70",
+                            "market_price_text": [
+                                "",
+                                "177,70",
+                                ""
+                            ],
+                            "market_price_type": 3,
+                            "market_price_icon": {
+                                "icon": "https://aimg.kwcdn.com/upload_aimg/aimg/ca6c4712-4aa2-4d98-8579-3fe721e8de50.png.slim.png",
+                                "text_list": [
                                     {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
+                                        "text": "Esse é o menor preço do produto na Temu nos últimos 30 dias antes da aplicação de redução de preço.",
+                                        "url": ""
+                                    },
+                                    {
+                                        "text": "Como a Temu consegue oferecer preços mais baixos do que as outras empresas?",
+                                        "url": "/whychoosetemu.html?_bg_fs=1"
                                     }
                                 ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "show_rrp": false,
+                                "show_low_price": false,
+                                "show_market_price_line": true
                             },
-                            "label": {
-                                "text": "20%",
-                                "styles": {
-                                    "font_weight": "semibold"
+                            "reduction": 880,
+                            "reduction_text": [
+                                "-88%"
+                            ],
+                            "min_on_sale_price": 17579,
+                            "min_on_sale_price_str": "175,79",
+                            "min_on_sale_price_text": [
+                                "R$",
+                                "175,79",
+                                ""
+                            ],
+                            "max_on_sale_price": 22200,
+                            "max_on_sale_price_str": "222,00",
+                            "max_on_sale_price_text": [
+                                "R$",
+                                "222,00",
+                                ""
+                            ],
+                            "show_price_sku_id": 98146176787453,
+                            "fix_market_price": 17770,
+                            "show_reduction": 880,
+                            "show_price_value": 1993
+                        },
+                        "comment": {
+                            "comment_num_tips": "(5)",
+                            "comment_num": 5,
+                            "goods_score": 4.8
+                        },
+                        "skc_list": [],
+                        "tags_info": {
+                            "billboard_tags": [],
+                            "promotion_tags": [],
+                            "goods_attributes_tags": [],
+                            "title_header_tags": [],
+                            "mall_tag": [],
+                            "goods_tags": [
+                                {
+                                    "tag_series": 2,
+                                    "text": "Quase esgotado",
+                                    "color": "#FB7701",
+                                    "tag_id": 91004,
+                                    "ext_map": {
+                                        "stock_type": "2",
+                                        "simply_stock_tag_text": "RESTAM POUCOS!"
+                                    },
+                                    "marketing_tag_type": 1000
                                 }
-                            }
+                            ]
+                        },
+                        "all_location_data_dict_map": {},
+                        "extra": {
+                            "goods_sale_progress": 50.0,
+                            "new_app_users_only": true
+                        },
+                        "status": 0,
+                        "is_picked": false,
+                        "in_shopping_cart": false,
+                        "is_shopping_cart_selected": false,
+                        "earn_up_to": 5597,
+                        "earn_up_to_balance_info": {
+                            "balance_amount": 5597,
+                            "decimal_multiply": 100,
+                            "decimals": 2,
+                            "currency": "BRL",
+                            "currency_str": "R$",
+                            "balance_str": "R$55,97",
+                            "balance_text": [
+                                "R$",
+                                "55,97",
+                                ""
+                            ]
+                        },
+                        "new_options": [
+                            54,
+                            7,
+                            11001
+                        ],
+                        "cat_ids": [
+                            25439,
+                            25753,
+                            25764
+                        ],
+                        "base_commission_rate": 30,
+                        "m_rec": {
+                            "picHash": 12877344,
+                            "list_id": "__s1iTY2CTzK__",
+                            "iid": 606476911371035,
+                            "offSet": 1060,
+                            "name_hash": 1567990129,
+                            "ad_goods": 0,
+                            "ugsr": "ykDh+8nrny54zFf8qn1PVdnWYR0xOktFHbB/hcKOUst5+aqqnIJMRtvAa0R3sjbSWliLaDNZLfX8iEpRK5v2CnAQLdaVt+hTNqwehqVYCMy+EUxvzU28gOZ3qszCFsPQbAy+vkU2e1eW7NvSR66mh7R43imyrWfNNd29CuwhInBno6ZBFhQLfRi0j4HcgeAFK5J2DU5zNHB7YVBMiRQDkMEKALJWGxY7I8QnGOqv8sJABC7bIlZLdGf8JVMk6vxnt261xvcYD+z707i7Wba7TEt6orssYi6KeCMwqDz4ePPf+TWYUhWx1fO13K8d/d/47mc0qjL1veZt0Z6632oLG8i+kM67xod3yIlv/TnIQ6EqCrWwSfUXxn6Ux6hnuxIIMUfaRqkzTL33DE33eKS861kjMSxe5K6zZ0wGe/9eFpOxoUshfHV4+Wk8yYN+HcesUzf3Ma08XHhF6OBKq5KPXoD6t2OWUBXmy0kwr+KlX4w=",
+                            "is_cache": false,
+                            "show_price": 17579,
+                            "language": "pt",
+                            "platform": "PC",
+                            "image_url_id": "1997405261680335089",
+                            "scene": "adg_kol_chnl_man_rec",
+                            "req_id": "5a635116-9605-4914-96bb-5ed1b05eb66e",
+                            "site_id": 132,
+                            "currency": "BRL",
+                            "show_sales": "236",
+                            "mkt_region": "29",
+                            "picId": 598551,
+                            "scene_name": "adg_kol_chnl_man_rec",
+                            "discount_source": "null"
                         }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 19,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
                     }
-                ]
-            },
-            {
-                "unique_id": "8d62468219d43c146cf",
-                "metadata": {
-                    "id": "MLB6156860112",
-                    "product_id": "MLB26518510",
-                    "user_product_id": "MLBU3716386087",
-                    "url": "www.mercadolivre.com.br/colher-concha-pegador-sorvete-inox-bola-ejetor-profissional/p/MLB26518510",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB6156860112&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB6156860112",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
+                }
+            ],
+            "has_more": false,
+            "filter_region": {
+                "style_type": 2,
+                "show": 1,
+                "selected_filter": [],
+                "out_filter": {
+                    "filters": [
                         {
-                            "id": "759574-MLA99580870860_122025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Colher Concha Pegador Sorvete Inox Bola Ejetor Profissional Prata",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 12%",
-                                "styles": {
-                                    "font_weight": "semibold"
+                            "identifier": "100",
+                            "side_name": "Ordenar por",
+                            "name": "Ordenar por",
+                            "filters": [
+                                {
+                                    "filter": "0:1",
+                                    "name": "Relevância"
+                                },
+                                {
+                                    "filter": "1:1",
+                                    "name": "Mais vendidos"
+                                },
+                                {
+                                    "filter": "3:1",
+                                    "name": "Mais recente"
+                                },
+                                {
+                                    "filter": "2:0",
+                                    "name": "Preço de baixo a alto"
+                                },
+                                {
+                                    "filter": "2:1",
+                                    "name": "Preço de alto a baixo"
                                 }
+                            ],
+                            "filter_list": [
+                                {
+                                    "filter": "0:1",
+                                    "name": "Relevância"
+                                },
+                                {
+                                    "filter": "1:1",
+                                    "name": "Mais vendidos"
+                                },
+                                {
+                                    "filter": "3:1",
+                                    "name": "Mais recente"
+                                },
+                                {
+                                    "filter": "2:0",
+                                    "name": "Preço de baixo a alto"
+                                },
+                                {
+                                    "filter": "2:1",
+                                    "name": "Preço de alto a baixo"
+                                }
+                            ],
+                            "show_result_vo": {
+                                "name": "Aplicar"
                             }
                         }
-                    },
+                    ]
+                },
+                "outer_filter": [
                     {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 19,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
+                        "identifier": "100",
+                        "side_name": "Ordenar por",
+                        "name": "Ordenar por",
+                        "filters": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "6e43a1d919d43c146cf",
-                "metadata": {
-                    "id": "MLB3815732423",
-                    "user_product_id": "MLBU1462752110",
-                    "url": "www.mercadolivre.com.br/capa-banco-termica-impermeavel-cg-125-150-160-ybr-factor-faz/up/MLBU1462752110",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB3815732423&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB3815732423",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "user_product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "824010-MLB106467853882_022026"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Capa Banco Termica Impermeável Cg 125 150 160 Ybr Factor Faz Preto",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "0:1",
+                                "name": "Relevância"
                             },
-                            "label": {
-                                "text": "19%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 23.99,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "636580a619d43c146cf",
-                "metadata": {
-                    "id": "MLB3601421563",
-                    "user_product_id": "MLBU1140630285",
-                    "url": "www.mercadolivre.com.br/10-folhas-ima-manta-imantada-adesivada-a4-03mm/up/MLBU1140630285",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB3601421563&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB3601421563",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "user_product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "967502-MLB40605046985_012020"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "10 Folhas Imã Manta Imantada Adesivada A4 0,3mm Preto Liso",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 12%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 33.17,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "2543dd4c19d43c146cf",
-                "metadata": {
-                    "id": "MLB4268514789",
-                    "user_product_id": "MLBU3512997612",
-                    "url": "www.mercadolivre.com.br/espumas-fone-compativel-jbl-tune600-t450-t450bt-t500bt-t500/up/MLBU3512997612",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB4268514789&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB4268514789",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "user_product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "982027-MLB96512791951_102025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Espumas Fone Compatível Jbl Tune600 T450 T450bt T500bt T500 Preto",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "1:1",
+                                "name": "Mais vendidos"
                             },
-                            "label": {
-                                "text": "17%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 33.9,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "a2ab09b419d43c146cf",
-                "metadata": {
-                    "id": "MLB3985746385",
-                    "product_id": "MLB37505403",
-                    "user_product_id": "MLBU3037357184",
-                    "url": "www.mercadolivre.com.br/guardanapo-embalado-restaurante-18x20cm-500-sachs-2fls/p/MLB37505403",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB3985746385&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB3985746385",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "782491-MLA99447994052_112025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Guardanapo Embalado Restaurante 18x20cm 500 Sachês 2fls Branco",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 12%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 38.95,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "1733762b19d43c146cf",
-                "metadata": {
-                    "id": "MLB4330196227",
-                    "user_product_id": "MLBU3636515066",
-                    "url": "www.mercadolivre.com.br/fonte-generica-12v2a-para-camera-ip-de-seguranca-fita-led/up/MLBU3636515066",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB4330196227&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB4330196227",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "user_product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "656679-MLB99163976078_112025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Fonte Genérica 12v-2a Para Câmera Ip De Segurança Fita Led",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "3:1",
+                                "name": "Mais recente"
                             },
-                            "label": {
-                                "text": "13%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 28.66,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "c0dd1e3a19d43c146cf",
-                "metadata": {
-                    "id": "MLB6204925866",
-                    "product_id": "MLB63955125",
-                    "user_product_id": "MLBU3427853066",
-                    "url": "www.mercadolivre.com.br/absorventes-para-seios-cremer-absorvente-para-seios-90-unidades/p/MLB63955125",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB6204925866&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB6204925866",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "960698-MLA104006654331_012026"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Absorventes Para Seios Cremer Absorvente Para Seios 90 Unidades Branco",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "2:0",
+                                "name": "Preço de baixo a alto"
                             },
-                            "label": {
-                                "text": "20%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 50.69,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
+                                "filter": "2:1",
+                                "name": "Preço de alto a baixo"
                             }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "4ae2789619d43c146cf",
-                "metadata": {
-                    "id": "MLB5258743876",
-                    "product_id": "MLB42624515",
-                    "user_product_id": "MLBU2959856643",
-                    "url": "www.mercadolivre.com.br/organizador-de-mesa-3-bandejas-p-documento-papel-escritorio/p/MLB42624515",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB5258743876&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB5258743876",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "965745-MLA96151547721_102025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Organizador De Mesa 3 Bandejas P/ Documento Papel Escritório",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 12%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 49.99,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
+                        ],
+                        "filter_list": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "e447482f19d43c146cf",
-                "metadata": {
-                    "id": "MLB6501273542",
-                    "product_id": "MLB52761735",
-                    "user_product_id": "MLBU3852401574",
-                    "url": "www.mercadolivre.com.br/saco-de-lixo-100lts-reforcado-preto-c-100-unidades/p/MLB52761735",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB6501273542&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB6501273542",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "794749-MLA87791397832_072025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Saco De Lixo 100lts Reforçado- Preto - C/ 100 Unidades",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 12%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 70,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "53cb36c19d43c146cf",
-                "metadata": {
-                    "id": "MLB5576140266",
-                    "product_id": "MLB39021521",
-                    "user_product_id": "MLBU3355793879",
-                    "url": "www.mercadolivre.com.br/mixer-misturador-de-henna-com-5-ponteiras-para-estetica-e-sobrancelhas/p/MLB39021521",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB5576140266&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB5576140266",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "684356-MLU77968961792_082024"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Mixer Misturador De Henna Com 5 Ponteiras Para Estética E Sobrancelhas",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "0:1",
+                                "name": "Relevância"
                             },
-                            "label": {
-                                "text": "22%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 19,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "129b89d319d43c146cf",
-                "metadata": {
-                    "id": "MLB3971174627",
-                    "product_id": "MLB45969293",
-                    "user_product_id": "MLBU1711077241",
-                    "url": "www.mercadolivre.com.br/kit-12-ventosas-com-bomba-ventosaterapia-massoterapia-chines/p/MLB45969293",
-                    "url_fragments": "#polycard_client=affiliates&wid=MLB3971174627&sid=affiliates",
-                    "url_params": "?pdp_filters=item_id%3AMLB3971174627",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "product"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "654388-MLA82034084076_022025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "RECOMENDADO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#333333"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Kit 12 Ventosas Com Bomba Ventosaterapia Massoterapia Chines",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 16%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 39.89,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "4b4805ff19d43c146cf",
-                "metadata": {
-                    "id": "MLB3990310103",
-                    "url": "produto.mercadolivre.com.br/MLB-3990310103-escova-pet-autolimpante-rasqueadeira-magica-pelos-ces-gatos-_JM",
-                    "url_fragments": "#polycard_client=affiliates",
-                    "url_params": "?searchVariation=183025095214",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "item"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "732017-MLB90033340793_082025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen",
-                    "variation_id": "183025095214"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Escova Pet Autolimpante Rasqueadeira Magica Pelos Cães Gatos",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 12%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 19.43,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "dfb472c319d43c146cf",
-                "metadata": {
-                    "id": "MLB2610259282",
-                    "url": "produto.mercadolivre.com.br/MLB-2610259282-trocador-americano-comoda-varias-cores-bebe-enxovais-_JM",
-                    "url_fragments": "#polycard_client=affiliates",
-                    "url_params": "?searchVariation=178781135969",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "item"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "809613-MLB49635590385_042022"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen",
-                    "variation_id": "178781135969"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "OFERTA DO DIA",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#3483FA"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Trocador Americano Comoda Várias Cores Bebe Enxovais",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "1:1",
+                                "name": "Mais vendidos"
                             },
-                            "label": {
-                                "text": "20%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 79.48,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "d70b5aca19d43c146cf",
-                "metadata": {
-                    "id": "MLB4224395075",
-                    "url": "produto.mercadolivre.com.br/MLB-4224395075-conversor-veicular-adaptador-starlink-mini-12v24v-p-30v-_JM",
-                    "url_fragments": "#polycard_client=affiliates",
-                    "url_params": "?searchVariation=190668466146",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "item"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "920048-MLB106794472000_022026"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen",
-                    "variation_id": "190668466146"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Conversor Veicular Adaptador Starlink Mini 12v/24v P/ 30v",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "3:1",
+                                "name": "Mais recente"
                             },
-                            "label": {
-                                "text": "9%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 247,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "e62e46ad19d43c146cf",
-                "metadata": {
-                    "id": "MLB4943557752",
-                    "url": "produto.mercadolivre.com.br/MLB-4943557752-tecido-chroma-key-fundo-fotografico-300-x-190-metros-_JM",
-                    "url_fragments": "#polycard_client=affiliates",
-                    "url_params": "?searchVariation=181192792454",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "item"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "606929-MLB91451641391_092025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen",
-                    "variation_id": "181192792454"
-                },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
-                        }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Tecido Chroma Key Fundo Fotografico 3,00 X 1,90 Metros",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
-                                }
+                                "filter": "2:0",
+                                "name": "Preço de baixo a alto"
                             },
-                            "label": {
-                                "text": "21%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 39.9,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
+                                "filter": "2:1",
+                                "name": "Preço de alto a baixo"
                             }
-                        ]
+                        ],
+                        "show_result_vo": {
+                            "name": "Aplicar"
+                        }
                     }
-                ]
-            },
-            {
-                "unique_id": "b1c388619d43c146cf",
-                "metadata": {
-                    "id": "MLB2893818869",
-                    "url": "produto.mercadolivre.com.br/MLB-2893818869-conjunto-uniforme-baba-domestica-camareira-copeira-empregada-_JM",
-                    "url_fragments": "#polycard_client=affiliates",
-                    "url_params": "?searchVariation=180713209267",
-                    "vertical": "",
-                    "extra_commission": "true",
-                    "type": "item"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
+                ],
+                "inner_filter": {
+                    "filter_list": [
                         {
-                            "id": "708709-MLB97927091916_112025"
-                        }
-                    ],
-                    "square": "Q",
-                    "alt_text": "Imagen",
-                    "variation_id": "180713209267"
-                },
-                "components": [
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Conjunto Uniforme Babá Domestica Camareira Copeira Empregada",
-                            "long_title": false
-                        }
-                    },
-                    {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "pill": {
-                                "text": "GANHOS {extra}",
-                                "values": [
-                                    {
-                                        "key": "extra",
-                                        "type": "label",
-                                        "label": {
-                                            "text": "EXTRA"
-                                        },
-                                        "styles": {
-                                            "font_weight": "bold",
-                                            "font_style": "italic"
-                                        }
-                                    }
-                                ],
-                                "styles": {
-                                    "color_hex": "#FFFFFF",
-                                    "font_weight": "bold",
-                                    "background_color_hex": "#000000"
+                            "identifier": "104",
+                            "side_name": "Preço",
+                            "pc_columns": 1,
+                            "name": "Preço",
+                            "filter_list": [
+                                {
+                                    "filter": "104:-1,69,95",
+                                    "name": "Menos que R$69,95",
+                                    "max_price": "69,95"
+                                },
+                                {
+                                    "filter": "104:71,38,110,84",
+                                    "name": "R$71,38 - R$110,84",
+                                    "min_price": "71,38",
+                                    "max_price": "110,84"
+                                },
+                                {
+                                    "filter": "104:110,96,180,18",
+                                    "name": "R$110,96 - R$180,18",
+                                    "min_price": "110,96",
+                                    "max_price": "180,18"
+                                },
+                                {
+                                    "filter": "104:181,03,-1",
+                                    "name": "Mais que R$181,03",
+                                    "min_price": "181,03"
+                                },
+                                {
+                                    "filter": "Z104:",
+                                    "input": [
+                                        "R$",
+                                        "Mínimo",
+                                        "a",
+                                        "R$",
+                                        "Máx."
+                                    ]
                                 }
+                            ],
+                            "multi": 0,
+                            "view_more": 7,
+                            "reset": {
+                                "name": "Repor"
                             },
-                            "label": {
-                                "text": "24%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
+                            "show_result_vo": {
+                                "name": "Aplicar"
                             }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 74.94,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
-                            {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "unique_id": "e6ec8e8419d43c146cf",
-                "metadata": {
-                    "id": "MLB4301132368",
-                    "url": "produto.mercadolivre.com.br/MLB-4301132368-cinto-tatico-militar-engate-rapido-fivela-metal-anti-alergic-_JM",
-                    "url_fragments": "#polycard_client=affiliates",
-                    "url_params": "?searchVariation=181499372473",
-                    "vertical": "",
-                    "extra_commission": "false",
-                    "type": "item"
-                },
-                "pictures": {
-                    "scale": "FILL",
-                    "pictures": [
-                        {
-                            "id": "752213-MLB92675810277_092025"
                         }
                     ],
-                    "square": "Q",
-                    "alt_text": "Imagen",
-                    "variation_id": "181499372473"
+                    "show_result": {
+                        "name": "Aplicar"
+                    },
+                    "name": "Filtros",
+                    "reset": {
+                        "name": "Repor"
+                    },
+                    "multi": 1,
+                    "selected": 0
                 },
-                "components": [
-                    {
-                        "type": "highlight",
-                        "id": "highlight",
-                        "highlight": {
-                            "text": "MAIS VENDIDO",
-                            "styles": {
-                                "color_hex": "#FFFFFF",
-                                "background_color_hex": "#FF7733"
-                            }
+                "rank_sorter": {
+                    "identifier": "100",
+                    "side_name": "Ordenar por",
+                    "name": "Ordenar por",
+                    "filters": [
+                        {
+                            "filter": "0:1",
+                            "name": "Relevância"
+                        },
+                        {
+                            "filter": "1:1",
+                            "name": "Mais vendidos"
+                        },
+                        {
+                            "filter": "3:1",
+                            "name": "Mais recente"
+                        },
+                        {
+                            "filter": "2:0",
+                            "name": "Preço de baixo a alto"
+                        },
+                        {
+                            "filter": "2:1",
+                            "name": "Preço de alto a baixo"
                         }
-                    },
-                    {
-                        "type": "title",
-                        "id": "title",
-                        "title": {
-                            "text": "Cinto Tático Militar Engate Rápido Fivela Metal Anti Alérgic",
-                            "long_title": false
+                    ],
+                    "filter_list": [
+                        {
+                            "filter": "0:1",
+                            "name": "Relevância"
+                        },
+                        {
+                            "filter": "1:1",
+                            "name": "Mais vendidos"
+                        },
+                        {
+                            "filter": "3:1",
+                            "name": "Mais recente"
+                        },
+                        {
+                            "filter": "2:0",
+                            "name": "Preço de baixo a alto"
+                        },
+                        {
+                            "filter": "2:1",
+                            "name": "Preço de alto a baixo"
                         }
-                    },
+                    ],
+                    "selected": 0,
+                    "show_result_vo": {
+                        "name": "Aplicar"
+                    }
+                },
+                "selected": 0
+            },
+            "multi_tab_result": {
+                "tab_list": [
                     {
-                        "type": "chip",
-                        "id": "affiliates_commission_chip",
-                        "chip": {
-                            "inverted": false,
-                            "inline": true,
-                            "label": {
-                                "text": "GANHOS 16%",
-                                "styles": {
-                                    "font_weight": "semibold"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "type": "price",
-                        "id": "price",
-                        "price": {
-                            "current_price": {
-                                "value": 21.95,
-                                "currency": "BRL",
-                                "decimal_style": "superscript"
-                            }
-                        }
-                    },
-                    {
-                        "type": "action_links",
-                        "id": "action_links",
-                        "action_links": [
+                        "name": "Tudo",
+                        "image_url": "https://aimg.kwcdn.com/upload_aimg/lp/b6230cb6-a382-434a-aba6-89e18493f0ac.png.slim.png",
+                        "tab_id": 1,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
                             {
-                                "id": "share_action",
-                                "type": "button",
-                                "hierarchy": "quiet",
-                                "size": "medium",
-                                "text": "Compartilhar"
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
                             }
                         ]
+                    },
+                    {
+                        "name": "Artes, artesanato e costura",
+                        "opt_id": 1493,
+                        "opt_type": 1,
+                        "tab_id": 2,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo4FdFKOibt7jZf0PjOHPpHs=",
+                            "opt_type": 1,
+                            "opt_id": 1493,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Malas",
+                        "opt_id": 731,
+                        "opt_type": 1,
+                        "tab_id": 3,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo4FdFKOibt7jZf0PjOHPpHs=",
+                            "opt_type": 1,
+                            "opt_id": 731,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Calçados masculinos",
+                        "opt_id": 1536,
+                        "opt_type": 1,
+                        "tab_id": 4,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 1536,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Animais",
+                        "opt_id": 320,
+                        "opt_type": 1,
+                        "tab_id": 5,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 320,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Homens",
+                        "opt_id": 67,
+                        "opt_type": 1,
+                        "tab_id": 6,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 67,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Automotivo",
+                        "opt_id": 580,
+                        "opt_type": 1,
+                        "tab_id": 7,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 580,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Escritório",
+                        "opt_id": 202,
+                        "opt_type": 1,
+                        "tab_id": 8,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 202,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Brinquedos",
+                        "opt_id": 204,
+                        "opt_type": 1,
+                        "tab_id": 9,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 204,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Curvas",
+                        "opt_id": 589,
+                        "opt_type": 1,
+                        "tab_id": 10,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 589,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Dispositivos inteligentes",
+                        "opt_id": 1422,
+                        "opt_type": 1,
+                        "tab_id": 11,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 1422,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Bebê",
+                        "opt_id": 1167,
+                        "opt_type": 1,
+                        "tab_id": 12,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 1167,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Plus size masculino",
+                        "opt_id": 1232,
+                        "opt_type": 1,
+                        "tab_id": 13,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 1232,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Celulares e acessórios",
+                        "opt_id": 2640,
+                        "opt_type": 1,
+                        "tab_id": 14,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 2640,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Calçados infantis",
+                        "opt_id": 1553,
+                        "opt_type": 1,
+                        "tab_id": 15,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 1553,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Lingerie",
+                        "opt_id": 1107,
+                        "opt_type": 1,
+                        "tab_id": 16,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 1107,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Móveis",
+                        "opt_id": 7319,
+                        "opt_type": 1,
+                        "tab_id": 17,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 7319,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Beleza",
+                        "opt_id": 25,
+                        "opt_type": 1,
+                        "tab_id": 18,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 25,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Criança",
+                        "opt_id": 218,
+                        "opt_type": 1,
+                        "tab_id": 19,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 218,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Mulher",
+                        "opt_id": 28,
+                        "opt_type": 1,
+                        "tab_id": 20,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 28,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Eletrodomésticos",
+                        "opt_id": 990,
+                        "opt_type": 1,
+                        "tab_id": 21,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 990,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Calçados",
+                        "opt_id": 95,
+                        "opt_type": 1,
+                        "tab_id": 22,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 95,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Acessórios",
+                        "opt_id": 352,
+                        "opt_type": 1,
+                        "tab_id": 23,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 352,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Casa",
+                        "opt_id": 36,
+                        "opt_type": 1,
+                        "tab_id": 24,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 36,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Artigos domésticos",
+                        "opt_id": 871,
+                        "opt_type": 1,
+                        "tab_id": 25,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 871,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
+                    },
+                    {
+                        "name": "Alimentação e Mercearia",
+                        "opt_id": 7084,
+                        "opt_type": 1,
+                        "tab_id": 26,
+                        "show_sort_tab": true,
+                        "sub_tab_list": [
+                            {
+                                "sub_tab_id": 1,
+                                "sub_field": "exclusive_deal",
+                                "type": "normal",
+                                "label": "Oferta Exclusiva",
+                                "pool_id": "rec_jasmine.shen_landing_132_1719372786"
+                            },
+                            {
+                                "sub_tab_id": 2,
+                                "sub_field": "free_gift",
+                                "type": "normal",
+                                "label": "R$0 Presentes",
+                                "pool_id": "rec_jasmine.shen_landing_132_1720770873"
+                            },
+                            {
+                                "sub_tab_id": 3,
+                                "sub_field": "direct_from_brand",
+                                "type": "normal",
+                                "label": "Direto da marca",
+                                "pool_id": "rec_jasmine.shen_landing_132_1722000892"
+                            }
+                        ],
+                        "m_rec": {
+                            "req_id": "0f49fdc2-c15a-4198-a4fd-311c8ad37aec",
+                            "ugsr": "Y4ZikMsISDoHzkmBqTwJo2babiZ0PfXBoW3L6lvxAXo=",
+                            "opt_type": 1,
+                            "opt_id": 7084,
+                            "scene_name": "adg_opt_rec",
+                            "scene": "adg_opt_rec"
+                        }
                     }
-                ]
+                ],
+                "is_multi_tab": true
             }
-        ],
-        "contract_version": "1.0.0"
-    },
-    "container_url": "https://lista.mercadolivre.com.br/_Container_aff-hub-ipv-score-domains-mlb",
-    "filters": [
-        {
-            "id": "extra_commission",
-            "name": "Comisión extra"
-        },
-        {
-            "id": "best_seller",
-            "name": "Más vendidos"
         }
-    ],
-    "sort": {
-        "id": "relevance",
-        "name": "Mais relevantes"
-    },
-    "available_sorts": [
-        {
-            "id": "lowest_price",
-            "name": "Menor preço"
-        },
-        {
-            "id": "highest_price",
-            "name": "Maior preço"
-        }
-    ]
+    }
 }

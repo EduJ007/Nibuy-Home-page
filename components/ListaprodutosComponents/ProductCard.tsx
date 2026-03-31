@@ -6,10 +6,43 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
   const navigate = useNavigate();
 
   const getStoreInfo = (link?: string) => {
-    // Cores ajustadas para manter harmonia com o laranja Nibuy
-    if (link?.includes('shopee')) return { name: 'Shopee', color: 'text-[#ee4d2d]', bg: 'bg-orange-50' };
-    if (link?.includes('mercadolivre')) return { name: 'Mercado Livre', color: 'text-blue-600', bg: 'bg-blue-50' };
-    if (link?.includes('amazon')) return { name: 'Amazon', color: 'text-[#232f3e]', bg: 'bg-gray-100' };
+    // SHOPEE: Laranja Vibrante Oficial
+    if (link?.includes('shopee')) {
+      return { 
+        name: 'Shopee', 
+        color: 'text-[#ee4d2d]', // Laranja Shopee
+        bg: 'bg-[#ee4d2d]/10' 
+      };
+    }
+
+    // TEMU: Laranja quase Vermelho (ou podes usar Preto para contrastar)
+    if (link?.includes('temu')) {
+      return { 
+        name: 'Temu', 
+        color: 'text-[#fb6406]', // Tom exato da Temu
+        bg: 'bg-[#fb6406]/10' 
+      };
+    }
+
+    // MERCADO LIVRE: Amarelo/Azul
+    if (link?.includes('mercadolivre')) {
+      return { 
+        name: 'Mercado Livre', 
+        color: 'text-[#2d3277]', 
+        bg: 'bg-[#fff159]' 
+      };
+    }
+
+    // AMAZON: Cinza Escuro / Squid Ink
+    if (link?.includes('amazon')) {
+      return { 
+        name: 'Amazon', 
+        color: 'text-[#232f3e]', 
+        bg: 'bg-gray-200' 
+      };
+    }
+
+    // PADRÃO (NIBUY)
     return { name: 'Oficial', color: 'text-[#ff5722]', bg: 'bg-orange-50' };
   };
 

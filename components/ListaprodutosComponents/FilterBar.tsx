@@ -9,7 +9,7 @@ const categories = [
   'Joias & Bijuterias', 'Livros & Educação', 'Viagem & Malas'
 ];
 
-const stores = ['Todas', 'Shopee', 'Mercado Livre', 'Amazon', 'Magalu'];
+const stores = ['Todas', 'Shopee', 'Mercado Livre', 'Amazon', 'Magalu', 'Temu'];
 
 // Opções de ordenação
 const sortOptions = [

@@ -76,12 +76,14 @@ const Listaprodutos: React.FC = () => {
     }
 
     if (activeStore && activeStore !== 'Todas') {
-  // Convertemos o nome da loja (ex: 'Mercado Livre') para o formato da plataforma (ex: 'mercadolivre')
+  // Remove espaços e deixa em minúsculo: 'Mercado Livre' -> 'mercadolivre', 'Temu' -> 'temu'
   const storeToPlatform = activeStore.toLowerCase().replace(/\s/g, '');
   
   result = result.filter(p => {
-    // Verificamos tanto 'platform' quanto 'store' caso existam
-    const productPlatform = (p.platform || p.store || '').toLowerCase().replace(/\s/g, '');
+    // Pegamos o valor da plataforma do produto
+    const productPlatform = (p.platform || '').toLowerCase().replace(/\s/g, '');
+    
+    // Verificação extra: Se o produto for da Temu, a plataforma no seu products.ts deve ser 'temu'
     return productPlatform === storeToPlatform;
   });
 }
@@ -216,30 +218,55 @@ useEffect(() => {
             )}
 
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 md:gap-3 mt-20 mb-10">
-                <button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30">
-                  <span className="text-black font-bold">❮</span>
-                </button>
+  <div className="flex justify-center items-center gap-2 md:gap-3 mt-20 mb-10">
+    {/* Botão Anterior */}
+    <button 
+      onClick={() => changePage(currentPage - 1)} 
+      disabled={currentPage === 1} 
+      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30"
+    >
+      <span className="text-black font-bold">❮</span>
+    </button>
 
-                <div className="flex items-center gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                    if (page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)) {
-                      return (
-                        <button key={page} onClick={() => changePage(page)} className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-black text-sm transition-all shadow-md ${currentPage === page ? 'bg-[#ff5722] text-white' : 'bg-white text-gray-600'}`}>
-                          {page}
-                        </button>
-                      );
-                    }
-                    if (page === currentPage - 2 || page === currentPage + 2) return <span key={page} className="text-gray-400 font-bold px-1">...</span>;
-                    return null;
-                  })}
-                </div>
+    <div className="flex items-center gap-2">
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+        // LÓGICA DE EXIBIÇÃO:
+        // 1. Sempre mostra a página 1
+        // 2. Mostra 2 páginas antes e 2 depois da página atual (total de 5 em 5)
+        const isWithinRange = page >= currentPage - 2 && page <= currentPage + 2;
+        const isFirstPage = page === 1;
 
-                <button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30">
-                  <span className="text-black font-bold">❯</span>
-                </button>
-              </div>
-            )}
+        if (isFirstPage || isWithinRange) {
+          return (
+            <button 
+              key={page} 
+              onClick={() => changePage(page)} 
+              className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-black text-sm transition-all shadow-md ${currentPage === page ? 'bg-[#ff5722] text-white' : 'bg-white text-gray-600'}`}
+            >
+              {page}
+            </button>
+          );
+        }
+
+        // Mostra os "..." logo após o bloco de 5 páginas se ainda houver mais páginas à frente
+        if (page === currentPage + 3 && page < totalPages) {
+          return <span key={page} className="text-gray-400 font-bold px-1">...</span>;
+        }
+
+        return null;
+      })}
+    </div>
+
+    {/* Botão Próximo */}
+    <button 
+      onClick={() => changePage(currentPage + 1)} 
+      disabled={currentPage === totalPages} 
+      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30"
+    >
+      <span className="text-black font-bold">❯</span>
+    </button>
+  </div>
+)}
           </div>
         </section>
 
