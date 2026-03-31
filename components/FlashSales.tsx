@@ -46,7 +46,7 @@ const FlashSales: React.FC = () => {
   const format = (n: number) => n.toString().padStart(2, '0');
 
   return (
-    <section className="bg-white mt-10 w-full max-w-[1600px] mx-auto md:rounded-2xl shadow-xl border border-orange-100 overflow-hidden">
+    <section className="bg-white mt-24 w-full max-w-[1600px] mx-auto md:rounded-2xl shadow-xl border border-orange-100 overflow-hidden">
       
       {/* HEADER DINÂMICO */}
       <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 bg-gradient-to-r from-[#ff5722] to-[#ff8a50]">
