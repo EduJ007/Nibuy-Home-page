@@ -6,43 +6,18 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
   const navigate = useNavigate();
 
   const getStoreInfo = (link?: string) => {
-    // SHOPEE: Laranja Vibrante Oficial
     if (link?.includes('shopee')) {
-      return { 
-        name: 'Shopee', 
-        color: 'text-[#ee4d2d]', // Laranja Shopee
-        bg: 'bg-[#ee4d2d]/10' 
-      };
+      return { name: 'Shopee', color: 'text-[#ee4d2d]', bg: 'bg-[#ee4d2d]/10' };
     }
-
-    // TEMU: Laranja quase Vermelho (ou podes usar Preto para contrastar)
     if (link?.includes('temu')) {
-      return { 
-        name: 'Temu', 
-        color: 'text-[#fb6406]', // Tom exato da Temu
-        bg: 'bg-[#fb6406]/10' 
-      };
+      return { name: 'Temu', color: 'text-[#fb6406]', bg: 'bg-[#fb6406]/10' };
     }
-
-    // MERCADO LIVRE: Amarelo/Azul
     if (link?.includes('mercadolivre')) {
-      return { 
-        name: 'Mercado Livre', 
-        color: 'text-[#2d3277]', 
-        bg: 'bg-[#fff159]' 
-      };
+      return { name: 'Mercado Livre', color: 'text-[#2d3277]', bg: 'bg-[#fff159]' };
     }
-
-    // AMAZON: Cinza Escuro / Squid Ink
     if (link?.includes('amazon')) {
-      return { 
-        name: 'Amazon', 
-        color: 'text-[#232f3e]', 
-        bg: 'bg-gray-200' 
-      };
+      return { name: 'Amazon', color: 'text-[#232f3e]', bg: 'bg-gray-200' };
     }
-
-    // PADRÃO (NIBUY)
     return { name: 'Oficial', color: 'text-[#ff5722]', bg: 'bg-orange-50' };
   };
 
@@ -59,7 +34,7 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
       className="group relative bg-white rounded-xl overflow-hidden transition-all duration-300 ease-in-out border border-gray-100 hover:border-[#ff5722]/30 shadow-sm hover:shadow-xl flex flex-col h-full cursor-pointer hover:-translate-y-1"
     >
       
-      {/* SELO DE DESCONTO (ESTILO NIBUY) */}
+      {/* SELO DE DESCONTO */}
       {product.discount && (
         <div className="absolute top-0 right-0 z-20 bg-[#ffe910] text-[#ff5722] text-[11px] font-black px-2 py-1 rounded-bl-xl shadow-sm">
           {product.discount} OFF
@@ -73,8 +48,8 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
         </div>
       )}
 
-      {/* ÁREA DA IMAGEM */}
-      <div className="relative aspect-square overflow-hidden bg-gray-50 p-2">
+      {/* ÁREA DA IMAGEM - Fixamos o tamanho para evitar pulos */}
+      <div className="relative aspect-square overflow-hidden bg-gray-50 p-2 shrink-0">
         <img 
           src={product.img} 
           alt={product.name} 
@@ -82,6 +57,7 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
         />
       </div>
       
+      {/* CONTEÚDO DO CARD */}
       <div className="p-3 flex flex-col flex-grow">
         {/* Loja e Badge Oficial */}
         <div className="flex items-center justify-between mb-2">
@@ -96,13 +72,15 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
           )}
         </div>
 
-        {/* Nome do Produto */}
-        <h3 className="text-gray-700 text-[13px] leading-tight font-medium line-clamp-2 mb-2 h-10 group-hover:text-[#ff5722] transition-colors">
-          {product.name}
-        </h3>
+        {/* Nome do Produto - AJUSTE AQUI: altura fixa (h-10 ou h-11) e line-clamp */}
+       <div className="h-[40px] mb-2"> {/* Container com altura fixa (20px por linha) */}
+  <h3 className="text-gray-700 text-[13px] leading-[20px] font-medium line-clamp-2 overflow-hidden group-hover:text-[#ff5722] transition-colors">
+    {product.name}
+  </h3>
+</div>
 
-        {/* Preços - Padronizado com DailyDiscover */}
-        <div className="mt-auto">
+        {/* Área de Preços e Ação - Empurrada para o fundo com mt-auto */}
+        <div className="mt-auto pt-2">
           <div className="h-4 flex items-center mb-0.5">
             {product.oldPrice && (
               <span className="text-[11px] text-gray-400 line-through">
@@ -115,26 +93,26 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
             <span className="text-[#ff5722] text-xl md:text-2xl font-black italic tracking-tighter leading-none">
               {product.price}
             </span>
-            <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
               <ShoppingCart size={16} />
             </div>
           </div>
-        </div>
 
-        {/* Avaliação e Vendas */}
-        <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-50 text-[11px]">
-           <div className="flex items-center gap-1">
-              <Star size={12} fill="#ffcc00" className="text-[#ffcc00]" />
-              <span className="font-black text-gray-700">{product.rating || '4.9'}</span>
-           </div>
-           <span className="text-gray-400 font-medium">{product.sold || '1k+'} vendidos</span>
-        </div>
+          {/* Avaliação e Vendas */}
+          <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-50 text-[11px]">
+             <div className="flex items-center gap-1">
+                <Star size={12} fill="#ffcc00" className="text-[#ffcc00]" />
+                <span className="font-black text-gray-700">{product.rating || '4.9'}</span>
+             </div>
+             <span className="text-gray-400 font-medium">{product.sold || '1k+'} vendidos</span>
+          </div>
 
-        {/* Botão de ação (Mais elegante) */}
-        <button className="mt-3 w-full bg-[#ff5722] text-white text-[11px] font-black py-2.5 rounded-xl hover:bg-[#e64a19] transition-all uppercase tracking-widest flex items-center justify-center gap-2 shadow-sm hover:shadow-orange-200">
-          Ver Oferta
-          <ArrowRight size={14} />
-        </button>
+          {/* Botão de ação */}
+          <button className="mt-3 w-full bg-[#ff5722] text-white text-[11px] font-black py-2.5 rounded-xl hover:bg-[#e64a19] transition-all uppercase tracking-widest flex items-center justify-center gap-2 shadow-sm hover:shadow-orange-200">
+            Ver Oferta
+            <ArrowRight size={14} />
+          </button>
+        </div>
       </div>
     </div>
   );

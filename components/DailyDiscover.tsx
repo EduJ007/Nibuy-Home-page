@@ -9,7 +9,9 @@ const DailyDiscover: React.FC = () => {
   const discoverProducts = useMemo(() => {
     const baseProducts = productsData.filter(p => !p.isFlashSale); 
     const today = new Date();
-    const dateSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    // Ajuste para garantir semente baseada na data de Brasília (opcional, mas recomendado)
+    const brasiliaDate = new Date(today.toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
+    const dateSeed = brasiliaDate.getFullYear() * 10000 + (brasiliaDate.getMonth() + 1) * 100 + brasiliaDate.getDate();
     
     let shuffled = [...baseProducts];
     let seed = dateSeed;
@@ -25,7 +27,7 @@ const DailyDiscover: React.FC = () => {
   }, []);
 
   return (
-    <section className="mt-20  px-4 max-w-[1625px] mx-auto">
+    <section className="mt-20 px-4 max-w-[1625px] mx-auto">
       {/* HEADER ESTILIZADO */}
       <div className="flex items-center gap-4 mb-8">
         <div className="h-8 w-1.5 bg-[#ff5722] rounded-full"></div>
@@ -52,8 +54,8 @@ const DailyDiscover: React.FC = () => {
               </div>
             )}
 
-            {/* IMAGEM */}
-            <div className="relative aspect-square overflow-hidden bg-gray-50 p-2">
+            {/* IMAGEM - Garantindo proporção fixa */}
+            <div className="relative aspect-square overflow-hidden bg-gray-50 p-2 shrink-0">
               <img 
                 src={item.img} 
                 alt={item.name} 
@@ -63,12 +65,16 @@ const DailyDiscover: React.FC = () => {
             
             {/* CONTEÚDO */}
             <div className="p-3 flex flex-col flex-1">
-              <h3 className="text-[13px] text-gray-600 line-clamp-2 mb-2 h-10 leading-tight font-medium group-hover:text-[#ff5722]">
-                {item.name}
-              </h3>
+              {/* Título com altura fixa para travar o layout (h-10) */}
+              <div className="h-[34px] mb-2 overflow-hidden"> 
+  <h3 className="text-gray-600 text-[13px] leading-[17px] font-medium line-clamp-2 group-hover:text-[#ff5722] transition-colors">
+    {item.name}
+  </h3>
+</div>
               
+              {/* mt-auto empurra o preço e o footer para o final do card, independente do título */}
               <div className="mt-auto">
-                <div className="h-4">
+                <div className="h-4 flex items-center">
                   {item.oldPrice && (
                     <span className="text-[11px] text-gray-400 line-through">
                       {item.oldPrice}
@@ -77,10 +83,10 @@ const DailyDiscover: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xl text-[#ff5722] font-black italic tracking-tighter">
+                  <span className="text-xl text-[#ff5722] font-black italic tracking-tighter leading-none">
                     {item.price}
                   </span>
-                  <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
                     <ShoppingCart size={16} />
                   </div>
                 </div>
