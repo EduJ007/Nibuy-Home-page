@@ -24,9 +24,35 @@ const parsePrice = (price: string | number | undefined | null) => {
   return parseFloat(cleanPrice) || 0;
 };
 
+// --- FUNÇÃO PARA RANDOMIZAR COM SEED BASEADA NA DATA (BRASÍLIA) ---
+const shuffleWithSeed = (array: any[]) => {
+  // Obter data atual no fuso de Brasília (UTC-3)
+  const agora = new Date();
+  const brasiliaTime = new Date(agora.toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
+  
+  // Criar semente numérica: AAAAMMDD (ex: 20231027)
+  const seed = (brasiliaTime.getFullYear() * 10000) + 
+               ((brasiliaTime.getMonth() + 1) * 100) + 
+               brasiliaTime.getDate();
+
+  const shuffled = [...array];
+  let m = shuffled.length, t, i;
+  let s = seed;
+
+  // Algoritmo LCG simples para embaralhar deterministicamente baseado na semente
+  while (m) {
+    s = (s * 9301 + 49297) % 233280;
+    i = Math.floor((s / 233280) * m--);
+    t = shuffled[m];
+    shuffled[m] = shuffled[i];
+    shuffled[i] = t;
+  }
+  return shuffled;
+};
+
 // ------------------ COMPONENTE DA PÁGINA ------------------
 const Listaprodutos: React.FC = () => {
-  const location = useLocation(); // Chame o hook aqui
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [activeStore, setActiveStore] = useState('Todas');
@@ -39,33 +65,17 @@ const Listaprodutos: React.FC = () => {
   const productsPerPage = 24;
 
   useEffect(() => {
-  const params = new URLSearchParams(location.search);
-  
-  // 1. Termo de busca
-  const searchFromUrl = params.get('search') || ''; 
-  setSearchTerm(decodeURIComponent(searchFromUrl));
+    const params = new URLSearchParams(location.search);
+    setSearchTerm(decodeURIComponent(params.get('search') || ''));
+    setActiveCategory(decodeURIComponent(params.get('categoria') || 'Todos'));
+    setSortBy(params.get('sort') || 'default');
+    setActiveStore(params.get('loja') || 'Todas');
+    setCurrentPage(parseInt(params.get('page') || '1'));
+  }, [location.search]);
 
-  // 2. Categoria
-  const categoryFromUrl = params.get('categoria') || 'Todos';
-  setActiveCategory(decodeURIComponent(categoryFromUrl));
-
-  // 3. Ordenação
-  const sortFromUrl = params.get('sort') || 'default';
-  setSortBy(sortFromUrl);
-
-  // 4. Loja
-  const storeFromUrl = params.get('loja') || 'Todas';
-  setActiveStore(storeFromUrl);
-
-  // Sempre que a URL mudar, voltamos para a página 1
-  setCurrentPage(1);
-
-}, [location.search]);
-  // -------------------------------------------------------------
-
-  // 2. O useMemo vem logo abaixo dele
   const filteredProducts = useMemo(() => {
-    let result = [...productsData];
+    // 1. Aplica a randomização diária apenas se o sortBy for 'default'
+    let result = sortBy === 'default' ? shuffleWithSeed(productsData) : [...productsData];
 
     if (searchTerm) {
       result = result.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -76,23 +86,14 @@ const Listaprodutos: React.FC = () => {
     }
 
     if (activeStore && activeStore !== 'Todas') {
-  // Remove espaços e deixa em minúsculo: 'Mercado Livre' -> 'mercadolivre', 'Temu' -> 'temu'
-  const storeToPlatform = activeStore.toLowerCase().replace(/\s/g, '');
-  
-  result = result.filter(p => {
-    // Pegamos o valor da plataforma do produto
-    const productPlatform = (p.platform || '').toLowerCase().replace(/\s/g, '');
-    
-    // Verificação extra: Se o produto for da Temu, a plataforma no seu products.ts deve ser 'temu'
-    return productPlatform === storeToPlatform;
-  });
-}
+      const storeToPlatform = activeStore.toLowerCase().replace(/\s/g, '');
+      result = result.filter(p => (p.platform || '').toLowerCase().replace(/\s/g, '') === storeToPlatform);
+    }
 
     if (maxPrice && parseFloat(maxPrice) > 0) {
       result = result.filter(p => parsePrice(p.price) <= parseFloat(maxPrice));
     }
 
-    // FILTRO DE ACHADINHOS (DEALS)
     if (sortBy === 'deals') {
       result = result.filter(p => {
         const pCurrent = parsePrice(p.price);
@@ -108,14 +109,17 @@ const Listaprodutos: React.FC = () => {
       result = result.filter(p => p.isFlashSale === true);
     }
 
-    result.sort((a, b) => {
-      switch (sortBy) {
-        case 'sales': return parseSales(b.sold) - parseSales(a.sold);
-        case 'price_asc': return parsePrice(a.price) - parsePrice(b.price);
-        case 'price_desc': return parsePrice(b.price) - parsePrice(a.price);
-        default: return 0;
-      }
-    });
+    // 2. Só aplica ordenação se não for o padrão (o padrão já foi randomizado acima)
+    if (sortBy !== 'default') {
+      result.sort((a, b) => {
+        switch (sortBy) {
+          case 'sales': return parseSales(b.sold) - parseSales(a.sold);
+          case 'price_asc': return parsePrice(a.price) - parsePrice(b.price);
+          case 'price_desc': return parsePrice(b.price) - parsePrice(a.price);
+          default: return 0;
+        }
+      });
+    }
 
     return result;
   }, [searchTerm, activeCategory, activeStore, sortBy, maxPrice]);
@@ -143,33 +147,22 @@ const Listaprodutos: React.FC = () => {
   };
 
   useEffect(() => {
-  const params = new URLSearchParams(location.search);
-  
-  // ... (seus outros filtros: search, categoria, sort, loja)
+    const params = new URLSearchParams(location.search);
+    const pageFromUrl = parseInt(params.get('page') || '1');
+    setCurrentPage(pageFromUrl);
+  }, [location.search]);
 
-  // 5. Pegar a página da URL (se não existir, padrão é 1)
-  const pageFromUrl = parseInt(params.get('page') || '1');
-  setCurrentPage(pageFromUrl);
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchTerm) params.set('search', searchTerm);
+    if (activeCategory !== 'Todos') params.set('categoria', activeCategory);
+    if (activeStore !== 'Todas') params.set('loja', activeStore);
+    if (sortBy !== 'default') params.set('sort', sortBy);
+    if (currentPage > 1) params.set('page', currentPage.toString());
+    const newRelativePathQuery = window.location.pathname + '?' + params.toString();
+    window.history.replaceState({}, '', newRelativePathQuery);
+  }, [activeCategory, activeStore, sortBy, searchTerm, currentPage]);
 
-}, [location.search]);
-
-// 2. Atualizar a URL sempre que a página ou filtros mudarem
-useEffect(() => {
-  const params = new URLSearchParams();
-  
-  if (searchTerm) params.set('search', searchTerm);
-  if (activeCategory !== 'Todos') params.set('categoria', activeCategory);
-  if (activeStore !== 'Todas') params.set('loja', activeStore);
-  if (sortBy !== 'default') params.set('sort', sortBy);
-  
-  // Só coloca a página na URL se for maior que 1 (estética)
-  if (currentPage > 1) params.set('page', currentPage.toString());
-  
-  const newRelativePathQuery = window.location.pathname + '?' + params.toString();
-  
-  // Usamos replaceState para não encher o histórico de "voltar" com cada troca de página
-  window.history.replaceState({}, '', newRelativePathQuery);
-}, [activeCategory, activeStore, sortBy, searchTerm, currentPage]);
   return (
     <div className="min-h-screen bg-gray-200">
       {isFilterOpen && (
@@ -218,55 +211,32 @@ useEffect(() => {
             )}
 
             {totalPages > 1 && (
-  <div className="flex justify-center items-center gap-2 md:gap-3 mt-20 mb-10">
-    {/* Botão Anterior */}
-    <button 
-      onClick={() => changePage(currentPage - 1)} 
-      disabled={currentPage === 1} 
-      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30"
-    >
-      <span className="text-black font-bold">❮</span>
-    </button>
-
-    <div className="flex items-center gap-2">
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-        // LÓGICA DE EXIBIÇÃO:
-        // 1. Sempre mostra a página 1
-        // 2. Mostra 2 páginas antes e 2 depois da página atual (total de 5 em 5)
-        const isWithinRange = page >= currentPage - 2 && page <= currentPage + 2;
-        const isFirstPage = page === 1;
-
-        if (isFirstPage || isWithinRange) {
-          return (
-            <button 
-              key={page} 
-              onClick={() => changePage(page)} 
-              className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-black text-sm transition-all shadow-md ${currentPage === page ? 'bg-[#ff5722] text-white' : 'bg-white text-gray-600'}`}
-            >
-              {page}
-            </button>
-          );
-        }
-
-        // Mostra os "..." logo após o bloco de 5 páginas se ainda houver mais páginas à frente
-        if (page === currentPage + 3 && page < totalPages) {
-          return <span key={page} className="text-gray-400 font-bold px-1">...</span>;
-        }
-
-        return null;
-      })}
-    </div>
-
-    {/* Botão Próximo */}
-    <button 
-      onClick={() => changePage(currentPage + 1)} 
-      disabled={currentPage === totalPages} 
-      className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30"
-    >
-      <span className="text-black font-bold">❯</span>
-    </button>
-  </div>
-)}
+              <div className="flex justify-center items-center gap-2 md:gap-3 mt-20 mb-10">
+                <button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30">
+                  <span className="text-black font-bold">❮</span>
+                </button>
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    const isWithinRange = page >= currentPage - 2 && page <= currentPage + 2;
+                    const isFirstPage = page === 1;
+                    if (isFirstPage || isWithinRange) {
+                      return (
+                        <button key={page} onClick={() => changePage(page)} className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-black text-sm transition-all shadow-md ${currentPage === page ? 'bg-[#ff5722] text-white' : 'bg-white text-gray-600'}`}>
+                          {page}
+                        </button>
+                      );
+                    }
+                    if (page === currentPage + 3 && page < totalPages) {
+                      return <span key={page} className="text-gray-400 font-bold px-1">...</span>;
+                    }
+                    return null;
+                  })}
+                </div>
+                <button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30">
+                  <span className="text-black font-bold">❯</span>
+                </button>
+              </div>
+            )}
           </div>
         </section>
 

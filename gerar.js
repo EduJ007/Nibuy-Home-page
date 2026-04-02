@@ -15,32 +15,69 @@ function formatPrice(value) {
 
 function detectCategory(name) {
   const n = name.toLowerCase();
+
+  // DEFINIÇÃO DAS CATEGORIAS COM HIERARQUIA (ORDEM IMPORTA)
   const categories = [
-    { cat: 'Smartphone & Tablets', keywords: /(iphone|celular|smartphone|android|xiaomi|samsung|motorola|realme|tablet|ipad|kindle|redmi|poco|lg|nokia|carregador iphone|película|capinha)/ },
-    { cat: 'Informática & PC', keywords: /(notebook|laptop|ssd|memória|ram|placa|cpu|gpu|teclado|mouse|monitor|roteador|wifi|impressora|nobreak|hub|hd externo|cooler|gabinete|macbook|acer|dell|lenovo|hp|tp-link|processador|pentium|ryzen|core i|rtx|gtx)/ },
-    { cat: 'Áudio & Vídeo', keywords: /(fone|headset|bluetooth|caixa de som|alexa|echo|projetor|smart tv|televisão|microfone|webcam|soundbar|jbl|sony|philips|tcl|roku|fire stick|chromecast|home theater)/ },
-    { cat: 'Games & Geek', keywords: /(ps5|ps4|playstation|xbox|nintendo|switch|gamer|jogo|controle|joystick|card|pokémon|funko|geek|action figure|lego|console|dualshock|cadeira gamer|headset gamer)/ },
-    { cat: 'Beleza & Skincare', keywords: /(maquiagem|batom|perfume|creme|skincare|shampoo|cabelo|esmaltes|base|corretivo|protetor solar|gloss|hidratante|sérum|secador|chapinha|esmalte|condicionador|eudora|oboticário|vult)/ },
-    { cat: 'Moda Masculina', keywords: /(camisa|camiseta|calça|bermuda|cueca|short|jaqueta|moletom|sapato|tênis|boné|sunga|carteira|cinto|blazer|polo)/ },
-    { cat: 'Moda Feminina', keywords: /(vestido|blusa|saia|lingerie|biquíni|body|tricô|salto|sandália|bolsa|joia|brinco|colar|anel|sutiã|calcinha|macacão|pijama)/ },
-    { cat: 'Eletrodomésticos', keywords: /(geladeira|fogão|máquina de lavar|climatizador|ar condicionado|micro-ondas|freezer|adega|lava louça|ventilador|circulador|lavadora|cooktop|depurador|exaustor)/ },
-    { cat: 'Eletroportáteis', keywords: /(air fryer|fritadeira|mixer|liquidificador|batedeira|cafeteira|aspirador|ferro de passar|sanduicheira|panela elétrica|grill|multiprocessador|espremedor|torradeira|moura)/ },
-    { cat: 'Cozinha & Mesa', keywords: /(faca|tábua|pote|garrafa|termos|copo|stanley|talher|prato|assadeira|escorredor|abridor|balança digital|pano de prato|tupperware|jogo de jantar|panela|frigideira)/ },
-    { cat: 'Casa & Decoração', keywords: /(luminária|led|tapete|cortina|almofada|espelho|quadro|vaso|vela|difusor|organizador|cabide|prateleira|estátua|parede|sofá|poltrona|mesa|cadeira|guarda-roupa|estante|painel)/ },
-    { cat: 'Cama, Mesa & Banho', keywords: /(lençol|fronha|cobertor|edredom|toalha|travesseiro|manta|colchão|jogo de cama|piso de banheiro)/ },
-    { cat: 'Saúde & Cuidados', keywords: /(suplemento|whey|creatina|vitamina|termômetro|medidor|massageador|curativo|irrigador|escova elétrica|dental|lixa pés|maca peruana|omega 3|colágeno|máscara)/ },
-    { cat: 'Ferramentas & Obra', keywords: /(furadeira|parafusadeira|martelo|trena|chave|alicate|pintura|tinta|torneira|chuveiro|disjuntor|cloro|serra|escada|genco|lixadeira|esmerilhadeira|vonder|makita|bosch|tramontina)/ },
-    { cat: 'Automotivo & Moto', keywords: /(pneu|capacete|óleo|carro|moto|retrovisor|multimídia|limpador|som automotivo|peças|partida|arranque|titan|bros|fan|aro|pastilha de freio|lâmpada automotiva)/ },
-    { cat: 'Esporte & Lazer', keywords: /(academia|musculação|bicicleta|bike|bola|yoga|crossfit|luva|skate|patins|lanterna|canivete|camping|chuteira|halter|anilhas|esteira)/ },
-    { cat: 'Bebês & Brinquedos', keywords: /(bebê|infantil|brinquedo|fralda|mamadeira|carrinho|chupeta|boneca|pelúcia|escolar|mochila|patinete|barbie|hot wheels|fisher price|pampers|huggies)/ },
-    { cat: 'Pets', keywords: /(pet|cachorro|gato|ração|coleira|aquário|areia|shampoo pet|bebedouro|comedouro|petisco|whiskas|pedigree|royal canin|arranhador)/ },
-    { cat: 'Papelaria & Envio', keywords: /(papel|caneta|caderno|estojo|organizador|envelope|segurança|embalagem|correios|etiqueta|fita|calculadora|lápis|faber castell)/ },
-    { cat: 'Acessórios & Outros', keywords: /(relógio|smartwatch|óculos|sol|pulseira|isqueiro|pilha|carregador portátil|power bank|guarda-chuva|mochila notebook)/ }
+    // 1. Tecnologia & Eletrônicos (Alta Prioridade)
+    { cat: 'Tecnologia & Eletrônicos', keywords: /(iphone|celular|smartphone|android|xiaomi|samsung|motorola|tablet|ipad|kindle|notebook|laptop|ssd|ram|cpu|gpu|placa|teclado|mouse|monitor|roteador|wifi|hub|caixa de som|alexa|echo|projetor|smart tv|microfone|webcam|carregador|cabo|power bank|fone|headset|bluetooth|earphone)/ },
+    
+    // 2. Games & Hobby
+    { cat: 'Games & Hobby', keywords: /(ps5|ps4|playstation|xbox|nintendo|switch|gamer|jogo|controle|joystick|card|pokémon|funko|geek|action figure|lego|console|quebra-cabeça|rpg|baralho|board game)/ },
+    
+    // 3. Segurança & Monitoramento
+    { cat: 'Segurança & Monitoramento', keywords: /(câmera|monitoramento|alarme|sensor|fechadura digital|interfone|vigilância|dvr|nvr|porteiro eletrônico|cadeado|cerca)/ },
+
+    // 4. Moda & Beleza
+    { cat: 'Moda & Beleza', keywords: /(maquiagem|batom|perfume|creme|skincare|shampoo|cabelo|esmalte|base|corretivo|protetor solar|hidratante|sérum|secador|chapinha|vestido|blusa|saia|lingerie|biquíni|camisa|camiseta|calça|bermuda|cueca|short|jaqueta|moletom|sapato|tênis|boné|bolsa|joia|brinco|colar|anel)/ },
+
+    // 5. Relógios & Acessórios
+    { cat: 'Relógios & Acessórios', keywords: /(relógio|smartwatch|pulseira|analógico|digital|cronômetro|boné|touca|óculos|carteira)/ },
+
+    // 6. Bebês & Infantil
+    { cat: 'Bebês & Infantil', keywords: /(bebê|infantil|baby|mamadeira|fralda|carrinho de bebê|berço|chocalho|babador|mordedor|brinquedo|boneca|lego|pelúcia|body bebê|escolar|slime)/ },
+
+    // 7. Automotivo
+    { cat: 'Automotivo', keywords: /(carro|automotivo|moto|veículo|pneu|calibrador|compressor|limpador|óleo|led carro|multimídia|som automotivo|capacete|luva moto|suporte celular carro)/ },
+
+    // 8. Esporte & Lazer
+    { cat: 'Esporte & Lazer', keywords: /(esporte|fitness|academia|bola|corrida|bike|bicicleta|suplemento|whey|creatina|halter|anilha|elástico|ioga|yoga|skate|patins|natação|camping|barraca|pesca)/ },
+
+    // 9. Pets
+    { cat: 'Pets', keywords: /(pet|cachorro|gato|cão|ração|coleira|guia|aquário|shampoo pet|sanitário|arranhador|caminha pet|brinquedo pet|antipulgas|higiênico)/ },
+
+    // 10. Eletrodomésticos
+    { cat: 'Eletrodomésticos', keywords: /(geladeira|microondas|liquidificador|air fryer|aspirador|batedeira|cafeteira|máquina de lavar|tanquinho|secadora|fogão|cooktop|refrigerador|ventilador|ar condicionado|ferro de passar|mixer)/ },
+
+    // 11. Móveis
+    { cat: 'Móveis', keywords: /(mesa|cadeira|sofá|estante|armário|cama|puf|escrivaninha|comoda|guarda-roupa|rack|painel|cabeceira|poltrona|banqueta)/ },
+
+    // 12. Iluminação
+    { cat: 'Iluminação', keywords: /(lâmpada|luminária|lustre|led|abajur|refletor|fita led|painel solar|spot|plafon|arandela|neon|lanterna)/ },
+
+    // 13. Papelaria & Escritório
+    { cat: 'Papelaria & Escritório', keywords: /(caneta|caderno|papel|escritório|agenda|estojo|tesoura|mochila escolar|calculadora|grampeador|lápis|borracha|pasta|impressora)/ },
+
+    // 14. Ferramentas & Construção
+    { cat: 'Ferramentas & Construção', keywords: /(furadeira|martelo|chave|serra|ferramenta|parafuso|trena|nível|alicates|lixadeira|parafusadeira|broca|tinta|pincel|escada|chuveiro|reparo|solda|torneira)/ },
+
+    // 15. Joias & Bijuterias
+    { cat: 'Joias & Bijuterias', keywords: /(anel|colar|brinco|pulseira|joia|prata|ouro|bijuteria|semijoia|pingente|tornozeleira|corrente|gargantilha)/ },
+
+    // 16. Livros & Educação
+    { cat: 'Livros & Educação', keywords: /(livro|curso|educação|apostila|estudo|dicionário|revista|didático|biografia|romance|mangá|hq)/ },
+
+    // 17. Viagem & Malas
+    { cat: 'Viagem & Malas', keywords: /(mala|viagem|passaporte|frasqueira|necessaire|mala de bordo|organizador de mala|etiqueta mala|bolsa de viagem)/ },
+
+    // 18. Casa & Decoração (Filtro Geral/Sobra)
+    { cat: 'Casa & Decoração', keywords: /(tapete|cortina|almofada|quadro|espelho|lençol|enxoval|fronha|manta|cobertor|edredom|toalha|banho|rosto|difusor|essência|vaso|planta|estátua|organizador|cabide|porta retrato|panela|prato|talher|copo|taça|pote|fatiador|mop|varal|lixo|lixeira|utensílios|marmita|vasilha|cozinha|filtro|balança|parede)/ }
   ];
+
   for (const item of categories) {
     if (item.keywords.test(n)) return item.cat;
   }
-  return "Diversos";
+
+  return "Casa & Decoração"; // Retorno padrão caso nada seja detectado
 }
 
 // --- LÓGICA PRINCIPAL ---

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { ShoppingBag, Zap, ArrowRight, Gamepad2, Sofa, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { productsData } from '../products';
@@ -10,7 +10,34 @@ const Hero: React.FC = () => {
   const [touchEnd, setTouchEnd] = useState(0);
   
   const navigate = useNavigate();
-  const featuredProducts = productsData.slice(0, 10);
+
+  // LÓGICA DE ROTAÇÃO DIÁRIA (BRASÍLIA)
+  const featuredProducts = useMemo(() => {
+    // 1. Obter timestamp atual em UTC
+    const agora = new Date();
+    
+    // 2. Ajustar para o fuso de Brasília (UTC-3)
+    // Subtraímos 3 horas do UTC para saber que dia é em Brasília
+    const brasiliaOffset = 3 * 60 * 60 * 1000;
+    const dataBrasilia = new Date(agora.getTime() - brasiliaOffset);
+    
+    // 3. Criar um ID único para o dia (ex: 20240520)
+    const diaId = dataBrasilia.getUTCFullYear() * 10000 + 
+                 (dataBrasilia.getUTCMonth() + 1) * 100 + 
+                 dataBrasilia.getUTCDate();
+
+    // 4. Usar o ID do dia para definir o ponto de partida na lista de produtos
+    // Isso garante que a cada dia o "pulo" na lista seja diferente
+    const totalProdutos = productsData.length;
+    const startIndex = diaId % totalProdutos;
+
+    // 5. Pegar 10 produtos a partir desse índice (fazendo o wrap se chegar no fim)
+    const selected = [];
+    for (let i = 0; i < 10; i++) {
+      selected.push(productsData[(startIndex + i) % totalProdutos]);
+    }
+    return selected;
+  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === featuredProducts.length - 1 ? 0 : prev + 1));
@@ -20,14 +47,14 @@ const Hero: React.FC = () => {
     setCurrentIndex((prev) => (prev === 0 ? featuredProducts.length - 1 : prev - 1));
   }, [featuredProducts.length]);
 
-  // Auto-play
+  // Auto-play (Troca o slide visual, mas o grupo de produtos só muda no refresh do dia)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(nextSlide, 7000);
     return () => clearInterval(timer);
   }, [nextSlide, isPaused]);
 
-  // Lógica de Swipe
+  // Handlers de Touch (Swipe)
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsPaused(true);
     setTouchStart(e.targetTouches[0].clientX);
@@ -66,7 +93,7 @@ const Hero: React.FC = () => {
           onMouseLeave={() => setIsPaused(false)}
           style={{ touchAction: 'pan-y' }}
         >
-          {/* SETAS - APENAS DESKTOP (hidden md:flex) */}
+          {/* BOTÕES DE NAVEGAÇÃO */}
           <button 
             onClick={prevSlide}
             className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100"
@@ -81,7 +108,7 @@ const Hero: React.FC = () => {
             <ChevronRight size={30} />
           </button>
 
-          {/* CONTEÚDO DO SLIDE */}
+          {/* CONTEÚDO DO SLIDE ATUAL */}
           <div key={currentProduct.externalId} className="flex flex-col md:flex-row h-full w-full animate-in fade-in duration-700">
             <div className="w-full md:w-1/2 relative flex items-center justify-center p-6 md:p-10 order-1 md:order-2">
               <div className="absolute inset-0 bg-white/20 blur-[80px] rounded-full scale-75 animate-pulse"></div>
@@ -94,7 +121,7 @@ const Hero: React.FC = () => {
 
             <div className="w-full md:w-1/2 p-6 pb-14 md:p-10 flex flex-col justify-center items-center md:items-start text-center md:text-left order-2 md:order-1">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full mb-4 text-[10px] font-bold uppercase tracking-widest">
-                  <Zap size={14} fill="currentColor" className="text-yellow-300" /> Oferta Especial
+                  <Zap size={14} fill="currentColor" className="text-yellow-300" /> Oferta do Dia
               </div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight mb-4 uppercase leading-tight line-clamp-2">
                 {currentProduct.name}
@@ -112,6 +139,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
+          {/* INDICADORES (PONTINHOS) */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-30">
             {featuredProducts.map((_, index) => (
               <button key={index} onClick={() => setCurrentIndex(index)} className={`h-2 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-10 bg-white' : 'w-2 bg-white/40'}`} />
@@ -119,7 +147,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* BANNERS LATERAIS (DESKTOP) */}
+        {/* BANNERS LATERAIS */}
         <div className="hidden lg:flex flex-col gap-6">
             <div 
               onClick={() => navigate('/Lista-produtos?categoria=Tecnologia %26 Eletrônicos')}
