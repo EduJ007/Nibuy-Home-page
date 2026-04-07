@@ -165,30 +165,60 @@ const Listaprodutos: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-200">
-      {isFilterOpen && (
-        <div className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm" onClick={() => setIsFilterOpen(false)} />
-      )}
+     {isFilterOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-[9998] md:hidden backdrop-blur-sm"
+            onClick={() => setIsFilterOpen(false)}
+          />
+        )}
 
       <main className="flex flex-col md:flex-row min-h-screen w-full relative">
-        <aside className={`fixed inset-y-0 left-0 z-[70] w-72 bg-white shadow-2xl transform transition-transform duration-300 md:relative md:translate-x-0 md:shadow-none md:z-10 md:w-72 lg:w-80 shrink-0 border-r border-gray-300 ${isFilterOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-          <div className="sticky top-0 h-screen overflow-y-auto p-6 pt-32 md:pt-36">
-            <button onClick={() => setIsFilterOpen(false)} className="md:hidden absolute top-24 right-4 text-gray-400 hover:text-[#ff5722]">✕</button>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-2 h-8 bg-[#ff5722] rounded-full"></div>
-              <h2 className="text-black font-black text-2xl uppercase tracking-tighter">Filtros</h2>
-            </div>
-            <FilterBar 
-                activeCategory={activeCategory} onSelectCategory={(c) => { setActiveCategory(c); setIsFilterOpen(false); }}
-                activeStore={activeStore} onSelectStore={setActiveStore}
-                maxPrice={maxPrice} onMaxPriceChange={setMaxPrice}
-                sortBy={sortBy} onSortChange={setSortBy} 
-            />
-            <button onClick={resetFilters} className="w-full mt-10 py-3 rounded-xl bg-gray-50 text-gray-500 font-bold hover:bg-[#ff5722] hover:text-white transition-all uppercase text-xs tracking-widest">Limpar Tudo</button>
-          </div>
-        </aside>
+      <aside 
+  className={`
+    fixed inset-y-0 left-0 z-[9999] w-72 bg-white shadow-2xl transition-transform duration-300
+    ${isFilterOpen ? 'translate-x-0' : '-translate-x-full'}
+    md:relative md:translate-x-0 md:z-10 md:w-72 lg:w-80 md:h-auto md:border-r md:border-gray-300
+  `}
+>
+  {/* Conteúdo interno original */}
+  <div className="h-full md:h-screen overflow-y-auto sticky top-0 p-6 pt-10 md:pt-36 bg-white">
+    
+    <button 
+      onClick={() => setIsFilterOpen(false)} 
+      className="md:hidden absolute top-5 right-5 text-gray-500 bg-gray-100 p-3 rounded-full active:bg-orange-100"
+    >
+      <span className="text-2xl font-bold">✕</span>
+    </button>
+
+    <div className="flex items-center gap-3 mb-8">
+      <div className="w-2 h-8 bg-[#ff5722] rounded-full"></div>
+      <h2 className="text-black font-black text-2xl uppercase tracking-tighter">Filtros</h2>
+    </div>
+
+    <FilterBar 
+        activeCategory={activeCategory} 
+        onSelectCategory={(c) => { setActiveCategory(c); setIsFilterOpen(false); }}
+        activeStore={activeStore} 
+        onSelectStore={setActiveStore}
+        maxPrice={maxPrice} 
+        onMaxPriceChange={setMaxPrice}
+        sortBy={sortBy} 
+        onSortChange={setSortBy} 
+    />
+
+    <div className="pb-32">
+      <button 
+        onClick={resetFilters} 
+        className="w-full mt-10 py-4 rounded-xl bg-gray-100 text-gray-500 font-bold hover:bg-[#ff5722] hover:text-white transition-all uppercase text-xs tracking-widest"
+      >
+        Limpar Tudo
+      </button>
+    </div>
+  </div>
+</aside>
 
         <section className="flex-1 flex flex-col pt-24 md:pt-28 pb-20 px-4 md:px-10">
-          <div className="mt-10 w-full max-w-[1400px] mx-auto">
+          <div className="mt-3 md:mt-6 w-full max-w-[1400px] mx-auto">
             <div className="bg-white border-b-4 border-[#ff5722] py-5 mb-8 shadow-sm px-6 flex justify-center">
               <h2 className="text-[#ff5722] tracking-[0.15em] font-bold text-lg md:text-xl uppercase">Lista de Produtos</h2>
             </div>
@@ -211,38 +241,62 @@ const Listaprodutos: React.FC = () => {
             )}
 
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 md:gap-3 mt-20 mb-10">
-                <button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30">
-                  <span className="text-black font-bold">❮</span>
-                </button>
-                <div className="flex items-center gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                    const isWithinRange = page >= currentPage - 2 && page <= currentPage + 2;
-                    const isFirstPage = page === 1;
-                    if (isFirstPage || isWithinRange) {
-                      return (
-                        <button key={page} onClick={() => changePage(page)} className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-black text-sm transition-all shadow-md ${currentPage === page ? 'bg-[#ff5722] text-white' : 'bg-white text-gray-600'}`}>
-                          {page}
-                        </button>
-                      );
-                    }
-                    if (page === currentPage + 3 && page < totalPages) {
-                      return <span key={page} className="text-gray-400 font-bold px-1">...</span>;
-                    }
-                    return null;
-                  })}
-                </div>
-                <button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30">
-                  <span className="text-black font-bold">❯</span>
-                </button>
-              </div>
-            )}
+  <div className="flex justify-center items-center gap-2 md:gap-3 mt-20 mb-3">
+    <button 
+      onClick={() => changePage(currentPage - 1)} 
+      disabled={currentPage === 1} 
+      className="w-12 h-12 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30"
+    >
+      <span className="text-black font-bold">❮</span>
+    </button>
+    
+    <div className="flex items-center gap-2">
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+        const isWithinRange = page >= currentPage - 2 && page <= currentPage + 2;
+        const isFirstPage = page === 1;
+        
+        if (isFirstPage || isWithinRange) {
+          return (
+            <button 
+              key={page} 
+              onClick={() => changePage(page)} 
+              className={`w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-black text-sm transition-all shadow-md ${
+                currentPage === page ? 'bg-[#ff5722] text-white' : 'bg-white text-gray-600'
+              }`}
+            >
+              {page}
+            </button>
+          );
+        }
+        
+        if (page === currentPage + 3 && page < totalPages) {
+          return <span key={page} className="text-gray-400 font-bold px-1">...</span>;
+        }
+        return null;
+      })}
+    </div>
+
+    <button 
+      onClick={() => changePage(currentPage + 1)} 
+      disabled={currentPage === totalPages} 
+      className="w-12 h-12 md:w-12 md:h-12 flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-sm disabled:opacity-30"
+    >
+      <span className="text-black font-bold">❯</span>
+    </button>
+  </div>
+)}
           </div>
         </section>
 
-        <div className="md:hidden fixed bottom-6 right-6 z-40">
-          <button onClick={() => setIsFilterOpen(true)} className="bg-[#ff5722] text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 font-black uppercase tracking-wider">🔍 Filtros</button>
-        </div>
+        <div className="md:hidden fixed bottom-[100px] right-6 z-[100]">
+            <button 
+              onClick={() => setIsFilterOpen(true)} 
+              className="bg-[#ff5722] text-white px-6 py-4 rounded-full shadow-xl flex items-center gap-3 font-black uppercase tracking-wider active:scale-95 transition-all shadow-orange-900/20"
+            >
+              <span className="text-lg">🔍</span>
+              <span>Filtros</span>
+            </button>
+          </div>
       </main>
     </div>
   );

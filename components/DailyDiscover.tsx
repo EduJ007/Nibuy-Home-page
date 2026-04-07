@@ -67,23 +67,22 @@ const DailyDiscover: React.FC = () => {
             <div className="p-3 flex flex-col flex-1">
               {/* Título com altura fixa para travar o layout (h-10) */}
               <div className="h-[34px] mb-2 overflow-hidden"> 
-  <h3 className="text-gray-600 text-[13px] leading-[17px] font-medium line-clamp-2 group-hover:text-[#ff5722] transition-colors">
-    {item.name}
-  </h3>
-</div>
-              
+                <h3 className="text-gray-600 text-[13px] leading-[17px] font-medium line-clamp-2 group-hover:text-[#ff5722] transition-colors">
+                  {item.name}
+                </h3>
+              </div>
               {/* mt-auto empurra o preço e o footer para o final do card, independente do título */}
               <div className="mt-auto">
                 <div className="h-4 flex items-center">
                   {item.oldPrice && (
-                    <span className="text-[11px] text-gray-400 line-through">
+                    <span className="text-[12px] text-gray-400 line-through">
                       {item.oldPrice}
                     </span>
                   )}
                 </div>
 
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xl text-[#ff5722] font-black italic tracking-tighter leading-none">
+                  <span className="text-[22px] text-[#ff5722] font-black italic tracking-tighter leading-none">
                     {item.price}
                   </span>
                   <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
@@ -92,10 +91,10 @@ const DailyDiscover: React.FC = () => {
                 </div>
 
                 {/* FOOTER DO CARD */}
-                <div className="flex items-center justify-between text-[11px] pt-2 border-t border-gray-50">
+                <div className="flex items-center justify-between text-[11px] pt-2 ">
                    <div className="flex items-center gap-1">
-                     <Star size={10} fill="#ffcc00" className="text-[#ffcc00]" />
-                     <span className="font-bold text-gray-700">{item.rating || '4.8'}</span>
+                     <Star size={16} fill="#ffcc00" className="text-[#ffcc00]" />
+                     <span className="font-bold text-gray-700 text-[12px]">{item.rating || '4.8'}</span>
                    </div>
                    <span className="text-gray-400 font-medium">{item.sold || '1mil+'} vendidos</span>
                 </div>

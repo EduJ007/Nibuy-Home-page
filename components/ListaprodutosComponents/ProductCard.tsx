@@ -49,11 +49,11 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
       )}
 
       {/* ÁREA DA IMAGEM - Fixamos o tamanho para evitar pulos */}
-      <div className="relative aspect-square overflow-hidden bg-gray-50 p-2 shrink-0">
+      <div className="relative aspect-square overflow-hidden bg-gray-50 p-0 shrink-0">
         <img 
           src={product.img} 
           alt={product.name} 
-          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
+          className="w-full h-full object-contain" 
         />
       </div>
       
@@ -74,37 +74,34 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
 
         {/* Nome do Produto - AJUSTE AQUI: altura fixa (h-10 ou h-11) e line-clamp */}
        <div className="h-[40px] mb-2"> {/* Container com altura fixa (20px por linha) */}
-  <h3 className="text-gray-700 text-[13px] leading-[20px] font-medium line-clamp-2 overflow-hidden group-hover:text-[#ff5722] transition-colors">
-    {product.name}
-  </h3>
-</div>
+              <h3 className="text-gray-700 text-[13px] leading-[20px] font-medium line-clamp-2 overflow-hidden group-hover:text-[#ff5722] transition-colors">
+                {product.name}
+              </h3>
+            </div>
 
         {/* Área de Preços e Ação - Empurrada para o fundo com mt-auto */}
         <div className="mt-auto pt-2">
           <div className="h-4 flex items-center mb-0.5">
             {product.oldPrice && (
-              <span className="text-[11px] text-gray-400 line-through">
+              <span className="text-[12px] text-gray-400 line-through">
                 {product.oldPrice}
               </span>
             )}
           </div>
           
           <div className="flex items-center justify-between">
-            <span className="text-[#ff5722] text-xl md:text-2xl font-black italic tracking-tighter leading-none">
+            <span className="text-[#ff5722] text-[22px] md:text-[26px] font-black italic tracking-tighter leading-none">
               {product.price}
             </span>
-            <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
-              <ShoppingCart size={16} />
-            </div>
           </div>
 
           {/* Avaliação e Vendas */}
           <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-50 text-[11px]">
              <div className="flex items-center gap-1">
-                <Star size={12} fill="#ffcc00" className="text-[#ffcc00]" />
-                <span className="font-black text-gray-700">{product.rating || '4.9'}</span>
+                <Star size={16} fill="#ffcc00" className="text-[#ffcc00]" />
+                <span className="font-black text-gray-700 text-[14px]">{product.rating || '4.9'}</span>
              </div>
-             <span className="text-gray-400 font-medium">{product.sold || '1k+'} vendidos</span>
+             <span className="text-gray-400 font-medium text-[12px]">{product.sold || '1k+'} vendidos</span>
           </div>
 
           {/* Botão de ação */}
