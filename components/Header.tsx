@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, HelpCircle, User, LogOut, Settings, Check, X, Home, MessageCircle, Info } from 'lucide-react';
+import { Search, Bell, HelpCircle, User, LogOut, Settings, Check, X, Home, MessageCircle, Info, ShoppingBag, Heart, Trash2 } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { auth, db, googleProvider } from '../firebase'; 
 import { 
@@ -13,11 +13,11 @@ import {
   linkWithCredential,
   EmailAuthProvider
 } from "firebase/auth";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, collection, onSnapshot, query, deleteDoc } from "firebase/firestore";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Adicionado para saber qual aba está ativa
+  const location = useLocation();
 
   /* --- ESTADOS DO COMPONENTE --- */
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -31,6 +31,7 @@ const Header: React.FC = () => {
 
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [savedProducts, setSavedProducts] = useState<any[]>([]); // ESTADO PARA SALVOS
 
   const [notifications] = useState([
     { id: 1, text: "Estamos Ajustando algumas coisas mas em caso de feedback só entrar em contato 👍" },
@@ -49,6 +50,31 @@ const Header: React.FC = () => {
   const [updateLoading, setUpdateLoading] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
+
+  /* --- LÓGICA DE PRODUTOS SALVOS EM TEMPO REAL --- */
+  useEffect(() => {
+    let unsubscribeSaved: any;
+    if (user && auth.currentUser) {
+      const q = query(collection(db, "users", auth.currentUser.uid, "savedProducts"));
+      unsubscribeSaved = onSnapshot(q, (snapshot) => {
+        const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setSavedProducts(items);
+      });
+    } else {
+      setSavedProducts([]);
+    }
+    return () => unsubscribeSaved && unsubscribeSaved();
+  }, [user]);
+
+  const removeSavedItem = async (e: React.MouseEvent, productId: string) => {
+    e.stopPropagation();
+    if (!auth.currentUser) return;
+    try {
+      await deleteDoc(doc(db, "users", auth.currentUser.uid, "savedProducts", productId));
+    } catch (err) {
+      console.error("Erro ao remover:", err);
+    }
+  };
 
   /* --- LÓGICA DE BUSCA --- */
   const handleSearch = () => {
@@ -186,22 +212,10 @@ const Header: React.FC = () => {
   };
 
  const getDynamicHelpLink = () => {
-  // decodeURIComponent resolve o problema do acento no "Sobre-nós"
   const path = decodeURIComponent(location.pathname);
-
-  if (path === '/Central-de-ajuda') {
-    return { label: 'Sobre Nós', path: '/Sobre-nós', icon: <Info size={24} /> };
-  } 
-  
-  if (path === '/Sobre-nós') {
-    return { label: 'Contato', path: '/Contato', icon: <MessageCircle size={24} /> };
-  } 
-  
-  if (path === '/Contato') {
-    return { label: 'Ajuda', path: '/Central-de-ajuda', icon: <HelpCircle size={24} /> };
-  }
-
-  // Se estiver na Home ou em qualquer outra página (como Lista-produtos ou detalhes)
+  if (path === '/Central-de-ajuda') return { label: 'Sobre Nós', path: '/Sobre-nós', icon: <Info size={24} /> };
+  if (path === '/Sobre-nós') return { label: 'Contato', path: '/Contato', icon: <MessageCircle size={24} /> };
+  if (path === '/Contato') return { label: 'Ajuda', path: '/Central-de-ajuda', icon: <HelpCircle size={24} /> };
   return { label: 'Ajuda', path: '/Central-de-ajuda', icon: <HelpCircle size={24} /> };
 };
 
@@ -210,7 +224,6 @@ const helpLink = getDynamicHelpLink();
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 bg-[#ff5722] shadow-md text-white">
-        {/* Top Bar Original */}
         <div className="hidden md:flex max-w-[1200px] mx-auto py-1.5 justify-between items-center text-xs px-4">
           <div className="flex gap-4 items-center">
             <Link to="/Contato" className="hover:text-gray-200 font-medium">Entrar em Contato</Link>
@@ -255,9 +268,7 @@ const helpLink = getDynamicHelpLink();
           </div>
         </div>
 
-        {/* Main Header Original */}
         <div className="max-w-[1200px] mx-auto py-4 px-4 flex items-center gap-3 md:gap-5 ">
-          {/* LOGO: agora com 'hidden md:flex' para sumir no mobile */}
           <Link to="/" className="hidden md:flex items-center gap-3 shrink-0">
             <img src="/logo-nibuy.png" alt="Logo" className="h-14 w-auto shadow-[0_0_6px_rgba(0,0,0,0.25)]" />
             <span className="text-3xl font-black">𝙉𝙞𝙗𝙪𝙮</span>
@@ -277,7 +288,6 @@ const helpLink = getDynamicHelpLink();
             </button>
           </div>
 
-          {/* PERFIL DESKTOP: Escondido no mobile (hidden md:block) */}
           <div className="relative hidden md:block">
             {!user ? (
               <button onClick={() => setShowLoginModal(true)} className="flex items-center gap-2 hover:opacity-80 transition-all">
@@ -297,10 +307,44 @@ const helpLink = getDynamicHelpLink();
                   <p className="text-[14px] font-bold uppercase tracking-tighter">Minha Conta</p>
                 </div>
                 {showUserMenu && (
-                  <div className="absolute top-full right-0 mt-3 w-52 bg-white rounded-xl shadow-2xl text-gray-800 border border-gray-100 overflow-hidden z-[60]">
-                    <div className="p-3 bg-gray-50 border-b flex items-center gap-2">
+                  <div className="absolute top-full right-0 mt-3 w-72 bg-white rounded-xl shadow-2xl text-gray-800 border border-gray-100 overflow-hidden z-[60]">
+                    <div className="p-4 bg-gray-50 border-b flex items-center justify-between">
                       <p className="font-bold text-[15px] truncate text-[#ff5722]">{user.name}</p>
+                      <button onClick={() => setShowUserMenu(false)} className="text-gray-400"><X size={18}/></button>
                     </div>
+                    
+                    {/* SEÇÃO MEUS SALVOS (MODAL INTERNO) */}
+                    <div className="p-2 border-b bg-orange-50/50">
+                      <p className="px-2 py-1 text-[10px] font-black uppercase text-orange-600 flex items-center gap-1">
+                        <Heart size={12} fill="currentColor"/> Meus Salvos ({savedProducts.length})
+                      </p>
+                      <div className="max-h-48 overflow-y-auto space-y-1 custom-scrollbar">
+                        {savedProducts.length > 0 ? (
+                          savedProducts.map((p) => (
+                            <div 
+                              key={p.id} 
+                              onClick={() => { navigate(`/produto/${p.externalId || p.id}`); setShowUserMenu(false); }}
+                              className="flex items-center gap-2 p-2 hover:bg-white rounded-lg transition-all group cursor-pointer"
+                            >
+                              <img src={p.img} className="w-10 h-10 object-cover rounded-md border bg-white" alt="" />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-[11px] font-bold truncate leading-tight">{p.name}</p>
+                                <p className="text-[12px] font-black text-[#ff5722]">{p.price}</p>
+                              </div>
+                              <button onClick={(e) => removeSavedItem(e, p.id)} className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-300 hover:text-red-500 transition-all">
+                                <Trash2 size={14}/>
+                              </button>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-[10px] text-center py-4 text-gray-400 font-medium">Nenhum produto salvo ainda.</p>
+                        )}
+                      </div>
+                      {savedProducts.length > 0 && (
+                        <button onClick={() => { navigate('/salvos'); setShowUserMenu(false); }} className="w-full text-center py-2 text-[10px] font-bold text-orange-600 hover:underline">Ver todos os salvos</button>
+                      )}
+                    </div>
+
                     <button onClick={() => { setEditName(user.name); setEditPhoto(user.photo); setShowProfileModal(true); setShowUserMenu(false); }} className="w-full text-left px-4 py-3 text-sm hover:bg-orange-50 flex items-center gap-2 font-bold"><Settings size={16} /> Editar Perfil</button>
                     <button onClick={() => setShowAddPasswordModal(true)} className="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 flex items-center gap-2 font-bold">🔐 Adicionar Senha</button>
                     <button onClick={handleLogout} className="w-full text-left px-4 py-3 text-sm hover:bg-red-50 text-red-600 flex items-center gap-2 font-bold border-t"><LogOut size={16} /> Sair</button>
@@ -312,78 +356,27 @@ const helpLink = getDynamicHelpLink();
         </div>
       </header>
 
-      {/* --- BARRA INFERIOR MOBILE (ESTILO SHOPEE) --- */}
+      {/* --- BARRA INFERIOR MOBILE --- */}
       <nav className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-[100] flex justify-around items-center py-2 px-1 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
         <Link to="/" className={`flex flex-col items-center gap-0.5 ${location.pathname === '/' ? 'text-[#ff5722]' : 'text-gray-500'}`}>
           <Home size={24} />
           <span className="text-[12px] font-bold">Início</span>
         </Link>
 
-        {/* Link para Notificações (ou central de ajuda conforme sua lógica) */}
         <button 
-        onClick={() => setShowNotifications(!showNotifications)} 
-        className={`flex flex-col items-center gap-0.5 ${showNotifications ? 'text-[#ff5722]' : 'text-gray-500'} relative`}
-      >
-        <Bell size={24} />
-        <span className="text-[12px] font-bold">Notificações</span>
-        {notifications.length > 0 && (
-          <span className="absolute top-0 right-3 bg-[#ff5722] text-white text-[9px] h-4 min-w-[16px] px-1 flex items-center justify-center rounded-full font-bold border border-white">
-            {notifications.length}
-          </span>
-        )}
-      </button>
-      {showNotifications && (
-      <div className="md:hidden fixed inset-0 z-[150] flex items-end">
-        {/* Overlay escuro no fundo */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" onClick={() => setShowNotifications(false)}></div>
-        
-        {/* Painel de Notificações */}
-        <div className="relative w-full bg-[#f5f5f5] rounded-t-3xl max-h-[80vh] overflow-hidden flex flex-col animate-in slide-in-from-bottom duration-300">
-          <div className="bg-white p-5 border-b flex justify-between items-center">
-            <h3 className="text-[#ff5722] font-black italic text-xl uppercase tracking-tight">Notificações</h3>
-            <button onClick={() => setShowNotifications(false)} className="bg-gray-100 p-2 rounded-full text-gray-400">
-              <X size={20} />
-            </button>
-          </div>
+          onClick={() => setShowNotifications(!showNotifications)} 
+          className={`flex flex-col items-center gap-0.5 ${showNotifications ? 'text-[#ff5722]' : 'text-gray-500'} relative`}
+        >
+          <Bell size={24} />
+          <span className="text-[12px] font-bold">Avisos</span>
+          {notifications.length > 0 && <span className="absolute top-0 right-3 bg-[#ff5722] text-white text-[9px] h-4 min-w-[16px] px-1 flex items-center justify-center rounded-full font-bold border border-white">{notifications.length}</span>}
+        </button>
 
-          <div className="overflow-y-auto p-4 space-y-3 pb-20">
-            {notifications.length > 0 ? (
-              notifications.map((n) => (
-                <div key={n.id} className="bg-white p-4 rounded-2xl shadow-sm border border-orange-50 flex gap-4 items-start transition-active active:scale-[0.98]">
-                  <div className="bg-orange-100 p-2 rounded-full text-[#ff5722] shrink-0">
-                    <Bell size={18} />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-gray-800 text-sm font-medium leading-tight">{n.text}</p>
-                    <span className="text-[10px] text-gray-400 mt-2 block font-bold uppercase">Nibuy News</span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="py-10 text-center text-gray-400 font-bold">
-                Nenhuma notificação por aqui...
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    )}
+        <Link to={helpLink.path} className={`flex flex-col items-center gap-0.5 ${location.pathname === helpLink.path ? 'text-[#ff5722]' : 'text-gray-600'}`}>
+          <div className="relative">{helpLink.icon}</div>
+          <span className="text-[12px] font-bold">{helpLink.label}</span>
+        </Link>
 
-<Link 
-  to={helpLink.path} 
-  className={`flex flex-col items-center gap-0.5 ${location.pathname === helpLink.path ? 'text-[#ff5722]' : 'text-gray-600'}`}
->
-  <div className="relative">
-    {helpLink.icon}
-    {/* Ponto indicador: aparece se o usuário não estiver na Home */}
-    {location.pathname !== '/' && (
-      <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#ff5722] rounded-full border border-white"></span>
-    )}
-  </div>
-  <span className="text-[12px] font-bold">{helpLink.label}</span>
-</Link>
-
-        {/* Botão de Perfil Mobile */}
         <button 
           onClick={() => user ? setShowUserMenu(!showUserMenu) : setShowLoginModal(true)} 
           className={`flex flex-col items-center gap-0.5 ${user ? 'text-[#ff5722]' : 'text-gray-500'}`}
@@ -399,29 +392,54 @@ const helpLink = getDynamicHelpLink();
         </button>
       </nav>
 
-      {/* MENU SUSPENSO MOBILE (SLIDE UP) */}
+      {/* MENU SUSPENSO MOBILE COM SALVOS */}
       {showUserMenu && user && (
         <div className="md:hidden fixed inset-0 z-[110] flex items-end">
           <div className="absolute inset-0 bg-black/40" onClick={() => setShowUserMenu(false)}></div>
-          <div className="relative w-full bg-white rounded-t-2xl p-6 animate-in slide-in-from-bottom duration-300">
-            <div className="flex items-center gap-4 mb-6 border-b pb-4">
+          <div className="relative w-full bg-white rounded-t-2xl max-h-[90vh] overflow-hidden flex flex-col animate-in slide-in-from-bottom duration-300">
+            <div className="flex items-center gap-4 p-6 border-b">
                <img src={user.photo || "https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png"} className="w-16 h-16 rounded-full border-2 border-[#ff5722] object-cover" />
                <div>
                  <p className="font-black text-lg text-gray-800 uppercase italic">Olá, {user.name.split(' ')[0]}</p>
                  <p className="text-xs text-gray-500">{user.email}</p>
                </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 text-gray-800">
-              <button onClick={() => { setEditName(user.name); setEditPhoto(user.photo); setShowProfileModal(true); setShowUserMenu(false); }} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg font-bold"><Settings size={18}/> Editar Perfil</button>
-              <button onClick={handleLogout} className="flex items-center gap-3 p-3 bg-red-50 rounded-lg text-red-600 font-bold"><LogOut size={18}/> Sair da Conta</button>
+
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {/* Amostra de Salvos no Mobile */}
+              <div className="bg-gray-50 rounded-2xl p-4">
+                <div className="flex justify-between items-center mb-3">
+                   <h3 className="text-xs font-black uppercase text-gray-400 tracking-widest flex items-center gap-2">
+                     <Heart size={14} fill="#ff5722" className="text-[#ff5722]"/> Meus Itens Salvos
+                   </h3>
+                   <span className="bg-orange-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">{savedProducts.length}</span>
+                </div>
+                <div className="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
+                  {savedProducts.length > 0 ? (
+                    savedProducts.map(p => (
+                      <div key={p.id} onClick={() => { navigate(`/produto/${p.externalId || p.id}`); setShowUserMenu(false); }} className="min-w-[100px] bg-white p-2 rounded-xl border shadow-sm shrink-0">
+                        <img src={p.img} className="w-full h-16 object-contain mb-1" />
+                        <p className="text-[10px] font-black text-[#ff5722]">{p.price}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-xs text-gray-400 py-4 w-full text-center">Lista vazia.</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 text-gray-800">
+                <button onClick={() => { setEditName(user.name); setEditPhoto(user.photo); setShowProfileModal(true); setShowUserMenu(false); }} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl font-bold"><Settings size={18}/> Editar Perfil</button>
+                <button onClick={() => { navigate('/salvos'); setShowUserMenu(false); }} className="flex items-center gap-3 p-4 bg-orange-50 rounded-xl font-bold text-[#ff5722]"><ShoppingBag size={18}/> Ver Página de Salvos</button>
+                <button onClick={handleLogout} className="flex items-center gap-3 p-4 bg-red-50 rounded-xl text-red-600 font-bold"><LogOut size={18}/> Sair da Conta</button>
+              </div>
             </div>
-            <button onClick={() => setShowUserMenu(false)} className="w-full mt-6 py-3 text-gray-400 font-bold border-t">Fechar</button>
+            <button onClick={() => setShowUserMenu(false)} className="w-full py-4 text-gray-400 font-bold border-t">Fechar</button>
           </div>
         </div>
       )}
 
-      {/* --- MODAIS (MANTIDOS ORIGINAIS) --- */}
-      {/* MODAL EDITAR PERFIL */}
+      {/* MODAIS ORIGINAIS (PERFIL E LOGIN) */}
       {showProfileModal && (
         <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 text-gray-800">
           <div className="fixed inset-0 bg-black/70 backdrop-blur-md" onClick={() => setShowProfileModal(false)}></div>
@@ -437,7 +455,6 @@ const helpLink = getDynamicHelpLink();
         </div>
       )}
 
-      {/* MODAL LOGIN */}
       {showLoginModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 text-gray-800">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowLoginModal(false)}></div>

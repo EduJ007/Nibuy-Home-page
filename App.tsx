@@ -12,7 +12,7 @@ import QuickLinks from './components/QuickLinks';
 import AuthModal from './components/AuthModal';
 import CentralAjuda from './pages/CentralAjuda';
 import ProductDetails from './pages/ProductDetails';
-
+import Salvos from './pages/Salvos';
 import { productsData } from './products';
 import Sobrenos from './pages/Sobrenos';
 import Listaprodutos from './pages/Listaprodutos';
@@ -99,6 +99,9 @@ const App: React.FC = () => {
          <Route path="/Contato" element={<Contato />} />
 
          <Route path="/produto/:externalId" element={<ProductDetails />} />
+         
+         <Route path="/salvos" element={<Salvos />} />
+
         </Routes>
       </main>
 

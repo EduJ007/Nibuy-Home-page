@@ -89,7 +89,7 @@ const FlashSales: React.FC = () => {
               </div>
 
               <div className="flex flex-col items-center mt-auto px-1">
-                <span className="text-[#ff5722] text-2xl font-black italic tracking-tighter mb-3">{p.price}</span>
+                <span className="text-[#ff5722] text-2xl font-black  tracking-tighter mb-3">{p.price}</span>
                 
                 {/* BARRA DE VENDIDOS ESTILO SHOPEE */}
                 <div className="w-full bg-[#ffbdad] h-5 rounded-full relative overflow-hidden border border-[#ff5722]/20">

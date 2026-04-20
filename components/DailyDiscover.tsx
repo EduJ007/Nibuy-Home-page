@@ -82,7 +82,7 @@ const DailyDiscover: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[22px] text-[#ff5722] font-black italic tracking-tighter leading-none">
+                  <span className="text-[22px] text-[#ff5722] font-black  tracking-tighter leading-none">
                     {item.price}
                   </span>
                   <div className="bg-orange-50 p-1.5 rounded-lg text-[#ff5722] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
