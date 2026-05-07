@@ -297,14 +297,41 @@ const ProductDetails: React.FC = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row md:items-center gap-2 mb-8">
-              <span className="text-gray-500 w-24 text-sm font-medium">Quantidade</span>
-              <div className="flex items-center bg-white border border-gray-200">
-                <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-9 h-9 flex items-center justify-center hover:bg-gray-50"><Minus size={14} /></button>
-                <input type="text" value={quantity} readOnly className="w-10 h-9 text-center font-bold text-sm outline-none" />
-                <button onClick={() => setQuantity(q => q + 1)} className="w-9 h-9 flex items-center justify-center border-l border-gray-200 hover:bg-gray-50"><Plus size={14} /></button>
-              </div>
-            </div>
+           <div className="flex flex-col md:flex-row items-end md:items-center justify-end md:justify-start gap-2 mb-8">
+  
+  {/* Texto 'Quantidade' */}
+  <div className="h-10 flex items-center px-6 justify-end md:justify-start">
+    <span className="text-gray-500 text-sm font-medium leading-none">
+        Quantidade:
+    </span>
+  </div>
+  
+  {/* Seletor de Quantidade */}
+  <div className="flex items-center bg-white border border-gray-200 w-fit rounded-sm overflow-hidden shadow-sm h-10">
+    <button 
+      onClick={() => setQuantity(q => Math.max(1, q - 1))} 
+      className="w-10 h-full flex items-center justify-center hover:bg-gray-50 transition-colors border-r border-gray-200 text-gray-600"
+    >
+      <Minus size={14} />
+    </button>
+    
+    <div className="w-12 h-full flex items-center justify-center bg-white">
+      <input 
+        type="text" 
+        value={quantity} 
+        readOnly 
+        className="w-full text-center font-bold text-sm outline-none text-gray-800 bg-transparent" 
+      />
+    </div>
+    
+    <button 
+      onClick={() => setQuantity(q => q + 1)} 
+      className="w-10 h-full flex items-center justify-center hover:bg-gray-50 transition-colors border-l border-gray-200 text-gray-600"
+    >
+      <Plus size={14} />
+    </button>
+  </div>
+</div>
 
             <div className="flex gap-2">
               <button 

@@ -49,7 +49,7 @@ const QuickLinks: React.FC = () => {
             </div>
             
             {/* Texto - Estilo Nibuy (Font Black e Gray-500) com hover laranja */}
-            <span className="text-[10px] md:text-[14px] font-black tracking-tighter text-gray-500 group-hover:text-[#ff5722] transition-colors uppercase">
+            <span className="text-[10px] md:text-[14px] font-black tracking-tighter text-gray-600 group-hover:text-[#ff5722] transition-colors uppercase">
               {link.label}
             </span>
           </button>

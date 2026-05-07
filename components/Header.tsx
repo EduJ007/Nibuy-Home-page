@@ -365,11 +365,11 @@ const helpLink = getDynamicHelpLink();
 
         <button 
           onClick={() => setShowNotifications(!showNotifications)} 
-          className={`flex flex-col items-center gap-0.5 ${showNotifications ? 'text-[#ff5722]' : 'text-gray-500'} relative`}
+          className={`flex flex-col items-center gap-0.5  ${showNotifications ? 'text-[#ff5722]' : 'text-gray-500'} relative`}
         >
           <Bell size={24} />
-          <span className="text-[12px] font-bold">Avisos</span>
-          {notifications.length > 0 && <span className="absolute top-0 right-3 bg-[#ff5722] text-white text-[9px] h-4 min-w-[16px] px-1 flex items-center justify-center rounded-full font-bold border border-white">{notifications.length}</span>}
+          <span className="text-[12px] font-bold">Notificações</span>
+          {notifications.length > 0 && <span className="absolute top-0 right-4   bg-[#ff5722] text-white text-[9px] h-4 min-w-[16px] px-1 flex items-center justify-center rounded-full font-bold border border-white">{notifications.length}</span>}
         </button>
 
         <Link to={helpLink.path} className={`flex flex-col items-center gap-0.5 ${location.pathname === helpLink.path ? 'text-[#ff5722]' : 'text-gray-600'}`}>
@@ -454,7 +454,47 @@ const helpLink = getDynamicHelpLink();
           </div>
         </div>
       )}
+{/* --- MODAL DE NOTIFICAÇÕES MOBILE --- */}
+{showNotifications && (
+  <div className="md:hidden fixed inset-0 z-[110] flex items-end">
+    {/* Fundo escuro que fecha ao clicar */}
+    <div className="absolute inset-0 bg-black/40" onClick={() => setShowNotifications(false)}></div>
+    
+    <div className="relative w-full bg-white rounded-t-2xl max-h-[70vh] overflow-hidden flex flex-col animate-in slide-in-from-bottom duration-300">
+      <div className="p-5 border-b bg-[#ff5722] text-white flex justify-between items-center">
+        <h3 className="font-black uppercase italic flex items-center gap-2">
+          <Bell size={20} /> Notificações
+        </h3>
+        <button onClick={() => setShowNotifications(false)} className="bg-white/20 p-1 rounded-full">
+          <X size={20} />
+        </button>
+      </div>
 
+      <div className="flex-1 overflow-y-auto p-2 divide-y divide-gray-100">
+        {notifications.length > 0 ? (
+          notifications.map((n) => (
+            <div key={n.id} className="p-4 flex gap-3 items-start hover:bg-gray-50 transition-colors">
+              <div className="w-2 h-2 bg-[#ff5722] rounded-full mt-1.5 shrink-0" />
+              <p className="text-sm text-gray-700 leading-relaxed font-medium">{n.text}</p>
+            </div>
+          ))
+        ) : (
+          <div className="py-10 text-center text-gray-400">
+            <Bell size={40} className="mx-auto mb-2 opacity-20" />
+            <p className="text-sm">Nenhuma notificação por aqui.</p>
+          </div>
+        )}
+      </div>
+      
+      <button 
+        onClick={() => setShowNotifications(false)} 
+        className="w-full py-4 text-gray-500 font-bold border-t bg-gray-50 uppercase text-xs tracking-widest"
+      >
+        Entendido
+      </button>
+    </div>
+  </div>
+)}
       {showLoginModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 text-gray-800">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowLoginModal(false)}></div>
