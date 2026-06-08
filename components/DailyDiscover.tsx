@@ -55,11 +55,11 @@ const DailyDiscover: React.FC = () => {
             )}
 
             {/* IMAGEM - Garantindo proporção fixa */}
-            <div className="relative aspect-square overflow-hidden bg-gray-50 p-2 shrink-0">
+            <div className="relative aspect-square overflow-hidden bg-gray-50 p-1 shrink-0 rounded-lg">
               <img 
                 src={item.img} 
                 alt={item.name} 
-                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
+                className="w-full h-full object-contain duration-500 rounded-lg" 
               />
             </div>
             

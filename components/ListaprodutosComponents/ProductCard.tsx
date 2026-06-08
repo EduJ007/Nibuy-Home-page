@@ -53,7 +53,7 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
         <img 
           src={product.img} 
           alt={product.name} 
-          className="w-full h-full object-contain" 
+          className="w-full h-full object-contain rounded-lg" 
         />
       </div>
       
@@ -90,7 +90,7 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
           </div>
           
           <div className="flex items-center justify-between">
-            <span className="text-[#ff5722] text-[22px] md:text-[26px] font-black italic tracking-tighter leading-none">
+            <span className="text-[#ff5722] text-[22px] md:text-[26px] font-black tracking-tighter leading-none">
               {product.price}
             </span>
           </div>
